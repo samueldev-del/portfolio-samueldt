@@ -2,35 +2,89 @@
 
 import { motion } from "framer-motion";
 import { Cloud, Server, Code, Shield } from "lucide-react";
+import type { Lang } from "@/lib/i18n";
 
-const highlights = [
-  {
-    icon: Cloud,
-    title: "Cloud Infrastructure",
-    description:
-      "Azure, STACKIT (certified), AWS — AAD, RBAC, Monitor, Synapse Analytics",
-  },
-  {
-    icon: Server,
-    title: "DevOps & Automation",
-    description:
-      "Docker, Kubernetes, Terraform, Ansible, GitHub Actions, n8n, CI/CD pipelines",
-  },
-  {
-    icon: Code,
-    title: "Fullstack Development",
-    description:
-      "Next.js, React, Node.js, FastAPI, Flutter — from APIs to production UIs",
-  },
-  {
-    icon: Shield,
-    title: "Security & Observability",
-    description:
-      "Zero Trust, Rate Limiting, RBAC, Sentry full-stack, Zabbix, Azure Monitor",
-  },
-];
+type AboutProps = {
+  lang: Lang;
+};
 
-export default function About() {
+const highlights = {
+  de: [
+    {
+      icon: Cloud,
+      title: "Cloud-Infrastruktur",
+      description:
+        "Azure, STACKIT (zertifiziert), AWS — AAD, RBAC, Monitor, Synapse Analytics",
+    },
+    {
+      icon: Server,
+      title: "DevOps & Automatisierung",
+      description:
+        "Docker, Kubernetes, Terraform, Ansible, GitHub Actions, n8n, CI/CD-Pipelines",
+    },
+    {
+      icon: Code,
+      title: "Fullstack-Entwicklung",
+      description:
+        "Next.js, React, Node.js, FastAPI, Flutter — von APIs bis zu produktionsreifen UIs",
+    },
+    {
+      icon: Shield,
+      title: "Security & Observability",
+      description:
+        "Zero Trust, Rate Limiting, RBAC, Sentry Full-Stack, Zabbix, Azure Monitor",
+    },
+  ],
+  en: [
+    {
+      icon: Cloud,
+      title: "Cloud Infrastructure",
+      description:
+        "Azure, STACKIT (certified), AWS — AAD, RBAC, Monitor, Synapse Analytics",
+    },
+    {
+      icon: Server,
+      title: "DevOps & Automation",
+      description:
+        "Docker, Kubernetes, Terraform, Ansible, GitHub Actions, n8n, CI/CD pipelines",
+    },
+    {
+      icon: Code,
+      title: "Fullstack Development",
+      description:
+        "Next.js, React, Node.js, FastAPI, Flutter — from APIs to production UIs",
+    },
+    {
+      icon: Shield,
+      title: "Security & Observability",
+      description:
+        "Zero Trust, Rate Limiting, RBAC, Sentry full-stack, Zabbix, Azure Monitor",
+    },
+  ],
+};
+
+const copy = {
+  de: {
+    eyebrow: "Über mich",
+    headingA: "Ich entwickle zuverlässige Systeme,",
+    headingB: "von Ende zu Ende.",
+    p1: "Cloud- & DevOps-Engineer sowie Fullstack-Developer mit über 5 Jahren IT-Erfahrung — von technischer Ausbildung und internationalen Freelance-Projekten bis zur professionellen System- und Cloud-Administration.",
+    p2: "Ich verbinde fundierte Infrastruktur-Expertise (Ansible, Terraform, Kubernetes, Docker, Azure) mit praxisnaher Produktentwicklung: drei Live-Projekte — eine KI-gestützte Karriereplattform, ein CRM- und Support-System sowie eine Travel-Tech-Startup-Architektur — zeigen meine Fähigkeit, hochverfügbare End-to-End-Systeme mit starkem Fokus auf Security und Full-Stack-Observability zu konzipieren, umzusetzen und zu betreiben.",
+    p3: "Zertifizierter STACKIT Cloud Engineer, aktuell in Vorbereitung auf Azure AZ-900, AWS CCP und CompTIA Security+.",
+  },
+  en: {
+    eyebrow: "About me",
+    headingA: "Building reliable systems,",
+    headingB: "end to end.",
+    p1: "Cloud & DevOps Engineer and Fullstack Developer with 5+ years of IT experience — from technical training and international freelance projects to professional system and cloud administration.",
+    p2: "I combine solid infrastructure expertise (Ansible, Terraform, Kubernetes, Docker, Azure) with hands-on product development: three live projects — an AI-powered career platform, a CRM & support system, and a travel-tech startup architecture — demonstrate my ability to design, develop, and operate highly available end-to-end systems with strong focus on security and full-stack observability.",
+    p3: "Certified STACKIT Cloud Engineer, currently preparing Azure AZ-900, AWS CCP and CompTIA Security+.",
+  },
+};
+
+export default function About({ lang }: AboutProps) {
+  const t = copy[lang];
+
   return (
     <section id="about" className="px-5 py-24 sm:px-8">
       <div className="mx-auto max-w-6xl">
@@ -41,11 +95,11 @@ export default function About() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#f0a050]">
-            About me
+            {t.eyebrow}
           </p>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-            Building reliable systems,{" "}
-            <span className="text-[#7e8ea6]">end to end.</span>
+            {t.headingA}{" "}
+            <span className="text-[#7e8ea6]">{t.headingB}</span>
           </h2>
         </motion.div>
 
@@ -56,27 +110,13 @@ export default function About() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-8 max-w-3xl space-y-4 text-[15px] leading-relaxed text-[#a0b0c8]"
         >
-          <p>
-            Cloud & DevOps Engineer and Fullstack Developer with 5+ years of IT
-            experience — from technical training and international freelance
-            projects to professional system and cloud administration.
-          </p>
-          <p>
-            I combine solid infrastructure expertise (Ansible, Terraform,
-            Kubernetes, Docker, Azure) with hands-on product development: three
-            live projects — an AI-powered career platform, a CRM & support
-            system, and a travel-tech startup architecture — demonstrate my
-            ability to design, develop, and operate highly available end-to-end
-            systems with strong focus on security and full-stack observability.
-          </p>
-          <p>
-            Certified STACKIT Cloud Engineer, currently preparing Azure AZ-900,
-            AWS CCP and CompTIA Security+.
-          </p>
+          <p>{t.p1}</p>
+          <p>{t.p2}</p>
+          <p>{t.p3}</p>
         </motion.div>
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {highlights.map((item, i) => (
+          {highlights[lang].map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 24 }}

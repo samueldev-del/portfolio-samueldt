@@ -3,8 +3,36 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowDown, MapPin, Mail } from "lucide-react";
+import type { Lang } from "@/lib/i18n";
 
-export default function Hero() {
+type HeroProps = {
+  lang: Lang;
+};
+
+const copy = {
+  de: {
+    openToWork: "Offen für neue Aufgaben — Cloud / DevOps",
+    role: "Cloud & DevOps Engineer",
+    role2: "Fullstack Developer",
+    description:
+      "Ich entwickle sichere, produktionsreife Systeme — von Cloud-Infrastruktur und CI/CD-Pipelines bis zu Fullstack-Anwendungen mit Echtzeit-Observability. Über 5 Jahre Erfahrung mit End-to-End-Lösungen.",
+    ctaProjects: "Projekte ansehen",
+    ctaContact: "Kontakt aufnehmen",
+  },
+  en: {
+    openToWork: "Open to work — Cloud / DevOps",
+    role: "Cloud & DevOps Engineer",
+    role2: "Fullstack Developer",
+    description:
+      "I build secure, production-grade systems — from cloud infrastructure and CI/CD pipelines to fullstack applications with real-time observability. 5+ years of experience shipping end-to-end solutions.",
+    ctaProjects: "View Projects",
+    ctaContact: "Get in Touch",
+  },
+};
+
+export default function Hero({ lang }: HeroProps) {
+  const t = copy[lang];
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20 sm:px-8">
       {/* Background effects */}
@@ -43,7 +71,7 @@ export default function Hero() {
         >
           <p className="mb-3 flex items-center justify-center gap-2 text-sm text-[#19b1ba]">
             <span className="inline-block h-2 w-2 rounded-full bg-[#19b1ba] animate-pulse" />
-            Open to work — Cloud / DevOps
+            {t.openToWork}
           </p>
           <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             Samuel Djommou
@@ -60,8 +88,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mx-auto mt-5 max-w-xl text-lg font-medium text-[#a0b0c8] sm:text-xl"
         >
-          Cloud & DevOps Engineer{" "}
-          <span className="text-[#6b7a92]">|</span> Fullstack Developer
+          {t.role} <span className="text-[#6b7a92]">|</span> {t.role2}
         </motion.p>
 
         <motion.p
@@ -70,9 +97,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#7e8ea6]"
         >
-          I build secure, production-grade systems — from cloud infrastructure
-          and CI/CD pipelines to fullstack applications with real-time
-          observability. 5+ years of experience shipping end-to-end solutions.
+          {t.description}
         </motion.p>
 
         {/* Location & Email */}
@@ -106,13 +131,13 @@ export default function Hero() {
             href="#projects"
             className="rounded-xl bg-gradient-to-r from-[#f0a050] to-[#e8734a] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-[#f0a050]/20 transition hover:shadow-[#f0a050]/30 hover:brightness-110"
           >
-            View Projects
+            {t.ctaProjects}
           </a>
           <a
             href="#contact"
             className="rounded-xl border border-white/15 bg-white/5 px-7 py-3 text-sm font-medium text-[#d0daea] transition hover:bg-white/10 hover:text-white"
           >
-            Get in Touch
+            {t.ctaContact}
           </a>
         </motion.div>
 

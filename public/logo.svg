@@ -1,28 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
   <defs>
-    <linearGradient id="grad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#f0a050"/>
-      <stop offset="50%" stop-color="#e8734a"/>
-      <stop offset="100%" stop-color="#19b1ba"/>
+      <stop offset="100%" stop-color="#e8734a"/>
     </linearGradient>
-    <linearGradient id="grad2" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#f0a050" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#19b1ba" stop-opacity="0.15"/>
+    <linearGradient id="accent" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fce8d0"/>
     </linearGradient>
   </defs>
-  <!-- Outer rounded square -->
-  <rect x="1" y="1" width="46" height="46" rx="12" fill="#0a0e18" stroke="url(#grad)" stroke-width="1.5"/>
-  <!-- Subtle inner glow -->
-  <rect x="3" y="3" width="42" height="42" rx="10" fill="url(#grad2)"/>
-  <!-- Letter S - stylized -->
-  <path d="M13 17.5c0-1.5 1.2-2.5 3-2.5h3c1.8 0 3 1 3 2.5s-1.2 2.5-3 2.5h-3c-1.8 0-3 1-3 2.5s1.2 2.5 3 2.5h3c1.8 0 3-1 3-2.5" stroke="url(#grad)" stroke-width="2" stroke-linecap="round" fill="none"/>
-  <!-- Letter D - geometric -->
-  <path d="M25 15h2.5c2.5 0 4.5 2 4.5 5s-2 5-4.5 5H25V15z" stroke="url(#grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <!-- Letter T - clean -->
-  <path d="M34.5 15h5M37 15v10" stroke="url(#grad)" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Rounded square background -->
+  <rect x="0" y="0" width="48" height="48" rx="12" fill="url(#bg)"/>
+  <!-- Inner subtle border -->
+  <rect x="2" y="2" width="44" height="44" rx="10" fill="none" stroke="white" stroke-opacity="0.2" stroke-width="1"/>
+  <!-- Letter S -->
+  <path d="M11 18c0-1.8 1.4-3 3.5-3h3c2.1 0 3.5 1.2 3.5 3s-1.4 3-3.5 3h-3c-2.1 0-3.5 1.2-3.5 3s1.4 3 3.5 3h3c2.1 0 3.5-1.2 3.5-3" stroke="url(#accent)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Letter D -->
+  <path d="M24 15h3c3 0 5.5 2.5 5.5 5.5S30 26 27 26h-3V15z" stroke="url(#accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Letter T -->
+  <path d="M35 15h6M38 15v11" stroke="url(#accent)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
   <!-- Accent dot -->
-  <circle cx="24" cy="35" r="2" fill="url(#grad)"/>
-  <!-- Decorative corner lines -->
-  <path d="M8 8l3 0M8 8l0 3" stroke="#f0a050" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
-  <path d="M40 40l-3 0M40 40l0-3" stroke="#19b1ba" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+  <circle cx="24" cy="36" r="2.5" fill="white" fill-opacity="0.9"/>
+  <!-- Corner accents -->
+  <path d="M7 7l4 0M7 7l0 4" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+  <path d="M41 41l-4 0M41 41l0-4" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
 </svg>

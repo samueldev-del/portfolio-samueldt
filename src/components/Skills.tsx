@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { Lang } from "@/lib/i18n";
 
 type SkillCategory = {
   name: string;
@@ -88,7 +89,44 @@ const categories: SkillCategory[] = [
   },
 ];
 
-export default function Skills() {
+type SkillsProps = {
+  lang: Lang;
+};
+
+const copy = {
+  de: {
+    eyebrow: "Technische Skills",
+    headingA: "Tools & Technologien",
+    headingB: "mit denen ich arbeite.",
+    certTitle: "Zertifikate & Weiterbildung",
+    more: "mehr",
+    certs: [
+      "Certified STACKIT Cloud Engineer — Schwarz Digits",
+      "AI Fluency: Framework & Foundations — Anthropic",
+      "Azure AZ-900 (in Vorbereitung)",
+      "AWS Cloud Practitioner (in Vorbereitung)",
+      "CompTIA Security+ (in Vorbereitung)",
+    ],
+  },
+  en: {
+    eyebrow: "Technical Skills",
+    headingA: "Tools & technologies",
+    headingB: "I work with.",
+    certTitle: "Certifications & Training",
+    more: "more",
+    certs: [
+      "Certified STACKIT Cloud Engineer — Schwarz Digits",
+      "AI Fluency: Framework & Foundations — Anthropic",
+      "Azure AZ-900 (in progress)",
+      "AWS Cloud Practitioner (in progress)",
+      "CompTIA Security+ (in progress)",
+    ],
+  },
+};
+
+export default function Skills({ lang }: SkillsProps) {
+  const t = copy[lang];
+
   return (
     <section id="skills" className="px-5 py-24 sm:px-8">
       <div className="mx-auto max-w-6xl">
@@ -99,11 +137,11 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#f0a050]">
-            Technical Skills
+            {t.eyebrow}
           </p>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-            Tools & technologies{" "}
-            <span className="text-[#7e8ea6]">I work with.</span>
+            {t.headingA}{" "}
+            <span className="text-[#7e8ea6]">{t.headingB}</span>
           </h2>
         </motion.div>
 
@@ -149,16 +187,10 @@ export default function Skills() {
           className="mt-14"
         >
           <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-[#7e8ea6]">
-            Certifications & Training
+            {t.certTitle}
           </h3>
           <div className="mt-5 flex flex-wrap gap-3">
-            {[
-              "Certified STACKIT Cloud Engineer — Schwarz Digits",
-              "AI Fluency: Framework & Foundations — Anthropic",
-              "Azure AZ-900 (in progress)",
-              "AWS Cloud Practitioner (in progress)",
-              "CompTIA Security+ (in progress)",
-            ].map((cert) => (
+            {t.certs.map((cert) => (
               <span
                 key={cert}
                 className="rounded-full border border-[#f0a050]/20 bg-[#f0a050]/5 px-4 py-2 text-xs text-[#f8c882]"

@@ -30,14 +30,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Samuel Djommou Thengho" }],
   icons: {
-    icon: "/logo.svg",
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
   },
   openGraph: {
     title: "Samuel Djommou Thengho — Cloud & DevOps | Fullstack",
     description:
       "5+ years building secure, production-grade cloud infrastructure and fullstack applications.",
     type: "website",
-    locale: "en_US",
+    locale: "de_DE",
   },
 };
 
@@ -48,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="de"
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[#060810] text-[#f0f2f8]">
