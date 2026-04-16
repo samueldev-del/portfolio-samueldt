@@ -50,10 +50,10 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-8 sm:py-4">
         <a
           href="#"
-          className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-white"
+          className="flex min-w-0 items-center gap-2 text-base font-semibold tracking-tight text-white sm:text-lg"
         >
           <Image
             src="/logo.svg"
@@ -62,7 +62,7 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
             height={32}
             className="brightness-115 drop-shadow-[0_0_10px_rgba(240,160,80,0.55)]"
           />
-          samuel<span className="text-[#f0a050]">DT</span>
+          <span className="truncate">samuel<span className="text-[#f0a050]">DT</span></span>
         </a>
 
         {/* Desktop */}

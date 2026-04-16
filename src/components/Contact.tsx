@@ -134,7 +134,7 @@ export default function Contact({ lang }: ContactProps) {
         >
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#f0a050]">{t.eyebrow}</p>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">{t.title}</h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#7e8ea6]">{t.description}</p>
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#7e8ea6] break-words">{t.description}</p>
 
           <motion.a
             href="mailto:contact@samueldt.com"
@@ -195,7 +195,7 @@ export default function Contact({ lang }: ContactProps) {
             aria-hidden="true"
           />
 
-          <div className="mt-4 flex items-center justify-between gap-3">
+          <div className="mt-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
             <button
               type="submit"
               disabled={isSubmitting}
@@ -204,8 +204,8 @@ export default function Contact({ lang }: ContactProps) {
               {isSubmitting ? t.sending : t.send}
             </button>
 
-            {status === "success" && <p className="text-xs text-[#8ce2a5]">{t.success}</p>}
-            {status === "error" && <p className="text-xs text-[#ffb3b3]">{t.error}</p>}
+            {status === "success" && <p className="text-xs text-[#8ce2a5] break-words">{t.success}</p>}
+            {status === "error" && <p className="text-xs text-[#ffb3b3] break-words">{t.error}</p>}
           </div>
         </motion.form>
 
@@ -222,7 +222,7 @@ export default function Contact({ lang }: ContactProps) {
               href={item.href}
               target={item.href.startsWith("http") ? "_blank" : undefined}
               rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.02] p-4 text-sm text-[#a0b0c8] transition hover:border-white/15 hover:text-white"
+              className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.02] p-4 text-sm text-[#a0b0c8] transition hover:border-white/15 hover:text-white break-all"
             >
               <item.icon size={16} className="shrink-0 text-[#f0a050]" />
               {item.label}

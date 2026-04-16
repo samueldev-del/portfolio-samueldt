@@ -327,18 +327,18 @@ function ProjectCard({
       transition={{ duration: 0.4 }}
       className="group rounded-2xl border border-white/8 bg-white/[0.02] transition hover:border-white/15"
     >
-      <div className="p-6">
+      <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 items-center gap-3">
             <div
               className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold text-white"
               style={{ backgroundColor: `${project.color}20` }}
             >
               <span style={{ color: project.color }}>{project.title.charAt(0)}</span>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-              <p className="text-xs text-[#7e8ea6]">{project.subtitle}</p>
+            <div className="min-w-0">
+              <h3 className="text-lg font-semibold text-white break-words">{project.title}</h3>
+              <p className="text-xs text-[#7e8ea6] break-words">{project.subtitle}</p>
             </div>
           </div>
           <span
@@ -353,7 +353,7 @@ function ProjectCard({
           </span>
         </div>
 
-        <p className="mt-4 text-sm leading-relaxed text-[#a0b0c8]">{project.description}</p>
+        <p className="mt-4 text-sm leading-relaxed text-[#a0b0c8] break-words">{project.description}</p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {project.stack.slice(0, expanded ? undefined : 5).map((tech) => (
@@ -395,7 +395,7 @@ function ProjectCard({
           )}
         </AnimatePresence>
 
-        <div className="mt-5 flex items-center gap-3">
+        <div className="mt-5 flex flex-wrap items-center gap-3">
           <button
             type="button"
             onClick={() => setExpanded(!expanded)}
@@ -416,7 +416,7 @@ function ProjectCard({
               href={project.url}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium transition hover:bg-white/5"
+              className="max-w-full break-all flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium transition hover:bg-white/5"
               style={{ color: project.color }}
             >
               <ExternalLink size={13} />

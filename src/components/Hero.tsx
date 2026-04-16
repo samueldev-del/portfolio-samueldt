@@ -42,7 +42,7 @@ export default function Hero({ lang }: HeroProps) {
         <div className="absolute bottom-0 left-[30%] h-[350px] w-[350px] rounded-full bg-[#f0a050]/10 blur-[130px]" />
       </div>
 
-      <div className="mx-auto max-w-4xl text-center">
+      <div className="mx-auto max-w-4xl text-center min-w-0">
         {/* Avatar */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
@@ -69,11 +69,11 @@ export default function Hero({ lang }: HeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <p className="mb-3 flex items-center justify-center gap-2 text-sm text-[#19b1ba]">
+          <p className="mb-3 flex flex-wrap items-center justify-center gap-2 px-2 text-xs sm:text-sm text-[#19b1ba]">
             <span className="inline-block h-2 w-2 rounded-full bg-[#19b1ba] animate-pulse" />
             {t.openToWork}
           </p>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             Samuel Djommou
             <br />
             <span className="bg-gradient-to-r from-[#f0a050] via-[#f8c882] to-[#19b1ba] bg-clip-text text-transparent">
@@ -86,7 +86,7 @@ export default function Hero({ lang }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto mt-5 max-w-xl text-lg font-medium text-[#a0b0c8] sm:text-xl"
+          className="mx-auto mt-5 max-w-xl text-base font-medium text-[#a0b0c8] sm:text-xl"
         >
           {t.role} <span className="text-[#6b7a92]">|</span> {t.role2}
         </motion.p>
@@ -125,17 +125,17 @@ export default function Hero({ lang }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          className="mt-10 flex flex-wrap items-center justify-center gap-3"
         >
           <a
             href="#projects"
-            className="rounded-xl bg-gradient-to-r from-[#f0a050] to-[#e8734a] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-[#f0a050]/20 transition hover:shadow-[#f0a050]/30 hover:brightness-110"
+            className="w-full rounded-xl bg-gradient-to-r from-[#f0a050] to-[#e8734a] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-[#f0a050]/20 transition hover:shadow-[#f0a050]/30 hover:brightness-110 sm:w-auto"
           >
             {t.ctaProjects}
           </a>
           <a
             href="#contact"
-            className="rounded-xl border border-white/15 bg-white/5 px-7 py-3 text-sm font-medium text-[#d0daea] transition hover:bg-white/10 hover:text-white"
+            className="w-full rounded-xl border border-white/15 bg-white/5 px-7 py-3 text-sm font-medium text-[#d0daea] transition hover:bg-white/10 hover:text-white sm:w-auto"
           >
             {t.ctaContact}
           </a>
