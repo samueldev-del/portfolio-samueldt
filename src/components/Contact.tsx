@@ -1,5 +1,6 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Globe, Link2, Code2 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
@@ -55,6 +56,14 @@ const copy = {
     levelDe: "B1 Beruflich",
     fluent: "Flieend",
     footer: "Entwickelt mit Next.js, Tailwind CSS & Framer Motion.",
+    formTitle: "Oder sende mir direkt eine Nachricht",
+    name: "Name",
+    email: "E-Mail",
+    message: "Nachricht",
+    send: "Nachricht senden",
+    sending: "Wird gesendet...",
+    success: "Danke! Deine Nachricht wurde sicher ubermittelt.",
+    error: "Fehler beim Senden. Bitte versuche es erneut.",
   },
   en: {
     eyebrow: "Get in Touch",
@@ -69,11 +78,49 @@ const copy = {
     levelDe: "B1 Professional",
     fluent: "Fluent",
     footer: "Built with Next.js, Tailwind CSS & Framer Motion.",
+    formTitle: "Or send me a direct message",
+    name: "Name",
+    email: "Email",
+    message: "Message",
+    send: "Send message",
+    sending: "Sending...",
+    success: "Thanks! Your message was submitted securely.",
+    error: "Failed to send message. Please try again.",
   },
 };
 
 export default function Contact({ lang }: ContactProps) {
   const t = copy[lang];
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("idle");
+    setIsSubmitting(true);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        setStatus("error");
+        return;
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <section id="contact" className="px-5 py-24 sm:px-8">
@@ -98,6 +145,69 @@ export default function Contact({ lang }: ContactProps) {
             {t.cta}
           </motion.a>
         </motion.div>
+
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.08 }}
+          className="mx-auto mt-12 max-w-2xl rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6"
+        >
+          <h3 className="text-sm font-semibold text-white">{t.formTitle}</h3>
+
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <label className="grid gap-1.5 text-xs text-[#9badc7]">
+              {t.name}
+              <input
+                name="name"
+                required
+                className="rounded-lg border border-white/10 bg-[#0b1020] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0a050]/60"
+              />
+            </label>
+            <label className="grid gap-1.5 text-xs text-[#9badc7]">
+              {t.email}
+              <input
+                name="email"
+                type="email"
+                required
+                className="rounded-lg border border-white/10 bg-[#0b1020] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0a050]/60"
+              />
+            </label>
+          </div>
+
+          <label className="mt-3 grid gap-1.5 text-xs text-[#9badc7]">
+            {t.message}
+            <textarea
+              name="message"
+              required
+              rows={5}
+              className="rounded-lg border border-white/10 bg-[#0b1020] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0a050]/60"
+            />
+          </label>
+
+          {/* Honeypot field: hidden from humans, traps automated bots. */}
+          <input
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+            aria-hidden="true"
+          />
+
+          <div className="mt-4 flex items-center justify-between gap-3">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="rounded-lg bg-gradient-to-r from-[#f0a050] to-[#e8734a] px-4 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isSubmitting ? t.sending : t.send}
+            </button>
+
+            {status === "success" && <p className="text-xs text-[#8ce2a5]">{t.success}</p>}
+            {status === "error" && <p className="text-xs text-[#ffb3b3]">{t.error}</p>}
+          </div>
+        </motion.form>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}

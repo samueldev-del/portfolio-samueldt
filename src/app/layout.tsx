@@ -14,31 +14,54 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Samuel Djommou Thengho — Cloud & DevOps Engineer | Fullstack Developer",
+  title: "Samuel Djommou Thengho | Cloud & DevOps Engineer",
   description:
-    "Portfolio of Samuel Djommou Thengho — Cloud & DevOps Engineer and Fullstack Developer based in Hamburg. 5+ years building secure, production-grade systems.",
+    "Portfolio von Samuel Djommou Thengho, Cloud & DevOps Engineer und Fullstack-Entwickler. Expertise in Azure/STACKIT/AWS-Infrastruktur, Security und Next.js/Python-Architekturen.",
   keywords: [
     "Cloud Engineer",
     "DevOps",
-    "Fullstack Developer",
+    "Fullstack",
+    "Terraform",
     "Azure",
+    "STACKIT",
+    "AWS",
     "Kubernetes",
-    "Docker",
     "Next.js",
-    "React",
-    "Hamburg",
+    "Samuel Djommou Thengho",
   ],
   authors: [{ name: "Samuel Djommou Thengho" }],
+  metadataBase: new URL("https://samueldt.com"),
   icons: {
     icon: "/favicon.svg",
     apple: "/favicon.svg",
   },
   openGraph: {
-    title: "Samuel Djommou Thengho — Cloud & DevOps | Fullstack",
+    title: "Samuel Djommou Thengho | Cloud & DevOps Engineer",
     description:
-      "5+ years building secure, production-grade cloud infrastructure and fullstack applications.",
+      "Konzeption, Security und Deployment hochverfugbarer Systeme.",
     type: "website",
     locale: "de_DE",
+    url: "https://samueldt.com",
+    siteName: "Portfolio Samuel DT",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Vorschau des Portfolios von Samuel",
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
