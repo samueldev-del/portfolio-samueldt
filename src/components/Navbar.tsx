@@ -31,7 +31,9 @@ type NavbarProps = {
 export default function Navbar({ lang, onLangChange }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const resumeLabel = lang === "de" ? "Lebenslauf" : "Resume";
+  const resumeOpenLabel = lang === "de" ? "Lebenslauf" : "Resume";
+  const resumeDownloadLabel = lang === "de" ? "Download" : "Download";
+  const resumeHref = "/Samuel_Djommou_CV_2026.pdf";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -98,14 +100,23 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
             </button>
           </li>
           <li className="ml-3">
-            <a
-              href="/Samuel_Djommou_ThenghoCV.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-lg border border-[#f0a050]/50 bg-[#f0a050]/10 px-4 py-2 text-sm font-medium text-[#f8c882] transition hover:bg-[#f0a050]/20"
-            >
-              {resumeLabel}
-            </a>
+            <div className="flex items-center gap-2">
+              <a
+                href={resumeHref}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-lg border border-[#f0a050]/50 bg-[#f0a050]/10 px-4 py-2 text-sm font-medium text-[#f8c882] transition hover:bg-[#f0a050]/20"
+              >
+                {resumeOpenLabel}
+              </a>
+              <a
+                href={resumeHref}
+                download
+                className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm font-medium text-[#d0daea] transition hover:bg-white/10 hover:text-white"
+              >
+                {resumeDownloadLabel}
+              </a>
+            </div>
           </li>
         </ul>
 
@@ -161,14 +172,23 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                 </button>
               </li>
               <li className="mt-2">
-                <a
-                  href="/Samuel_Djommou_ThenghoCV.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block rounded-lg border border-[#f0a050]/50 bg-[#f0a050]/10 px-4 py-2.5 text-center text-sm font-medium text-[#f8c882]"
-                >
-                  {resumeLabel}
-                </a>
+                <div className="grid gap-2">
+                  <a
+                    href={resumeHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-lg border border-[#f0a050]/50 bg-[#f0a050]/10 px-4 py-2.5 text-center text-sm font-medium text-[#f8c882]"
+                  >
+                    {resumeOpenLabel}
+                  </a>
+                  <a
+                    href={resumeHref}
+                    download
+                    className="block rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-center text-sm font-medium text-[#d0daea]"
+                  >
+                    {resumeDownloadLabel}
+                  </a>
+                </div>
               </li>
             </ul>
           </motion.div>
