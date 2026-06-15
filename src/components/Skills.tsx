@@ -7,6 +7,7 @@ type SkillCategory = {
   name: string;
   color: string;
   skills: string[];
+  note?: string;
 };
 
 const categories: SkillCategory[] = [
@@ -14,77 +15,78 @@ const categories: SkillCategory[] = [
     name: "Cloud",
     color: "#f0a050",
     skills: [
-      "Azure (AAD, RBAC, Monitor, Synapse)",
-      "STACKIT (certified)",
-      "AWS",
+      "STACKIT (zertifiziert)",
+      "Azure (AZ-900, in Vorbereitung)",
     ],
   },
   {
     name: "Container & IaC",
     color: "#19b1ba",
+    note: "Grundlagen zertifiziert (STACKIT University)",
     skills: [
       "Docker",
       "Kubernetes",
       "Terraform",
-      "Ansible",
       "Cloud Foundry",
     ],
   },
   {
-    name: "Automation",
+    name: "CI/CD & Git",
     color: "#e8734a",
-    skills: ["n8n", "Jenkins", "GitHub Actions", "CI/CD", "GitOps"],
-  },
-  {
-    name: "OS & Virtualization",
-    color: "#a78bfa",
     skills: [
-      "Linux (Ubuntu, RHEL)",
-      "Windows Server (AD, GPO)",
-      "VMware",
+      "Git / GitHub",
+      "Vercel (Deploy)",
+      "Render (Deploy)",
+      "GitHub Actions (lernend)",
     ],
   },
   {
-    name: "Networking & Security",
-    color: "#f472b6",
+    name: "OS & Scripting",
+    color: "#a78bfa",
     skills: [
-      "VLANs",
-      "VPN",
-      "Cisco Routing/Switching",
-      "Firewall",
-      "Zero Trust",
+      "Linux (Ubuntu)",
+      "Windows",
+      "Bash",
     ],
   },
   {
     name: "Development",
     color: "#34d399",
     skills: [
-      "Python",
-      "Bash",
-      "PowerShell",
-      "JavaScript/TypeScript",
+      "JavaScript / TypeScript",
+      "Python (Grundlagen)",
+      "HTML / CSS",
       "SQL",
-      "Flutter/Dart",
-    ],
-  },
-  {
-    name: "Monitoring",
-    color: "#fbbf24",
-    skills: [
-      "Sentry (Full-Stack)",
-      "Zabbix",
-      "Azure Monitor",
-      "Power BI",
     ],
   },
   {
     name: "Database",
     color: "#60a5fa",
     skills: [
-      "PostgreSQL",
-      "Serverless SQL (Neon)",
+      "PostgreSQL (Neon)",
       "Prisma ORM",
-      "Firebase / Firestore",
+    ],
+  },
+  {
+    name: "Services",
+    color: "#fbbf24",
+    note: "Integrationslevel — in eigenen Projekten eingesetzt",
+    skills: [
+      "Cloudinary",
+      "Pusher",
+      "Redis (Upstash)",
+      "Sentry",
+    ],
+  },
+  {
+    name: "In Weiterbildung",
+    color: "#f472b6",
+    skills: [
+      "GitHub Actions / CI/CD",
+      "Ansible",
+      "Terraform (Vertiefung)",
+      "Linux Vertiefung",
+      "KI / Prompt Engineering",
     ],
   },
 ];
@@ -99,13 +101,12 @@ const copy = {
     headingA: "Tools & Technologien",
     headingB: "mit denen ich arbeite.",
     certTitle: "Zertifikate & Weiterbildung",
-    more: "mehr",
     certs: [
-      "Certified STACKIT Cloud Engineer — Schwarz Digits",
-      "AI Fluency: Framework & Foundations — Anthropic",
-      "Azure AZ-900 (in Vorbereitung)",
-      "AWS Cloud Practitioner (in Vorbereitung)",
-      "CompTIA Security+ (in Vorbereitung)",
+      "Certified STACKIT Cloud Engineer — Schwarz Digits (März 2026)",
+      "STACKIT Fundamentals — 7 Kurse abgeschlossen: Linux, Docker, Kubernetes, Terraform, DevOps, Cloud Foundry, STACKIT Products (März 2026)",
+      "AI Fluency: Framework & Foundations — Anthropic (2026)",
+      "Microsoft SQL Server Database Administration (2023)",
+      "Azure AZ-900 — in Vorbereitung",
     ],
   },
   en: {
@@ -113,13 +114,12 @@ const copy = {
     headingA: "Tools & technologies",
     headingB: "I work with.",
     certTitle: "Certifications & Training",
-    more: "more",
     certs: [
-      "Certified STACKIT Cloud Engineer — Schwarz Digits",
-      "AI Fluency: Framework & Foundations — Anthropic",
-      "Azure AZ-900 (in progress)",
-      "AWS Cloud Practitioner (in progress)",
-      "CompTIA Security+ (in progress)",
+      "Certified STACKIT Cloud Engineer — Schwarz Digits (March 2026)",
+      "STACKIT Fundamentals — 7 courses completed: Linux, Docker, Kubernetes, Terraform, DevOps, Cloud Foundry, STACKIT Products (March 2026)",
+      "AI Fluency: Framework & Foundations — Anthropic (2026)",
+      "Microsoft SQL Server Database Administration (2023)",
+      "Azure AZ-900 — in progress",
     ],
   },
 };
@@ -164,6 +164,11 @@ export default function Skills({ lang }: SkillsProps) {
                   {cat.name}
                 </h3>
               </div>
+              {cat.note && (
+                <p className="mt-1.5 text-[10px] leading-relaxed text-[#5a6a82] italic">
+                  {cat.note}
+                </p>
+              )}
               <div className="mt-4 flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
                   <span

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
@@ -16,6 +17,7 @@ type Project = {
   urlLabel: string;
   color: string;
   status: string;
+  screenshot?: string;
 };
 
 type ProjectsProps = {
@@ -27,26 +29,23 @@ const projectsByLang: Record<Lang, Project[]> = {
     {
       id: "bolo237",
       title: "Bolo237",
-      subtitle: "Sicheres Support- & CRM-System",
+      subtitle: "Jobbörse & Dienstleistungsplattform (Kamerun)",
       description:
-        "Vollwertige CRM-Plattform mit KI-gestütztem Job-Matching, mehrsprachigem Support und Enterprise-Sicherheit. Live in Produktion mit echten Nutzerinnen und Nutzern.",
+        "Persönliches Projekt — Full-Stack-Plattform für Jobs und Dienstleistungen, deployed und in Betrieb. Code mit KI-Assistent (Claude Code) entwickelt; Deployment, Infrastruktur und Inbetriebnahme eigenständig umgesetzt.",
       highlights: [
         "REST-API mit Node.js/Express, Prisma ORM, serverless PostgreSQL (Neon)",
-        "Mehrschichtige Sicherheit: granular Rate Limiting (pro IP/User), Helmet, CORS, JWT",
-        "Volle Sentry-Integration (Frontend, Backend, Admin) inkl. eigenem Ad-Blocker-Tunneling",
-        "PostgreSQL-Optimierung mit Trigram-Indexen (pg_trgm) fur ultraschnelle Suche",
-        "Automatisierte Workflows mit n8n und Twilio API fur WhatsApp-Benachrichtigungen",
-        "Monorepo CI/CD via Vercel und Render mit sicherem Environment-Management",
+        "Mehrschichtige Sicherheit: Rate Limiting (pro IP/User), Helmet, CORS, JWT",
+        "Sentry-Integration (Frontend + Backend) für Fehlertracking und Monitoring",
+        "Kontinuierliches Deployment via Vercel (Frontend) und Render (Backend)",
+        "Sichere Verwaltung von Umgebungsvariablen und Secrets über mehrere Dienste",
       ],
       stack: [
         "Node.js",
         "React/Next.js",
         "Prisma",
-        "PostgreSQL",
-        "n8n",
+        "PostgreSQL (Neon)",
         "Vercel",
         "Render",
-        "Twilio",
         "JWT",
         "Sentry",
       ],
@@ -54,73 +53,50 @@ const projectsByLang: Record<Lang, Project[]> = {
       urlLabel: "bolo237.com",
       color: "#f0a050",
       status: "Live",
+      screenshot: "/screenshots/bolo237-home.png",
     },
     {
-      id: "237go",
-      title: "237Go",
-      subtitle: "Intercity-Reisebuchungsplattform",
+      id: "mymifa",
+      title: "MyMifa",
+      subtitle: "Familiale Kommunikations-App (PWA)",
       description:
-        "Startup-Projekt (Pre-Launch) - komplette System- und Produktarchitektur fur Intercity-Busbuchungen in Kamerun.",
+        "Progressive Web App für Familienkommunikation. Mehrere Cloud-Dienste eigenständig orchestriert und in Produktion deployed. Code mit KI-Assistent (Claude Code) entwickelt; Infrastruktur und Deployment eigenständig umgesetzt.",
       highlights: [
-        "4-Ebenen-Plattform: Mobile App (Flutter) - Agency Dashboard (React) - Admin Portal (React) - REST API (FastAPI)",
-        "Agency-Dashboard fur Busunternehmen zur Verwaltung von Abfahrten, Kapazitaten, Preisen und Buchungen",
-        "Datenstrategie: Firebase (Firestore, Storage) kombiniert mit PostgreSQL fur strukturierte Unternehmensdaten",
-        "KI-Roadmap: Preisoptimierung, Nachfrageprognosen, Traveler-Chatbot",
-        "Deployment-Zusammenarbeit mit GDE Solution GmbH auf Azure/Linux-Infrastruktur",
+        "Deployment und Betrieb auf Vercel mit serverlosem PostgreSQL (Neon)",
+        "Medien-Management mit Cloudinary (Upload und Transformation)",
+        "Echtzeit-Kommunikation via Pusher",
+        "Session-Caching mit Upstash Redis",
+        "Fehlertracking mit Sentry",
+        "Verwaltung von Secrets und Umgebungsvariablen über mehrere Cloud-Dienste",
       ],
       stack: [
-        "Flutter",
-        "React",
-        "Python/FastAPI",
-        "PostgreSQL",
-        "Firebase",
-        "Azure",
-        "CinetPay",
-        "AI/ML",
-      ],
-      url: "#",
-      urlLabel: "Pre-Launch",
-      color: "#19b1ba",
-      status: "In Entwicklung",
-    },
-    {
-      id: "dtsfuture",
-      title: "DTS Future",
-      subtitle: "Portfolio-Showcase mit interaktiven Case Studies",
-      description:
-        "Mehrsprachige Portfolio-Website mit detaillierten Case Studies, hoher Performance und modernen Design-Mustern.",
-      highlights: [
-        "Mehrsprachige Website (FR/EN): Startseite mit Hero, Portfolio-Overview, Detailseiten fur Case Studies",
-        "Case Studies mit Anforderungen, Architektur, Features und Live-Demos",
-        "SEO & Performance: Open Graph Meta-Tags, Sitemap, optimierte Bilder, schnelle LCP (<2.5s), Vercel Edge Caching",
-        "Responsive Design mit Tailwind CSS, Dark Mode und barrierearmen Komponenten (WCAG 2.1)",
-      ],
-      stack: [
-        "Next.js 16",
-        "React 19",
-        "TypeScript",
-        "Tailwind CSS",
-        "i18n",
+        "Next.js",
+        "Prisma",
+        "PostgreSQL (Neon)",
+        "Cloudinary",
+        "Pusher",
+        "Upstash Redis",
+        "Sentry",
         "Vercel",
-        "Edge Caching",
       ],
-      url: "https://dtsfuture.com",
-      urlLabel: "dtsfuture.com",
-      color: "#a78bfa",
+      url: "https://mymifa-app.vercel.app",
+      urlLabel: "mymifa-app.vercel.app",
+      color: "#818cf8",
       status: "Live",
+      screenshot: "/screenshots/mymifa-home.png",
     },
     {
       id: "schmidts",
       title: "Schmidts Zaunbau Nord",
-      subtitle: "Professionelle Website fur Zaunbauunternehmen",
+      subtitle: "Kundenprojekt — bezahlte Auftragsarbeit",
       description:
-        "Kundenprojekt - responsive Mehrseiten-Website fur ein Hamburger Zaunbauunternehmen mit interaktiven Features.",
+        "Responsive Mehrseiten-Website für ein Hamburger Zaunbauunternehmen. Vollständig von Hand codiert (HTML/Tailwind/JS), kontinuierliches Deployment über Git.",
       highlights: [
         "Responsive Mehrseiten-Website (DE/EN): Startseite, Produktkatalog, Impressum, Datenschutz",
         "Vorher/Nachher-Slider, Projektgalerie mit Auto-Scroll, Lightbox-Modals",
         "DSGVO-konforme Google Maps Integration und Cookie-Banner",
         "SEO-Optimierung mit Meta-Tags, Open Graph und semantischem HTML",
-        "Kundenbewertungen mit animierten Countern",
+        "Kontinuierliches Deployment via Git/Netlify",
       ],
       stack: [
         "HTML5",
@@ -134,19 +110,44 @@ const projectsByLang: Record<Lang, Project[]> = {
       urlLabel: "schmidtszaunbaunord.com",
       color: "#34d399",
       status: "Live",
+      screenshot: "/screenshots/schmidts-home.png",
+    },
+    {
+      id: "237go",
+      title: "237Go / Carlite",
+      subtitle: "Intercity-Busbuchungen — Kamerun (in Entwicklung)",
+      description:
+        "Startup-Projekt (Pre-Launch) — persönliches Architekturprojekt für Intercity-Busbuchungen in Kamerun. Aktuell in Entwicklung.",
+      highlights: [
+        "Geplante Plattform: Mobile App (Flutter), Agency Dashboard (React), REST API (FastAPI)",
+        "Datenstrategie: Firebase (Firestore, Storage) und PostgreSQL",
+        "Zahlungsintegration für den kamerunischen Markt (CinetPay)",
+      ],
+      stack: [
+        "Flutter",
+        "React",
+        "Python/FastAPI",
+        "PostgreSQL",
+        "Firebase",
+        "CinetPay",
+      ],
+      url: "#",
+      urlLabel: "Pre-Launch",
+      color: "#19b1ba",
+      status: "In Entwicklung",
     },
     {
       id: "macarriere",
-      title: "Ma Carriere",
-      subtitle: "KI-gestutztes Karrieremanagement-System",
+      title: "Ma Carrière",
+      subtitle: "Karriereverwaltungs-App",
       description:
-        "Komplette Career-Management-App: Bewerbungen, Agenda, Dokumente, Zertifikate und Portfolio - mit KI-Assistent.",
+        "App zur persönlichen Karriereverwaltung: Bewerbungen, Agenda, Dokumente, Zertifikate — mit KI-Assistenzfunktionen. Deployed auf Streamlit Cloud.",
       highlights: [
-        "KI-Assistent: organisiert Termine, priorisiert Aufgaben und strukturiert Bewerbungsprozesse",
-        "Authentifizierung mit Session-Management: privates Dashboard und offentliches Portfolio",
-        "Bilinguale UI (Franzosisch / Deutsch), deployed auf Streamlit Cloud",
+        "Authentifizierung mit Session-Management: privates Dashboard und öffentliches Portfolio",
+        "KI-Assistent für Aufgabenpriorisierung und Bewerbungsstrukturierung",
+        "Bilinguale UI (Französisch / Deutsch), deployed auf Streamlit Cloud",
       ],
-      stack: ["Python", "Streamlit", "AI Integration", "Authentication", "Streamlit Cloud"],
+      stack: ["Python", "Streamlit", "KI-Integration", "Authentifizierung", "Streamlit Cloud"],
       url: "https://samueldt.streamlit.app",
       urlLabel: "samueldt.streamlit.app",
       color: "#fbbf24",
@@ -157,26 +158,23 @@ const projectsByLang: Record<Lang, Project[]> = {
     {
       id: "bolo237",
       title: "Bolo237",
-      subtitle: "Secure Support & CRM System",
+      subtitle: "Job Board & Services Platform (Cameroon)",
       description:
-        "Full-featured CRM platform with AI-powered job matching, multilingual support, and enterprise-grade security. Live production system serving real users.",
+        "Personal project — full-stack platform for jobs and services, deployed and in operation. Code developed with AI assistance (Claude Code); deployment, infrastructure, and operations handled independently.",
       highlights: [
         "REST API with Node.js/Express, Prisma ORM, serverless PostgreSQL (Neon)",
-        "Multi-layer security: granular rate limiting (per IP/user), Helmet, CORS, JWT",
-        "Full Sentry integration (frontend, backend, admin) with custom ad-blocker tunneling",
-        "PostgreSQL optimization with trigram indexes (pg_trgm) for ultra-fast search",
-        "Automated workflows with n8n and Twilio API for WhatsApp alerts",
-        "Monorepo CI/CD via Vercel and Render with secure environment management",
+        "Multi-layer security: rate limiting (per IP/user), Helmet, CORS, JWT",
+        "Sentry integration (frontend + backend) for error tracking and monitoring",
+        "Continuous deployment via Vercel (frontend) and Render (backend)",
+        "Secure management of environment variables and secrets across multiple services",
       ],
       stack: [
         "Node.js",
         "React/Next.js",
         "Prisma",
-        "PostgreSQL",
-        "n8n",
+        "PostgreSQL (Neon)",
         "Vercel",
         "Render",
-        "Twilio",
         "JWT",
         "Sentry",
       ],
@@ -184,73 +182,50 @@ const projectsByLang: Record<Lang, Project[]> = {
       urlLabel: "bolo237.com",
       color: "#f0a050",
       status: "Live",
+      screenshot: "/screenshots/bolo237-home.png",
     },
     {
-      id: "237go",
-      title: "237Go",
-      subtitle: "Intercity Travel Booking Platform",
+      id: "mymifa",
+      title: "MyMifa",
+      subtitle: "Family Communication App (PWA)",
       description:
-        "Startup project (pre-launch) - complete system and product architecture for intercity bus travel booking in Cameroon.",
+        "Progressive web app for family communication. Multiple cloud services independently orchestrated and deployed to production. Code developed with AI assistance (Claude Code); infrastructure and deployment handled independently.",
       highlights: [
-        "4-layer platform: Mobile App (Flutter) - Agency Dashboard (React) - Admin Portal (React) - REST API (FastAPI)",
-        "Agency dashboard for bus companies to manage departures, capacity, pricing, and bookings",
-        "Data strategy: Firebase (Firestore, Storage) combined with PostgreSQL for structured business data",
-        "AI roadmap: price optimization, demand forecasting, traveler chatbot",
-        "Deployment collaboration with GDE Solution GmbH on Azure/Linux infrastructure",
+        "Deployed and operated on Vercel with serverless PostgreSQL (Neon)",
+        "Media management with Cloudinary (upload and transformation)",
+        "Real-time communication via Pusher",
+        "Session caching with Upstash Redis",
+        "Error tracking with Sentry",
+        "Secrets and environment variable management across multiple cloud services",
       ],
       stack: [
-        "Flutter",
-        "React",
-        "Python/FastAPI",
-        "PostgreSQL",
-        "Firebase",
-        "Azure",
-        "CinetPay",
-        "AI/ML",
-      ],
-      url: "#",
-      urlLabel: "Pre-launch",
-      color: "#19b1ba",
-      status: "In Development",
-    },
-    {
-      id: "dtsfuture",
-      title: "DTS Future",
-      subtitle: "Portfolio Showcase with Interactive Case Studies",
-      description:
-        "Multilingual portfolio website with detailed case studies, optimized performance, and modern design patterns.",
-      highlights: [
-        "Multilingual website (FR/EN): homepage with hero, portfolio overview, case study detail pages",
-        "Case studies: detailed requirements, architecture, features, and live demos",
-        "SEO & Performance: Open Graph meta-tags, sitemap, optimized images, fast LCP (<2.5s), Vercel Edge Caching",
-        "Responsive design with Tailwind CSS, dark mode support, accessible components (WCAG 2.1)",
-      ],
-      stack: [
-        "Next.js 16",
-        "React 19",
-        "TypeScript",
-        "Tailwind CSS",
-        "i18n",
+        "Next.js",
+        "Prisma",
+        "PostgreSQL (Neon)",
+        "Cloudinary",
+        "Pusher",
+        "Upstash Redis",
+        "Sentry",
         "Vercel",
-        "Edge Caching",
       ],
-      url: "https://dtsfuture.com",
-      urlLabel: "dtsfuture.com",
-      color: "#a78bfa",
+      url: "https://mymifa-app.vercel.app",
+      urlLabel: "mymifa-app.vercel.app",
+      color: "#818cf8",
       status: "Live",
+      screenshot: "/screenshots/mymifa-home.png",
     },
     {
       id: "schmidts",
       title: "Schmidts Zaunbau Nord",
-      subtitle: "Professional Fence Construction Website",
+      subtitle: "Client project — paid work",
       description:
-        "Client project - responsive multipage website for a Hamburg-based fence construction company with rich interactive features.",
+        "Responsive multipage website for a Hamburg-based fence construction company. Hand-coded from scratch (HTML/Tailwind/JS), with continuous deployment via Git.",
       highlights: [
         "Responsive multipage site (DE/EN): homepage, product catalog, imprint, privacy",
         "Before/after slider, project gallery with auto-scroll, lightbox modals",
         "GDPR-compliant Google Maps integration and cookie banner",
         "SEO optimization with meta tags, Open Graph, semantic HTML",
-        "Customer reviews section with animated counters",
+        "Continuous deployment via Git/Netlify",
       ],
       stack: [
         "HTML5",
@@ -264,16 +239,41 @@ const projectsByLang: Record<Lang, Project[]> = {
       urlLabel: "schmidtszaunbaunord.com",
       color: "#34d399",
       status: "Live",
+      screenshot: "/screenshots/schmidts-home.png",
+    },
+    {
+      id: "237go",
+      title: "237Go / Carlite",
+      subtitle: "Intercity Bus Booking — Cameroon (in development)",
+      description:
+        "Startup project (pre-launch) — personal architecture project for intercity bus travel booking in Cameroon. Currently in development.",
+      highlights: [
+        "Planned platform: Mobile App (Flutter), Agency Dashboard (React), REST API (FastAPI)",
+        "Data strategy: Firebase (Firestore, Storage) and PostgreSQL",
+        "Payment integration for the Cameroonian market (CinetPay)",
+      ],
+      stack: [
+        "Flutter",
+        "React",
+        "Python/FastAPI",
+        "PostgreSQL",
+        "Firebase",
+        "CinetPay",
+      ],
+      url: "#",
+      urlLabel: "Pre-launch",
+      color: "#19b1ba",
+      status: "In Development",
     },
     {
       id: "macarriere",
-      title: "Ma Carriere",
-      subtitle: "AI-Powered Career Management System",
+      title: "Ma Carrière",
+      subtitle: "Career Management App",
       description:
-        "Full career management app: applications, agenda, documents, certifications, portfolio - with an AI assistant.",
+        "Personal career management app: applications, agenda, documents, certifications — with AI assistance features. Deployed on Streamlit Cloud.",
       highlights: [
-        "AI assistant: organizes agenda, prioritizes tasks, structures application processes",
-        "Authentication system with session management: private dashboard and public portfolio",
+        "Authentication with session management: private dashboard and public portfolio",
+        "AI assistant for task prioritization and application structuring",
         "Bilingual UI (French / German), deployed on Streamlit Cloud",
       ],
       stack: ["Python", "Streamlit", "AI Integration", "Authentication", "Streamlit Cloud"],
@@ -289,9 +289,9 @@ const sectionCopy = {
   de: {
     eyebrow: "Projekte",
     headingA: "Was ich gebaut",
-    headingB: "& ausgeliefert habe.",
+    headingB: "& deployed habe.",
     intro:
-      "Von produktiven CRM-Systemen bis zu Startup-Architekturen - jedes Projekt ist real und nachvollziehbar.",
+      "Selbst deployed und betrieben — jedes Projekt ist live und testbar. Code mit KI-Assistent entwickelt; Infrastruktur und Inbetriebnahme eigenständig.",
     less: "Weniger Details",
     more: "Mehr Details",
     moreCount: "mehr",
@@ -299,9 +299,9 @@ const sectionCopy = {
   en: {
     eyebrow: "Projects",
     headingA: "Things I've built",
-    headingB: "& shipped.",
+    headingB: "& deployed.",
     intro:
-      "From production CRM systems to startup architectures - each project is live and testable.",
+      "Self-deployed and operated — each project is live and testable. Code developed with AI assistance; infrastructure and operations handled independently.",
     less: "Less details",
     more: "More details",
     moreCount: "more",
@@ -352,6 +352,19 @@ function ProjectCard({
             {project.status}
           </span>
         </div>
+
+        {project.screenshot && (
+          <div className="mt-4 overflow-hidden rounded-lg border border-white/8">
+            <Image
+              src={project.screenshot}
+              alt={`Vorschau von ${project.title}`}
+              width={1280}
+              height={800}
+              className="w-full object-cover object-top"
+              loading="lazy"
+            />
+          </div>
+        )}
 
         <p className="mt-4 text-sm leading-relaxed text-[#a0b0c8] break-words">{project.description}</p>
 

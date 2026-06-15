@@ -31,9 +31,12 @@ type NavbarProps = {
 export default function Navbar({ lang, onLangChange }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const resumeHref =
+    lang === "de"
+      ? "/Samuel%20Djommou%20ThenghoLebenslauf.pdf"
+      : "/Samuel%20Djommou%20Thengho%20%E2%80%94%20Resume.pdf";
   const resumeOpenLabel = lang === "de" ? "Lebenslauf" : "Resume";
-  const resumeDownloadLabel = lang === "de" ? "Download" : "Download";
-  const resumeHref = "/Samuel_Djommou_CV_2026.pdf";
+  const resumeDownloadLabel = "Download";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);

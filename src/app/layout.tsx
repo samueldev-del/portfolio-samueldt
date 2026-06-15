@@ -14,18 +14,18 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Samuel Djommou Thengho | Cloud & DevOps Engineer",
+  title: "Samuel Djommou Thengho | Junior DevOps / Cloud Engineer",
   description:
-    "Portfolio von Samuel Djommou Thengho, Cloud & DevOps Engineer und Fullstack-Entwickler. Expertise in Azure/STACKIT/AWS-Infrastruktur, Security und Next.js/Python-Architekturen.",
+    "Portfolio von Samuel Djommou Thengho — Quereinsteiger im DevOps-/Cloud-Bereich mit zertifizierten Grundlagen (STACKIT) und mehreren selbst deployten Live-Projekten. Next.js, Vercel, Docker, Kubernetes.",
   keywords: [
+    "Junior DevOps",
     "Cloud Engineer",
-    "DevOps",
-    "Fullstack",
-    "Terraform",
-    "Azure",
+    "Quereinsteiger",
     "STACKIT",
-    "AWS",
+    "Azure",
+    "Docker",
     "Kubernetes",
+    "Terraform",
     "Next.js",
     "Samuel Djommou Thengho",
   ],
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     apple: "/favicon.svg",
   },
   openGraph: {
-    title: "Samuel Djommou Thengho | Cloud & DevOps Engineer",
+    title: "Samuel Djommou Thengho | Junior DevOps / Cloud Engineer",
     description:
-      "Konzeption, Security und Deployment hochverfugbarer Systeme.",
+      "Quereinsteiger im DevOps-Bereich — zertifizierte Grundlagen, Live-Projekte, ehrliches Profil.",
     type: "website",
     locale: "de_DE",
     url: "https://samueldt.com",

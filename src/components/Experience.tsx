@@ -17,33 +17,17 @@ const timelineByLang: Record<Lang, TimelineItem[]> = {
   de: [
     {
       type: "work",
-      title: "Freelance Webentwickler",
-      company: "Schmidts Zaunbau Nord — Hamburg",
-      period: "Jan. 2026 — Apr. 2026",
+      title: "Lagerist (Logistik)",
+      company: "Unternehmen in Hamburg (über Randstad)",
+      period: "Mai 2026 — heute",
       bullets: [
-        "Responsive Multipage-Website (DE/EN): Startseite, Produktkatalog, Impressum, Datenschutz — mit Tailwind CSS und mobilem Hamburger-Menü",
-        "Vorher/Nachher-Slider, Projekt-Galerie mit Auto-Scroll, Lightbox-Modals, DSGVO-konforme Google-Maps-Integration",
-        "SEO-Optimierung (Meta-Tags, Open Graph, semantisches HTML), Cookie-Banner, Kontaktformular, animierte Scroll-Effekte",
+        "Aktuelle Anstellung, parallel zur laufenden Weiterqualifizierung im DevOps-/Cloud-Bereich.",
       ],
-      stack: ["HTML5", "Tailwind CSS", "JavaScript", "FormSubmit", "Netlify"],
-    },
-    {
-      type: "work",
-      title: "Senior System- & Netzwerkadministrator",
-      company: "GDE Solution GmbH — Eberdingen",
-      period: "2023 — 2025",
-      bullets: [
-        "Administration von VMware-Serverlandschaften und ~10 Ubuntu-Linux-Servern",
-        "Automatisierung mit Ansible: Patch-Management, Konfigurations-Rollout, Security-Patching",
-        "Azure-Administration: AAD, RBAC, Monitor, Synapse Analytics, Power-BI-Dashboards",
-        "Netzwerk: VLANs, Routing, ACLs, Switches; Incident-Management & 24/7-Support",
-      ],
-      stack: ["VMware", "Ansible", "Azure", "Linux", "VLANs", "Power BI"],
     },
     {
       type: "work",
       title: "Webentwickler (Freelance)",
-      company: "Fiverr — Ukraine (Odessa)",
+      company: "Fiverr — internationale Kundschaft (Odessa, Ukraine)",
       period: "Juni 2021 — Jan. 2022",
       bullets: [
         "Websites und Landingpages für Dropshipping und E-Commerce — internationale Kunden",
@@ -67,7 +51,7 @@ const timelineByLang: Record<Lang, TimelineItem[]> = {
     },
     {
       type: "education",
-      title: "Fachinformatiker Systemintegration",
+      title: "Technische Ausbildung — Informatik (Systemintegration)",
       company: "Collège de la Salle — Douala, Kamerun",
       period: "2014 — 2017",
       bullets: [],
@@ -76,33 +60,17 @@ const timelineByLang: Record<Lang, TimelineItem[]> = {
   en: [
     {
       type: "work",
-      title: "Freelance Web Developer",
-      company: "Schmidts Zaunbau Nord — Hamburg",
-      period: "Jan 2026 — Apr 2026",
+      title: "Warehouse Operative (Logistics)",
+      company: "Company in Hamburg (via Randstad)",
+      period: "May 2026 — present",
       bullets: [
-        "Responsive multipage website (DE/EN): homepage, product catalog, imprint, privacy — Tailwind CSS with mobile hamburger menu",
-        "Before/after slider, project gallery with auto-scroll, lightbox modals, GDPR-compliant Google Maps integration",
-        "SEO optimization (meta tags, Open Graph, semantic HTML), cookie banner, contact form, animated scroll effects",
+        "Current position held in parallel with ongoing DevOps / Cloud retraining.",
       ],
-      stack: ["HTML5", "Tailwind CSS", "JavaScript", "FormSubmit", "Netlify"],
-    },
-    {
-      type: "work",
-      title: "Senior System & Network Administrator",
-      company: "GDE Solution GmbH — Eberdingen",
-      period: "2023 — 2025",
-      bullets: [
-        "Administration of VMware server landscapes and ~10 Ubuntu Linux servers",
-        "Automation with Ansible: patch management, configuration rollout, security patching",
-        "Azure administration: AAD, RBAC, Monitor, Synapse Analytics, Power BI dashboards",
-        "Networking: VLANs, routing, ACLs, switches; incident management & 24/7 support",
-      ],
-      stack: ["VMware", "Ansible", "Azure", "Linux", "VLANs", "Power BI"],
     },
     {
       type: "work",
       title: "Web Developer (Freelance)",
-      company: "Fiverr — Ukraine (Odessa)",
+      company: "Fiverr — international clients (Odessa, Ukraine)",
       period: "Jun 2021 — Jan 2022",
       bullets: [
         "Websites and landing pages for dropshipping and e-commerce — international clients",
@@ -126,7 +94,7 @@ const timelineByLang: Record<Lang, TimelineItem[]> = {
     },
     {
       type: "education",
-      title: "IT Specialist — Systems Integration",
+      title: "Technical Training — IT (Systems Integration)",
       company: "Collège de la Salle — Douala, Cameroon",
       period: "2014 — 2017",
       bullets: [],
@@ -142,7 +110,7 @@ const copy = {
   },
   en: {
     eyebrow: "Experience & Education",
-    headingA: "Where I\u2019ve worked",
+    headingA: "Where I’ve worked",
     headingB: "& learned.",
   },
 };

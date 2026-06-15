@@ -47,7 +47,7 @@ const copy = {
     eyebrow: "Kontakt",
     title: "Lass uns zusammenarbeiten.",
     description:
-      "Offen fur feste Positionen in Cloud/DevOps oder Fullstack-Entwicklung. Schreib mir gerne - ich freue mich auf dein Team und eure Herausforderungen.",
+      "Offen für eine Junior-Position in Cloud/DevOps oder Fullstack-Entwicklung. Schreib mir gerne — ich freue mich auf dein Team und eure Herausforderungen.",
     cta: "Hallo sagen",
     french: "Franzosisch",
     german: "Deutsch",
@@ -69,7 +69,7 @@ const copy = {
     eyebrow: "Get in Touch",
     title: "Let's work together.",
     description:
-      "Open for permanent roles in Cloud/DevOps or fullstack development. Feel free to reach out - I'd love to hear about your team and challenges.",
+      "Open to a junior position in Cloud/DevOps or full-stack development. Feel free to reach out — I'd love to hear about your team and challenges.",
     cta: "Say Hello",
     french: "French",
     german: "German",
@@ -252,7 +252,7 @@ export default function Contact({ lang }: ContactProps) {
       </div>
 
       <div className="mx-auto mt-24 max-w-6xl border-t border-white/8 pt-8 text-center">
-        <p className="text-xs text-[#5a6a82]">
+        <p className="text-xs text-[#5a6a82]" suppressHydrationWarning>
           &copy; {new Date().getFullYear()} Samuel Djommou Thengho. {t.footer}
         </p>
       </div>

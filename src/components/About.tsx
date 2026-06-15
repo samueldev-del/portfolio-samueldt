@@ -14,25 +14,25 @@ const highlights = {
       icon: Cloud,
       title: "Cloud-Infrastruktur",
       description:
-        "Azure, STACKIT (zertifiziert), AWS — AAD, RBAC, Monitor, Synapse Analytics",
+        "STACKIT (zertifiziert), Azure AZ-900 (in Vorbereitung) — zertifizierte Grundlagen, mehrere Live-Projekte deployed",
     },
     {
       icon: Server,
-      title: "DevOps & Automatisierung",
+      title: "DevOps — Grundlagen",
       description:
-        "Docker, Kubernetes, Terraform, Ansible, GitHub Actions, n8n, CI/CD-Pipelines",
+        "Docker, Kubernetes, Terraform, Cloud Foundry — zertifizierte Grundlagen (STACKIT University); GitHub Actions in Weiterbildung",
     },
     {
       icon: Code,
       title: "Fullstack-Entwicklung",
       description:
-        "Next.js, React, Node.js, FastAPI, Flutter — von APIs bis zu produktionsreifen UIs",
+        "Next.js, React, Node.js, TypeScript — Live-Projekte deployed auf Vercel und Render mit echten Nutzern",
     },
     {
       icon: Shield,
-      title: "Security & Observability",
+      title: "Services & Observability",
       description:
-        "Zero Trust, Rate Limiting, RBAC, Sentry Full-Stack, Zabbix, Azure Monitor",
+        "Sentry, Cloudinary, Pusher, Upstash Redis — integriert und in Produktion betrieben (Integrationslevel)",
     },
   ],
   en: [
@@ -40,25 +40,25 @@ const highlights = {
       icon: Cloud,
       title: "Cloud Infrastructure",
       description:
-        "Azure, STACKIT (certified), AWS — AAD, RBAC, Monitor, Synapse Analytics",
+        "STACKIT (certified), Azure AZ-900 (in progress) — certified fundamentals, multiple live projects deployed",
     },
     {
       icon: Server,
-      title: "DevOps & Automation",
+      title: "DevOps — Fundamentals",
       description:
-        "Docker, Kubernetes, Terraform, Ansible, GitHub Actions, n8n, CI/CD pipelines",
+        "Docker, Kubernetes, Terraform, Cloud Foundry — certified fundamentals (STACKIT University); GitHub Actions in training",
     },
     {
       icon: Code,
       title: "Fullstack Development",
       description:
-        "Next.js, React, Node.js, FastAPI, Flutter — from APIs to production UIs",
+        "Next.js, React, Node.js, TypeScript — live projects deployed on Vercel and Render serving real users",
     },
     {
       icon: Shield,
-      title: "Security & Observability",
+      title: "Services & Observability",
       description:
-        "Zero Trust, Rate Limiting, RBAC, Sentry full-stack, Zabbix, Azure Monitor",
+        "Sentry, Cloudinary, Pusher, Upstash Redis — integrated and operated in production (integration level)",
     },
   ],
 };
@@ -66,19 +66,19 @@ const highlights = {
 const copy = {
   de: {
     eyebrow: "Über mich",
-    headingA: "Ich entwickle zuverlässige Systeme,",
-    headingB: "von Ende zu Ende.",
-    p1: "Cloud- & DevOps-Engineer sowie Fullstack-Developer mit über 5 Jahren IT-Erfahrung — von technischer Ausbildung und internationalen Freelance-Projekten bis zur professionellen System- und Cloud-Administration.",
-    p2: "Ich verbinde fundierte Infrastruktur-Expertise (Ansible, Terraform, Kubernetes, Docker, Azure) mit praxisnaher Produktentwicklung: drei Live-Projekte — eine KI-gestützte Karriereplattform, ein CRM- und Support-System sowie eine Travel-Tech-Startup-Architektur — zeigen meine Fähigkeit, hochverfügbare End-to-End-Systeme mit starkem Fokus auf Security und Full-Stack-Observability zu konzipieren, umzusetzen und zu betreiben.",
-    p3: "Zertifizierter STACKIT Cloud Engineer, aktuell in Vorbereitung auf Azure AZ-900, AWS CCP und CompTIA Security+.",
+    headingA: "Auf dem Weg zum DevOps Engineer —",
+    headingB: "ehrlich und nachvollziehbar.",
+    p1: "Mein Weg in die IT führt über eine technische Ausbildung, internationale Freelance-Webprojekte und intensive Eigenweiterbildung im Cloud-/DevOps-Bereich.",
+    p2: "Ich habe mehrere Live-Projekte eigenständig deployed und betrieben (Vercel, Render, Neon, Cloudinary, Pusher, Upstash Redis). Der Code entstand mit KI-Unterstützung (Claude Code); Infrastruktur, Deployment und Inbetriebnahme habe ich selbst umgesetzt. Zertifizierte Grundlagen in Docker, Kubernetes, Terraform und Cloud Foundry via STACKIT University.",
+    p3: "Zertifizierter STACKIT Cloud Engineer (Schwarz Digits). Aktuell in Vorbereitung auf Azure AZ-900.",
   },
   en: {
     eyebrow: "About me",
-    headingA: "Building reliable systems,",
-    headingB: "end to end.",
-    p1: "Cloud & DevOps Engineer and Fullstack Developer with 5+ years of IT experience — from technical training and international freelance projects to professional system and cloud administration.",
-    p2: "I combine solid infrastructure expertise (Ansible, Terraform, Kubernetes, Docker, Azure) with hands-on product development: three live projects — an AI-powered career platform, a CRM & support system, and a travel-tech startup architecture — demonstrate my ability to design, develop, and operate highly available end-to-end systems with strong focus on security and full-stack observability.",
-    p3: "Certified STACKIT Cloud Engineer, currently preparing Azure AZ-900, AWS CCP and CompTIA Security+.",
+    headingA: "Building toward a DevOps career —",
+    headingB: "honest and verifiable.",
+    p1: "My path into IT runs through technical training, international freelance web projects, and intensive self-directed learning in the cloud/DevOps space.",
+    p2: "I have independently deployed and operated several live projects (Vercel, Render, Neon, Cloudinary, Pusher, Upstash Redis). Code developed with AI assistance (Claude Code); infrastructure, deployment, and operations handled by me. Certified fundamentals in Docker, Kubernetes, Terraform, and Cloud Foundry via STACKIT University.",
+    p3: "Certified STACKIT Cloud Engineer (Schwarz Digits). Currently preparing Azure AZ-900.",
   },
 };
 

@@ -12,19 +12,19 @@ type HeroProps = {
 const copy = {
   de: {
     openToWork: "Offen für neue Aufgaben — Cloud / DevOps",
-    role: "Cloud & DevOps Engineer",
-    role2: "Fullstack Developer",
+    role: "Junior DevOps / Cloud Engineer (Quereinsteiger)",
+    role2: "Fullstack-Praxis",
     description:
-      "Ich entwickle sichere, produktionsreife Systeme — von Cloud-Infrastruktur und CI/CD-Pipelines bis zu Fullstack-Anwendungen mit Echtzeit-Observability. Über 5 Jahre Erfahrung mit End-to-End-Lösungen.",
+      "Quereinsteiger im DevOps-Bereich mit zertifizierten Grundlagen (STACKIT) und mehreren selbst deployten Live-Projekten. Ich konzipiere, deploye und betreibe eigene Web-Anwendungen und entwickle mich gezielt zum DevOps Engineer weiter.",
     ctaProjects: "Projekte ansehen",
     ctaContact: "Kontakt aufnehmen",
   },
   en: {
     openToWork: "Open to work — Cloud / DevOps",
-    role: "Cloud & DevOps Engineer",
-    role2: "Fullstack Developer",
+    role: "Junior DevOps / Cloud Engineer (Career Changer)",
+    role2: "Fullstack Practice",
     description:
-      "I build secure, production-grade systems — from cloud infrastructure and CI/CD pipelines to fullstack applications with real-time observability. 5+ years of experience shipping end-to-end solutions.",
+      "Career changer into DevOps with certified foundations (STACKIT) and several self-deployed live projects. I design, deploy, and operate my own web applications while actively growing into the DevOps Engineer role.",
     ctaProjects: "View Projects",
     ctaContact: "Get in Touch",
   },
