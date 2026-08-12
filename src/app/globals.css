@@ -57,3 +57,96 @@ section {
   background: rgba(240, 160, 80, 0.3);
   color: #fff;
 }
+
+/* ---------------------------------------------------------------------------
+   Digital business card (/carte)
+
+   The entrance choreography is CSS rather than Framer Motion on purpose: the
+   card must paint instantly and must never depend on JavaScript arriving. It is
+   shown to a stranger, once, on a phone, on whatever connection they have.
+   --------------------------------------------------------------------------- */
+
+@keyframes carte-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes carte-slab {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* One pass across the card face, then gone. A looping shimmer reads as spam. */
+@keyframes carte-sheen {
+  from {
+    transform: translateX(-140%) skewX(-12deg);
+  }
+  to {
+    transform: translateX(260%) skewX(-12deg);
+  }
+}
+
+@keyframes carte-mark {
+  from {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes carte-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.carte-slab {
+  animation: carte-slab 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.carte-rise {
+  animation: carte-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.carte-sheen {
+  animation: carte-sheen 1s cubic-bezier(0.33, 0, 0.2, 1) 0.42s both;
+}
+
+.carte-mark {
+  animation: carte-mark 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.carte-breathe {
+  animation: carte-breathe 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carte-slab,
+  .carte-rise,
+  .carte-mark,
+  .carte-breathe {
+    animation: none;
+  }
+  .carte-sheen {
+    display: none;
+  }
+}
