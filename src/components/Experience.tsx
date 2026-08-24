@@ -150,7 +150,7 @@ export default function Experience({ lang }: ExperienceProps) {
   const items = timelineByLang[lang];
 
   return (
-    <section id="experience" className="px-5 py-24 sm:px-8">
+    <section id="experience" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

@@ -2,6 +2,8 @@
 
 import type { ReactNode } from "react";
 
+import type { Lang } from "@/lib/i18n";
+
 export const BOX = {
   neutral: { fill: "#2b2f38", stroke: "#4a5160" },
   blue: { fill: "#123a63", stroke: "#2f6ba8" },
@@ -105,34 +107,53 @@ export function Arrow({ d, dashed = false }: { d: string; dashed?: boolean }) {
   );
 }
 
+/**
+ * A diagram is kept above `minWidth` so its labels stay readable, which means
+ * it has to scroll sideways on a phone. The fade and the hint below only
+ * appear at that size, so the sideways scroll is discoverable rather than
+ * something the reader has to guess at.
+ */
 export function Figure({
   title,
   viewBox,
   minWidth,
+  lang,
   children,
 }: {
   title: string;
   viewBox: string;
   minWidth: number;
+  lang: Lang;
   children: ReactNode;
 }) {
   return (
-    <figure className="m-0">
+    <figure className="m-0 min-w-0">
       <figcaption className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-[#7e8ea6]">
         {title}
       </figcaption>
-      <div className="overflow-x-auto rounded-xl border border-white/8 bg-[#0b0e17] p-4">
-        <svg
-          viewBox={viewBox}
-          role="img"
-          aria-label={title}
-          className="h-auto w-full"
-          style={{ minWidth }}
-        >
-          <Defs />
-          {children}
-        </svg>
+      <div className="relative min-w-0">
+        <div className="overflow-x-auto rounded-xl border border-white/8 bg-[#0b0e17] p-4">
+          <svg
+            viewBox={viewBox}
+            role="img"
+            aria-label={title}
+            className="h-auto w-full"
+            style={{ minWidth }}
+          >
+            <Defs />
+            {children}
+          </svg>
+        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-px right-px w-12 rounded-r-xl bg-gradient-to-l from-[#0b0e17] to-transparent sm:hidden"
+        />
       </div>
+      <p className="mt-2 text-[11px] text-[#5a6a82] sm:hidden">
+        {lang === "de"
+          ? "Zum Erkunden seitwärts wischen"
+          : "Swipe sideways to explore"}
+      </p>
     </figure>
   );
 }

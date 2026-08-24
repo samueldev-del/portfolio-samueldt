@@ -157,7 +157,10 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
               <li className="mt-2 flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 p-1.5">
                 <button
                   type="button"
-                  onClick={() => onLangChange("de")}
+                  onClick={() => {
+                    onLangChange("de");
+                    setMobileOpen(false);
+                  }}
                   className={`flex-1 rounded-md px-3 py-2 text-xs transition ${
                     lang === "de" ? "bg-[#f0a050]/25 text-[#f8c882]" : "text-[#9cadc6]"
                   }`}
@@ -166,7 +169,10 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => onLangChange("en")}
+                  onClick={() => {
+                    onLangChange("en");
+                    setMobileOpen(false);
+                  }}
                   className={`flex-1 rounded-md px-3 py-2 text-xs transition ${
                     lang === "en" ? "bg-[#19b1ba]/25 text-[#94edf3]" : "text-[#9cadc6]"
                   }`}
@@ -180,6 +186,7 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                     href={resumeHref}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={() => setMobileOpen(false)}
                     className="block rounded-lg border border-[#f0a050]/50 bg-[#f0a050]/10 px-4 py-2.5 text-center text-sm font-medium text-[#f8c882]"
                   >
                     {resumeOpenLabel}
@@ -187,6 +194,7 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                   <a
                     href={resumeHref}
                     download
+                    onClick={() => setMobileOpen(false)}
                     className="block rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-center text-sm font-medium text-[#d0daea]"
                   >
                     {resumeDownloadLabel}

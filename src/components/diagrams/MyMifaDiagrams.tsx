@@ -69,7 +69,7 @@ const copy = {
 export function ArchitectureDiagram({ lang }: { lang: Lang }) {
   const t = copy[lang];
   return (
-    <Figure title={t.archTitle} viewBox="0 0 740 470" minWidth={620}>
+    <Figure title={t.archTitle} viewBox="0 0 740 470" minWidth={620} lang={lang}>
 
           <Node x={20} y={20} w={200} h={62} tone="neutral" label={t.frontend} sub={t.frontendSub} />
           <Node x={262} y={20} w={200} h={62} tone="blue" label={t.api} sub={t.apiSub} />
@@ -121,7 +121,7 @@ export function PipelineDiagram({ lang }: { lang: Lang }) {
   ];
 
   return (
-    <Figure title={t.ciTitle} viewBox="0 0 740 250" minWidth={620}>
+    <Figure title={t.ciTitle} viewBox="0 0 740 250" minWidth={620} lang={lang}>
 
           <Node x={12} y={92} w={132} h={56} tone="neutral" label={t.pr} />
 

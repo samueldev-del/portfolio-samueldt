@@ -93,7 +93,7 @@ export function RoleRunDiagram({ lang }: { lang: Lang }) {
   ];
 
   return (
-    <Figure title={t.runTitle} viewBox="0 0 760 520" minWidth={640}>
+    <Figure title={t.runTitle} viewBox="0 0 760 520" minWidth={640} lang={lang}>
       {/* inventory */}
       <rect
         x={16}
@@ -202,7 +202,7 @@ export function PrecedenceDiagram({ lang }: { lang: Lang }) {
   ];
 
   return (
-    <Figure title={t.varTitle} viewBox="0 0 760 400" minWidth={640}>
+    <Figure title={t.varTitle} viewBox="0 0 760 400" minWidth={640} lang={lang}>
       {/* precedence axis */}
       <line x1={40} y1={40} x2={40} y2={330} stroke="#4a5160" strokeWidth={1.4} />
       <text x={40} y={30} textAnchor="middle" fill="#8e9bb0" fontSize={10}>

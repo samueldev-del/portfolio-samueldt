@@ -184,7 +184,7 @@ export default function Skills({ lang }: SkillsProps) {
   const t = copy[lang];
 
   return (
-    <section id="skills" className="px-5 py-24 sm:px-8">
+    <section id="skills" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

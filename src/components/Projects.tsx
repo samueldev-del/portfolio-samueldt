@@ -283,7 +283,7 @@ function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.4 }}
-      className={`group rounded-2xl border border-white/8 bg-white/[0.02] transition hover:border-white/15 ${
+      className={`group min-w-0 rounded-2xl border border-white/8 bg-white/[0.02] transition hover:border-white/15 ${
         featured ? "md:col-span-2" : ""
       }`}
     >
@@ -331,14 +331,14 @@ function ProjectCard({
         <p className="mt-4 text-sm leading-relaxed text-[#a0b0c8] break-words">{project.description}</p>
 
         {project.diagrams === "mymifa" && (
-          <div className="mt-6 space-y-6">
+          <div className="mt-6 space-y-8">
             <ArchitectureDiagram lang={lang} />
             <PipelineDiagram lang={lang} />
           </div>
         )}
 
         {project.diagrams === "ansible" && (
-          <div className="mt-6 space-y-6">
+          <div className="mt-6 space-y-8">
             <RoleRunDiagram lang={lang} />
             <PrecedenceDiagram lang={lang} />
           </div>
@@ -429,7 +429,7 @@ export default function Projects({ lang }: ProjectsProps) {
   const projects = projectsByLang[lang];
 
   return (
-    <section id="projects" className="px-5 py-24 sm:px-8">
+    <section id="projects" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

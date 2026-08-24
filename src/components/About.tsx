@@ -86,7 +86,7 @@ export default function About({ lang }: AboutProps) {
   const t = copy[lang];
 
   return (
-    <section id="about" className="px-5 py-24 sm:px-8">
+    <section id="about" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
