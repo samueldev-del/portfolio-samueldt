@@ -14,25 +14,25 @@ const highlights = {
       icon: Cloud,
       title: "Cloud-Infrastruktur",
       description:
-        "STACKIT (zertifiziert), Azure AZ-900 (in Vorbereitung) — zertifizierte Grundlagen, mehrere Live-Projekte deployed",
+        "AWS (IAM, S3, Lambda, EventBridge, ECS, VPC, ALB) und STACKIT — eigenverantwortlich aufgebaut und betrieben",
     },
     {
       icon: Server,
-      title: "DevOps — Grundlagen",
+      title: "CI/CD & Infrastructure as Code",
       description:
-        "Docker, Kubernetes, Terraform, Cloud Foundry — zertifizierte Grundlagen (STACKIT University); GitHub Actions in Weiterbildung",
+        "GitHub Actions und Terraform im eigenen Projekt eingesetzt: sechs blockierende Prüfungen pro PR, AWS-Infrastruktur vollständig in Code",
     },
     {
       icon: Code,
-      title: "Fullstack-Entwicklung",
+      title: "Fullstack-Praxis",
       description:
-        "Next.js, React, Node.js, TypeScript — Live-Projekte deployed auf Vercel und Render mit echten Nutzern",
+        "Next.js, React, Node.js, TypeScript — drei Projekte live auf Vercel, Render und Netlify",
     },
     {
       icon: Shield,
-      title: "Services & Observability",
+      title: "Betrieb & Monitoring",
       description:
-        "Sentry, Cloudinary, Pusher, Upstash Redis — integriert und in Produktion betrieben (Integrationslevel)",
+        "CloudWatch-Alarme, Sentry, Budget-Alerts — ich will von Problemen erfahren, bevor jemand anderes sie meldet",
     },
   ],
   en: [
@@ -40,25 +40,25 @@ const highlights = {
       icon: Cloud,
       title: "Cloud Infrastructure",
       description:
-        "STACKIT (certified), Azure AZ-900 (in progress) — certified fundamentals, multiple live projects deployed",
+        "AWS (IAM, S3, Lambda, EventBridge, ECS, VPC, ALB) and STACKIT — built and operated on my own responsibility",
     },
     {
       icon: Server,
-      title: "DevOps — Fundamentals",
+      title: "CI/CD & Infrastructure as Code",
       description:
-        "Docker, Kubernetes, Terraform, Cloud Foundry — certified fundamentals (STACKIT University); GitHub Actions in training",
+        "GitHub Actions and Terraform used on my own project: six blocking checks per PR, AWS infrastructure fully described in code",
     },
     {
       icon: Code,
-      title: "Fullstack Development",
+      title: "Fullstack practice",
       description:
-        "Next.js, React, Node.js, TypeScript — live projects deployed on Vercel and Render serving real users",
+        "Next.js, React, Node.js, TypeScript — three projects live on Vercel, Render and Netlify",
     },
     {
       icon: Shield,
-      title: "Services & Observability",
+      title: "Operations & Monitoring",
       description:
-        "Sentry, Cloudinary, Pusher, Upstash Redis — integrated and operated in production (integration level)",
+        "CloudWatch alarms, Sentry, budget alerts — I want to hear about problems before anyone else reports them",
     },
   ],
 };
@@ -66,19 +66,19 @@ const highlights = {
 const copy = {
   de: {
     eyebrow: "Über mich",
-    headingA: "Auf dem Weg zum DevOps Engineer —",
-    headingB: "ehrlich und nachvollziehbar.",
-    p1: "Mein Weg in die IT führt über eine technische Ausbildung, internationale Freelance-Webprojekte und intensive Eigenweiterbildung im Cloud-/DevOps-Bereich.",
-    p2: "Ich habe mehrere Live-Projekte eigenständig deployed und betrieben (Vercel, Render, Neon, Cloudinary, Pusher, Upstash Redis). Der Code entstand mit KI-Unterstützung (Claude Code); Infrastruktur, Deployment und Inbetriebnahme habe ich selbst umgesetzt. Zertifizierte Grundlagen in Docker, Kubernetes, Terraform und Cloud Foundry via STACKIT University.",
-    p3: "Zertifizierter STACKIT Cloud Engineer (Schwarz Digits). Aktuell in Vorbereitung auf Azure AZ-900.",
+    headingA: "Messen statt vermuten —",
+    headingB: "und jede Änderung umkehrbar.",
+    p1: "Ausgebildet in der Systemintegration, automatisiere ich heute die Softwareauslieferung vom Commit bis zum Alarm. Zwei Jahre, in denen ich Verfügbarkeit und Wiederherstellbarkeit von SQL-Server-Datenbanken im Produktivbetrieb sicherzustellen hatte, haben mich gelehrt, zuerst in Fehlerbildern zu denken.",
+    p2: "Eine vollständige AWS-Umgebung mit Terraform, ECS Fargate, Lambda und CloudWatch habe ich eigenverantwortlich aufgebaut und betrieben. MyMifa nutze ich täglich selbst — und genau deshalb liegen dort eine CI-Pipeline, Infrastruktur als Code und Alarme drumherum: weil es weh tut, wenn es kaputt geht.",
+    p3: "Zertifizierter STACKIT Cloud Engineer bei Schwarz Digits. Meine Arbeitsweise: messen statt vermuten, und jede Änderung reproduzierbar und umkehrbar machen.",
   },
   en: {
     eyebrow: "About me",
-    headingA: "Building toward a DevOps career —",
-    headingB: "honest and verifiable.",
-    p1: "My path into IT runs through technical training, international freelance web projects, and intensive self-directed learning in the cloud/DevOps space.",
-    p2: "I have independently deployed and operated several live projects (Vercel, Render, Neon, Cloudinary, Pusher, Upstash Redis). Code developed with AI assistance (Claude Code); infrastructure, deployment, and operations handled by me. Certified fundamentals in Docker, Kubernetes, Terraform, and Cloud Foundry via STACKIT University.",
-    p3: "Certified STACKIT Cloud Engineer (Schwarz Digits). Currently preparing Azure AZ-900.",
+    headingA: "Measure, don\u2019t assume —",
+    headingB: "and keep every change reversible.",
+    p1: "Trained in systems integration, I now automate software delivery from the commit to the alarm. Two years spent guaranteeing the availability and recoverability of production SQL Server databases taught me to think in failure modes first.",
+    p2: "A complete AWS environment with Terraform, ECS Fargate, Lambda and CloudWatch, built and operated on my own responsibility. I use MyMifa every day myself — which is exactly why it has a CI pipeline, infrastructure as code and alarms around it: because it hurts when it breaks.",
+    p3: "Certified STACKIT Cloud Engineer at Schwarz Digits. The way I work: measure instead of assume, and make every change reproducible and reversible.",
   },
 };
 

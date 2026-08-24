@@ -10,86 +10,142 @@ type SkillCategory = {
   note?: string;
 };
 
-const categories: SkillCategory[] = [
-  {
-    name: "Cloud",
-    color: "#f0a050",
-    skills: [
-      "STACKIT (zertifiziert)",
-      "Azure (AZ-900, in Vorbereitung)",
-    ],
-  },
-  {
-    name: "Container & IaC",
-    color: "#19b1ba",
-    note: "Grundlagen zertifiziert (STACKIT University)",
-    skills: [
-      "Docker",
-      "Kubernetes",
-      "Terraform",
-      "Cloud Foundry",
-    ],
-  },
-  {
-    name: "CI/CD & Git",
-    color: "#e8734a",
-    skills: [
-      "Git / GitHub",
-      "Vercel (Deploy)",
-      "Render (Deploy)",
-      "GitHub Actions (lernend)",
-    ],
-  },
-  {
-    name: "OS & Scripting",
-    color: "#a78bfa",
-    skills: [
-      "Linux (Ubuntu)",
-      "Windows",
-      "Bash",
-    ],
-  },
-  {
-    name: "Development",
-    color: "#34d399",
-    skills: [
-      "JavaScript / TypeScript",
-      "Python (Grundlagen)",
-      "HTML / CSS",
-      "SQL",
-    ],
-  },
-  {
-    name: "Database",
-    color: "#60a5fa",
-    skills: [
-      "PostgreSQL (Neon)",
-      "Prisma ORM",
-    ],
-  },
-  {
-    name: "Services",
-    color: "#fbbf24",
-    note: "Integrationslevel — in eigenen Projekten eingesetzt",
-    skills: [
-      "Cloudinary",
-      "Pusher",
-      "Redis (Upstash)",
-      "Sentry",
-    ],
-  },
-  {
-    name: "In Weiterbildung",
-    color: "#f472b6",
-    skills: [
-      "GitHub Actions / CI/CD",
-      "Ansible",
-      "Terraform (Vertiefung)",
-      "Linux Vertiefung",
-      "KI / Prompt Engineering",
-    ],
-  },
-];
+type SkillCategoryByLang = Record<Lang, SkillCategory[]>;
+
+const categoriesByLang: SkillCategoryByLang = {
+  de: [
+    {
+      name: "CI/CD",
+      color: "#e8734a",
+      skills: ["GitHub Actions", "GitLab CI", "GHCR", "Rulesets & blockierende Prüfungen"],
+    },
+    {
+      name: "Container",
+      color: "#19b1ba",
+      skills: ["Docker", "Docker Compose", "ECS Fargate"],
+    },
+    {
+      name: "Orchestrierung",
+      color: "#60a5fa",
+      note: "Deklarative Manifeste, Rolling Updates, Rollback",
+      skills: ["Kubernetes", "kind", "kubectl"],
+    },
+    {
+      name: "Infrastructure as Code",
+      color: "#f0a050",
+      note: "Remote State, Module, kontrollierte Plan- und Apply-Läufe",
+      skills: ["Terraform"],
+    },
+    {
+      name: "Konfigurationsmanagement",
+      color: "#a78bfa",
+      note: "Wiederverwendbare Rollen, Handler, Variablen-Präzedenz",
+      skills: ["Ansible", "Jinja2", "ansible-vault", "ansible-lint"],
+    },
+    {
+      name: "AWS",
+      color: "#fbbf24",
+      note: "Im eigenen Projekt aufgebaut und betrieben",
+      skills: ["IAM", "S3", "Lambda", "EventBridge", "SSM Parameter Store", "CloudWatch", "ECS", "VPC", "ALB"],
+    },
+    {
+      name: "Observability",
+      color: "#f472b6",
+      skills: ["CloudWatch (Metriken, Alarme, Logs)", "SNS", "Sentry"],
+    },
+    {
+      name: "Sicherheit",
+      color: "#34d399",
+      skills: ["gitleaks", "Secret Scanning", "Least Privilege", "Verschlüsselung at rest & in transit"],
+    },
+    {
+      name: "Sprachen",
+      color: "#818cf8",
+      skills: ["JavaScript / TypeScript", "SQL / T-SQL", "Bash"],
+    },
+    {
+      name: "Frameworks & Datenbanken",
+      color: "#2dd4bf",
+      skills: ["Node.js", "Express", "Next.js", "PostgreSQL", "Microsoft SQL Server"],
+    },
+    {
+      name: "Qualitätssicherung",
+      color: "#c084fc",
+      skills: ["Unit- & Integrationstests", "Smoke-Tests nach dem Deployment"],
+    },
+    {
+      name: "Werkzeuge",
+      color: "#94a3b8",
+      skills: ["Git", "GitHub CLI", "actionlint", "hadolint", "AWS CLI", "psql", "rsync over SSH"],
+    },
+  ],
+  en: [
+    {
+      name: "CI/CD",
+      color: "#e8734a",
+      skills: ["GitHub Actions", "GitLab CI", "GHCR", "Rulesets & blocking checks"],
+    },
+    {
+      name: "Containers",
+      color: "#19b1ba",
+      skills: ["Docker", "Docker Compose", "ECS Fargate"],
+    },
+    {
+      name: "Orchestration",
+      color: "#60a5fa",
+      note: "Declarative manifests, rolling updates, rollback",
+      skills: ["Kubernetes", "kind", "kubectl"],
+    },
+    {
+      name: "Infrastructure as Code",
+      color: "#f0a050",
+      note: "Remote state, modules, controlled plan and apply runs",
+      skills: ["Terraform"],
+    },
+    {
+      name: "Configuration management",
+      color: "#a78bfa",
+      note: "Reusable roles, handlers, variable precedence",
+      skills: ["Ansible", "Jinja2", "ansible-vault", "ansible-lint"],
+    },
+    {
+      name: "AWS",
+      color: "#fbbf24",
+      note: "Built and operated on my own project",
+      skills: ["IAM", "S3", "Lambda", "EventBridge", "SSM Parameter Store", "CloudWatch", "ECS", "VPC", "ALB"],
+    },
+    {
+      name: "Observability",
+      color: "#f472b6",
+      skills: ["CloudWatch (metrics, alarms, logs)", "SNS", "Sentry"],
+    },
+    {
+      name: "Security",
+      color: "#34d399",
+      skills: ["gitleaks", "Secret scanning", "Least privilege", "Encryption at rest & in transit"],
+    },
+    {
+      name: "Languages",
+      color: "#818cf8",
+      skills: ["JavaScript / TypeScript", "SQL / T-SQL", "Bash"],
+    },
+    {
+      name: "Frameworks & databases",
+      color: "#2dd4bf",
+      skills: ["Node.js", "Express", "Next.js", "PostgreSQL", "Microsoft SQL Server"],
+    },
+    {
+      name: "Quality assurance",
+      color: "#c084fc",
+      skills: ["Unit & integration tests", "Post-deployment smoke tests"],
+    },
+    {
+      name: "Tooling",
+      color: "#94a3b8",
+      skills: ["Git", "GitHub CLI", "actionlint", "hadolint", "AWS CLI", "psql", "rsync over SSH"],
+    },
+  ],
+};
 
 type SkillsProps = {
   lang: Lang;
@@ -102,11 +158,11 @@ const copy = {
     headingB: "mit denen ich arbeite.",
     certTitle: "Zertifikate & Weiterbildung",
     certs: [
-      "Certified STACKIT Cloud Engineer — Schwarz Digits (März 2026)",
-      "STACKIT Fundamentals — 7 Kurse abgeschlossen: Linux, Docker, Kubernetes, Terraform, DevOps, Cloud Foundry, STACKIT Products (März 2026)",
-      "AI Fluency: Framework & Foundations — Anthropic (2026)",
-      "Microsoft SQL Server Database Administration (2023)",
-      "Azure AZ-900 — in Vorbereitung",
+      "Certified STACKIT Cloud Engineer — STACKIT University, Schwarz Digits, Neckarsulm (März 2026)",
+      "STACKIT University — STACKIT Product Fundamentals, DevOps Fundamentals, Terraform Fundamentals, Cloud Foundry Fundamentals, Deploying an Application with STACKIT Kubernetes Engine, Kubernetes Fundamentals, Docker Fundamentals, Linux Fundamentals (März 2026)",
+      "AI Fluency: Framework and Foundations — Anthropic, in Partnerschaft mit University College Cork (2026)",
+      "Microsoft SQL Server Administration — KiawiTechIT Academy, über 600 Stunden (Okt. 2022 — Jan. 2023)",
+      "Deutschzertifikat Niveau B1 — Anglo-German Institut, Stuttgart (2022); aktuelles Niveau B2",
     ],
   },
   en: {
@@ -115,11 +171,11 @@ const copy = {
     headingB: "I work with.",
     certTitle: "Certifications & Training",
     certs: [
-      "Certified STACKIT Cloud Engineer — Schwarz Digits (March 2026)",
-      "STACKIT Fundamentals — 7 courses completed: Linux, Docker, Kubernetes, Terraform, DevOps, Cloud Foundry, STACKIT Products (March 2026)",
-      "AI Fluency: Framework & Foundations — Anthropic (2026)",
-      "Microsoft SQL Server Database Administration (2023)",
-      "Azure AZ-900 — in progress",
+      "Certified STACKIT Cloud Engineer — STACKIT University, Schwarz Digits, Neckarsulm (March 2026)",
+      "STACKIT University — STACKIT Product Fundamentals, DevOps Fundamentals, Terraform Fundamentals, Cloud Foundry Fundamentals, Deploying an Application with STACKIT Kubernetes Engine, Kubernetes Fundamentals, Docker Fundamentals, Linux Fundamentals (March 2026)",
+      "AI Fluency: Framework and Foundations — Anthropic, in partnership with University College Cork (2026)",
+      "Microsoft SQL Server Administration — KiawiTechIT Academy, over 600 hours (Oct 2022 — Jan 2023)",
+      "German language certificate level B1 — Anglo-German Institut, Stuttgart (2022); current level B2",
     ],
   },
 };
@@ -146,7 +202,7 @@ export default function Skills({ lang }: SkillsProps) {
         </motion.div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((cat, i) => (
+          {categoriesByLang[lang].map((cat, i) => (
             <motion.div
               key={cat.name}
               initial={{ opacity: 0, y: 24 }}

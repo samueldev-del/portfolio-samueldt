@@ -13,7 +13,7 @@ export const CARD = {
   firstName: "Samuel",
   lastName: "Djommou Thengho",
   fullName: "Samuel Djommou Thengho",
-  role: "Junior DevOps / Cloud Engineer",
+  role: "Cloud & DevOps Engineer",
   city: "Hamburg",
   country: "Germany",
   location: "Hamburg, Germany",

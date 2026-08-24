@@ -12,19 +12,19 @@ type HeroProps = {
 const copy = {
   de: {
     openToWork: "Offen für neue Aufgaben — Cloud / DevOps",
-    role: "Junior DevOps / Cloud Engineer (Quereinsteiger)",
-    role2: "Fullstack-Praxis",
+    role: "Cloud & DevOps Engineer",
+    role2: "Hamburg",
     description:
-      "Quereinsteiger im DevOps-Bereich mit zertifizierten Grundlagen (STACKIT) und mehreren selbst deployten Live-Projekten. Ich konzipiere, deploye und betreibe eigene Web-Anwendungen und entwickle mich gezielt zum DevOps Engineer weiter.",
+      "Ich automatisiere die Softwareauslieferung vom Commit bis zum Alarm. Ausgebildet in der Systemintegration, zwei Jahre Verantwortung für Verfügbarkeit und Wiederherstellbarkeit von SQL-Server-Datenbanken im Produktivbetrieb — das lehrt einen, zuerst in Fehlerbildern zu denken.",
     ctaProjects: "Projekte ansehen",
     ctaContact: "Kontakt aufnehmen",
   },
   en: {
     openToWork: "Open to work — Cloud / DevOps",
-    role: "Junior DevOps / Cloud Engineer (Career Changer)",
-    role2: "Fullstack Practice",
+    role: "Cloud & DevOps Engineer",
+    role2: "Hamburg",
     description:
-      "Career changer into DevOps with certified foundations (STACKIT) and several self-deployed live projects. I design, deploy, and operate my own web applications while actively growing into the DevOps Engineer role.",
+      "I automate software delivery from the commit to the alarm. Trained in systems integration, then two years responsible for the availability and recoverability of production SQL Server databases — that teaches you to think in failure modes first.",
     ctaProjects: "View Projects",
     ctaContact: "Get in Touch",
   },

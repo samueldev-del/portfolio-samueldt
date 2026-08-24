@@ -33,8 +33,8 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const resumeHref =
     lang === "de"
-      ? "/Samuel%20Djommou%20Thengho%20%E2%80%94%20Lebenslauf.pdf"
-      : "/Samuel%20Djommou%20Thengho%20%E2%80%94%20Resume.pdf";
+      ? "/CV_Samuel_Djommou_Thengho_DE.pdf"
+      : "/CV_Samuel_Djommou_Thengho_EN.pdf";
   const resumeOpenLabel = lang === "de" ? "Lebenslauf" : "Resume";
   const resumeDownloadLabel = "Download";
 

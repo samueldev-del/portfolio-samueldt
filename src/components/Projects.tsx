@@ -5,6 +5,10 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
+import {
+  ArchitectureDiagram,
+  PipelineDiagram,
+} from "@/components/diagrams/MyMifaDiagrams";
 
 type Project = {
   id: string;
@@ -18,6 +22,8 @@ type Project = {
   color: string;
   status: string;
   screenshot?: string;
+  note?: string;
+  diagrams?: boolean;
 };
 
 type ProjectsProps = {
@@ -27,28 +33,75 @@ type ProjectsProps = {
 const projectsByLang: Record<Lang, Project[]> = {
   de: [
     {
-      id: "bolo237",
-      title: "Bolo237",
-      subtitle: "Jobbörse & Dienstleistungsplattform (Kamerun)",
+      id: "mymifa",
+      title: "MyMifa",
+      subtitle: "Bewerbungs-Tracker — und meine DevOps-Werkstatt",
       description:
-        "Persönliches Projekt — Full-Stack-Plattform für Jobs und Dienstleistungen, deployed und in Betrieb. Code mit KI-Assistent (Claude Code) entwickelt; Deployment, Infrastruktur und Inbetriebnahme eigenständig umgesetzt.",
+        "Ein Tool, mit dem ich meine eigenen Bewerbungen verwalte: Übersicht, Interview-Vorbereitung, automatische Erkennung von Recruiter-Antworten. Die App lief bereits. Interessant wurde es danach — als ich anfing, ihren Betrieb nachweisbar zu machen: Pipeline, Infrastruktur als Code, Alarme.",
       highlights: [
-        "REST-API mit Node.js/Express, Prisma ORM, serverless PostgreSQL (Neon)",
-        "Mehrschichtige Sicherheit: Rate Limiting (pro IP/User), Helmet, CORS, JWT",
-        "Sentry-Integration (Frontend + Backend) für Fehlertracking und Monitoring",
-        "Kontinuierliches Deployment via Vercel (Frontend) und Render (Backend)",
-        "Sichere Verwaltung von Umgebungsvariablen und Secrets über mehrere Dienste",
+        "Sechs blockierende Prüfungen pro Pull Request: Lint, Unit-Tests, Image-Build, Neuaufbau des Schemas, Validierung der Workflows und des Terraform-Codes. Kein direkter Push auf main — auch nicht für mich selbst",
+        "Das Datenbankschema wird bei jedem PR auf einer leeren Datenbank neu aufgebaut. Dabei kam heraus: fünf von neun Produktionstabellen waren nie versioniert",
+        "Drei echte Bugs hat dieses Tooling gefunden, keinen davon das Code-Review. Der schönste: eine Regex, die Interview-Einladungen als Absagen einsortierte",
+        "Fehlerhaften GitHub-Actions-Cron durch Messung diagnostiziert: 19 statt der konfigurierten 96 täglichen Ausführungen. Ersatzkette aus EventBridge Scheduler und Lambda war nach 15 Minuten in Betrieb",
+        "Terraform auf AWS: verschlüsselter und gesperrter Remote State in S3, IAM-Rollen nach Least Privilege, Secrets isoliert im SSM Parameter Store. Die Konfiguration ist die Wahrheit, nicht die Konsole",
+        "API containerisiert als Non-Root-Benutzer, reproduzierbare lokale Umgebung über Docker Compose und PostgreSQL 18",
+        "Kurzlebige Umgebung auf ECS Fargate hinter einem ALB — VPC, Subnetze in zwei Availability Zones, Security Groups über Kreuzreferenzen — per Terraform aufgebaut, validiert, dokumentiert und wieder abgebaut",
+        "Zwei CloudWatch-Alarme aus zwei Blickwinkeln: einer, wenn die Funktion scheitert — einer, wenn sie gar nicht mehr startet",
       ],
       stack: [
-        "Node.js",
-        "React/Next.js",
-        "Prisma",
-        "PostgreSQL (Neon)",
-        "Vercel",
-        "Render",
-        "JWT",
-        "Sentry",
+        "GitHub Actions",
+        "Terraform",
+        "AWS Lambda",
+        "EventBridge",
+        "CloudWatch",
+        "S3",
+        "Docker",
+        "Next.js 16",
+        "Express / Node 20",
+        "PostgreSQL 18 (Neon)",
       ],
+      url: "https://github.com/samueldev-del/mymifa",
+      urlLabel: "Repository ansehen",
+      color: "#818cf8",
+      status: "Live",
+      diagrams: true,
+      note: "Was ich daraus mitnehme: einem System erst trauen, wenn ich es gemessen habe. Jede Annahme — der Cron, die Migrationen, das Deployment — hat sich irgendwann als falsch erwiesen.",
+    },
+    {
+      id: "ansible-k8s",
+      title: "Konfigurationsmanagement & Orchestrierung",
+      subtitle: "Lernprojekt — Ansible, Kubernetes mit kind, Linux",
+      description:
+        "Kein Deployment, sondern eine Werkbank: eine Handvoll Linux-VMs und ein lokaler Multi-Node-Cluster, an denen ich übe, Zustand deklarativ zu beschreiben statt ihn von Hand herzustellen. Läuft seit März 2026 parallel zu allem anderen.",
+      highlights: [
+        "Wiederverwendbare Ansible-Rolle, die nginx idempotent auf einer Servergruppe ausrollt: Jinja2-Templates auf Basis der Facts, Handler nur bei tatsächlicher Änderung, Schleifen und Bedingungen über Systemvariablen",
+        "Variablen-Präzedenz bewusst beherrscht — das war der Teil, an dem ich am längsten gesessen habe",
+        "Secrets verschlüsselt über ansible-vault, mit nicht-interaktiver Ausführung für automatisierten Betrieb",
+        "Vor jeder Anwendung erst Check-Modus mit Diff. Der Code ist konform zu ansible-lint im Production-Profil",
+        "Kubernetes über deklarative Manifeste: Deployments und ReplicaSets, Pod-Scheduling, Verknüpfung über Labels und Selectors",
+        "Interne Erreichbarkeit über ClusterIP-Services mit DNS-Auflösung und Lastverteilung; Rolling Updates und Rollback auf eine frühere Revision",
+      ],
+      stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Kubernetes", "kind", "kubectl", "Linux"],
+      url: "#",
+      urlLabel: "",
+      color: "#a78bfa",
+      status: "Laufend",
+      note: "Bewusst als Übungsumgebung geführt und nicht als Produktivsystem — ich will erst sicher sein, dass ich verstehe, was passiert, bevor ich es auf etwas Echtes loslasse.",
+    },
+    {
+      id: "bolo237",
+      title: "Bolo237",
+      subtitle: "Jobbörse & Dienstleistungen (Kamerun)",
+      description:
+        "Eine Plattform, auf der Menschen in Kamerun Jobs und Dienstleistungen finden. Persönliches Projekt, live und in Betrieb. Der Code entstand mit KI-Unterstützung; Deployment, Infrastruktur und Betrieb habe ich selbst gemacht.",
+      highlights: [
+        "REST-API mit Node.js/Express, Prisma ORM, serverless PostgreSQL bei Neon",
+        "Mehrschichtige Absicherung: Rate Limiting pro IP und User, Helmet, CORS, JWT",
+        "Sentry im Frontend und Backend — damit ich von Fehlern erfahre, bevor Nutzer sie melden",
+        "Kontinuierliches Deployment über Vercel (Frontend) und Render (Backend)",
+        "Secrets und Umgebungsvariablen sauber über mehrere Dienste verteilt verwaltet",
+      ],
+      stack: ["Node.js", "React/Next.js", "Prisma", "PostgreSQL (Neon)", "Vercel", "Render", "JWT", "Sentry"],
       url: "https://bolo237.com",
       urlLabel: "bolo237.com",
       color: "#f0a050",
@@ -56,128 +109,97 @@ const projectsByLang: Record<Lang, Project[]> = {
       screenshot: "/screenshots/bolo237-home.png",
     },
     {
-      id: "mymifa",
-      title: "MyMifa",
-      subtitle: "Familiale Kommunikations-App (PWA)",
-      description:
-        "Progressive Web App für Familienkommunikation. Mehrere Cloud-Dienste eigenständig orchestriert und in Produktion deployed. Code mit KI-Assistent (Claude Code) entwickelt; Infrastruktur und Deployment eigenständig umgesetzt.",
-      highlights: [
-        "Deployment und Betrieb auf Vercel mit serverlosem PostgreSQL (Neon)",
-        "Medien-Management mit Cloudinary (Upload und Transformation)",
-        "Echtzeit-Kommunikation via Pusher",
-        "Session-Caching mit Upstash Redis",
-        "Fehlertracking mit Sentry",
-        "Verwaltung von Secrets und Umgebungsvariablen über mehrere Cloud-Dienste",
-      ],
-      stack: [
-        "Next.js",
-        "Prisma",
-        "PostgreSQL (Neon)",
-        "Cloudinary",
-        "Pusher",
-        "Upstash Redis",
-        "Sentry",
-        "Vercel",
-      ],
-      url: "https://mymifa-app.vercel.app",
-      urlLabel: "mymifa-app.vercel.app",
-      color: "#818cf8",
-      status: "Live",
-      screenshot: "/screenshots/mymifa-home.png",
-    },
-    {
       id: "schmidts",
       title: "Schmidts Zaunbau Nord",
-      subtitle: "Kundenprojekt — bezahlte Auftragsarbeit",
+      subtitle: "Kundenprojekt — Relaunch und Deployment-Automatisierung",
       description:
-        "Responsive Mehrseiten-Website für ein Hamburger Zaunbauunternehmen. Vollständig von Hand codiert (HTML/Tailwind/JS), kontinuierliches Deployment über Git.",
+        "Eine Zaunbau-Website in Hamburg, die auf einer undokumentierten Legacy-Infrastruktur lag und per FTP von Hand aktualisiert wurde. Die sichtbare Arbeit war der Relaunch. Die eigentliche Arbeit war herauszufinden, welches Verzeichnis überhaupt ausgeliefert wird.",
       highlights: [
-        "Responsive Mehrseiten-Website (DE/EN): Startseite, Produktkatalog, Impressum, Datenschutz",
-        "Vorher/Nachher-Slider, Projektgalerie mit Auto-Scroll, Lightbox-Modals",
-        "DSGVO-konforme Google Maps Integration und Cookie-Banner",
-        "SEO-Optimierung mit Meta-Tags, Open Graph und semantischem HTML",
-        "Kontinuierliches Deployment via Git/Netlify",
+        "Vier duplizierte Verzeichnisse, keine Dokumentation — das tatsächlich ausgelieferte Docroot durch Abgleich der HTTP-Header Last-Modified mit den mtimes auf dem Server identifiziert und die Umgebung in einem Runbook festgehalten",
+        "Manuelles FTP-Deployment durch eine Bash-Pipeline mit rsync over SSH abgelöst: Dry-Run-Modus, Konfiguration über Umgebungsvariablen, Einbindung des SSH-Schlüssels",
+        "curl-Smoke-Tests nach jedem Livegang: Kontrolle der produktiv ausgelieferten Inhalte auf Deutsch und Englisch sowie des HTTP-Status des API-Endpunkts, mit eindeutigem Fehlschlag bei Regression",
+        "Externen Formulardienst durch ein selbst gehostetes PHP-Backend ersetzt: Eingabevalidierung, Schutz vor SMTP-Header-Injection, Honeypot gegen Spam, Fallback beim Versand, Protokollierung der Fehlversuche",
+        "Zeitgestempelte Backups vor jeder Änderung im Produktivbetrieb, damit ein sofortiges Rollback möglich bleibt",
       ],
-      stack: [
-        "HTML5",
-        "Tailwind CSS",
-        "JavaScript",
-        "Google Fonts",
-        "FormSubmit",
-        "Netlify",
-      ],
+      stack: ["Bash", "rsync over SSH", "PHP", "curl", "STRATO-Hosting", "Tailwind CSS", "JavaScript"],
       url: "https://schmidtszaunbaunord.com",
       urlLabel: "schmidtszaunbaunord.com",
       color: "#34d399",
       status: "Live",
       screenshot: "/screenshots/schmidts-home.png",
-    },
-    {
-      id: "237go",
-      title: "237Go / Carlite",
-      subtitle: "Intercity-Busbuchungen — Kamerun (in Entwicklung)",
-      description:
-        "Startup-Projekt (Pre-Launch) — persönliches Architekturprojekt für Intercity-Busbuchungen in Kamerun. Aktuell in Entwicklung.",
-      highlights: [
-        "Geplante Plattform: Mobile App (Flutter), Agency Dashboard (React), REST API (FastAPI)",
-        "Datenstrategie: Firebase (Firestore, Storage) und PostgreSQL",
-        "Zahlungsintegration für den kamerunischen Markt (CinetPay)",
-      ],
-      stack: [
-        "Flutter",
-        "React",
-        "Python/FastAPI",
-        "PostgreSQL",
-        "Firebase",
-        "CinetPay",
-      ],
-      url: "#",
-      urlLabel: "Pre-Launch",
-      color: "#19b1ba",
-      status: "In Entwicklung",
-    },
-    {
-      id: "macarriere",
-      title: "Ma Carrière",
-      subtitle: "Karriereverwaltungs-App",
-      description:
-        "App zur persönlichen Karriereverwaltung: Bewerbungen, Agenda, Dokumente, Zertifikate — mit KI-Assistenzfunktionen. Deployed auf Streamlit Cloud.",
-      highlights: [
-        "Authentifizierung mit Session-Management: privates Dashboard und öffentliches Portfolio",
-        "KI-Assistent für Aufgabenpriorisierung und Bewerbungsstrukturierung",
-        "Bilinguale UI (Französisch / Deutsch), deployed auf Streamlit Cloud",
-      ],
-      stack: ["Python", "Streamlit", "KI-Integration", "Authentifizierung", "Streamlit Cloud"],
-      url: "https://samueldt.streamlit.app",
-      urlLabel: "samueldt.streamlit.app",
-      color: "#fbbf24",
-      status: "Live",
     },
   ],
   en: [
     {
-      id: "bolo237",
-      title: "Bolo237",
-      subtitle: "Job Board & Services Platform (Cameroon)",
+      id: "mymifa",
+      title: "MyMifa",
+      subtitle: "Job application tracker — and my DevOps workshop",
       description:
-        "Personal project — full-stack platform for jobs and services, deployed and in operation. Code developed with AI assistance (Claude Code); deployment, infrastructure, and operations handled independently.",
+        "A tool I use to manage my own job search: applications, interview prep, automatic detection of recruiter replies. The app already worked. What came next is the interesting part — making its operation something I can actually prove: a pipeline, infrastructure as code, alarms.",
       highlights: [
-        "REST API with Node.js/Express, Prisma ORM, serverless PostgreSQL (Neon)",
-        "Multi-layer security: rate limiting (per IP/user), Helmet, CORS, JWT",
-        "Sentry integration (frontend + backend) for error tracking and monitoring",
-        "Continuous deployment via Vercel (frontend) and Render (backend)",
-        "Secure management of environment variables and secrets across multiple services",
+        "Six blocking checks per pull request: lint, unit tests, image build, schema rebuild, workflow validation and Terraform validation. No direct push to main — not even for me",
+        "The database schema is rebuilt from scratch on an empty database on every PR. That's how I found out five of nine production tables had never been versioned",
+        "Three real bugs came out of this tooling, none of them from code review. My favourite: a regex that filed interview invitations as rejections",
+        "Diagnosed a broken GitHub Actions cron by measuring it: 19 daily runs instead of the 96 configured. The replacement chain — EventBridge Scheduler plus Lambda — was live 15 minutes later",
+        "Terraform on AWS: encrypted and locked remote state in S3, least-privilege IAM roles, secrets isolated in SSM Parameter Store. The config is the truth, not the console",
+        "API containerised as a non-root user, reproducible local environment via Docker Compose and PostgreSQL 18",
+        "Ephemeral environment on ECS Fargate behind an ALB — VPC, subnets across two availability zones, cross-referenced security groups — stood up, validated, documented and torn down again with Terraform",
+        "Two CloudWatch alarms from two angles: one if the function fails — one if it simply stops firing",
       ],
       stack: [
-        "Node.js",
-        "React/Next.js",
-        "Prisma",
-        "PostgreSQL (Neon)",
-        "Vercel",
-        "Render",
-        "JWT",
-        "Sentry",
+        "GitHub Actions",
+        "Terraform",
+        "AWS Lambda",
+        "EventBridge",
+        "CloudWatch",
+        "S3",
+        "Docker",
+        "Next.js 16",
+        "Express / Node 20",
+        "PostgreSQL 18 (Neon)",
       ],
+      url: "https://github.com/samueldev-del/mymifa",
+      urlLabel: "View the repository",
+      color: "#818cf8",
+      status: "Live",
+      diagrams: true,
+      note: "What I took away: don't trust a system until you've measured it. Every assumption — the cron, the migrations, the deployment — turned out to be wrong at some point.",
+    },
+    {
+      id: "ansible-k8s",
+      title: "Configuration management & orchestration",
+      subtitle: "Learning project — Ansible, Kubernetes with kind, Linux",
+      description:
+        "Not a deployment — a workbench: a handful of Linux VMs and a local multi-node cluster where I practise describing state declaratively instead of producing it by hand. Running since March 2026 alongside everything else.",
+      highlights: [
+        "Reusable Ansible role that rolls out and configures nginx idempotently across a server group: Jinja2 templates driven by facts, handlers that fire only on real change, loops and conditionals from system variables",
+        "Variable precedence properly understood — that's the part I spent longest on",
+        "Secrets encrypted with ansible-vault, with non-interactive execution for automated runs",
+        "Check mode with diff before every apply. The code passes ansible-lint on the production profile",
+        "Kubernetes through declarative manifests: Deployments and ReplicaSets, pod scheduling, wiring via labels and selectors",
+        "Internal reachability through ClusterIP services with DNS resolution and load balancing; rolling updates and rollback to a previous revision",
+      ],
+      stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Kubernetes", "kind", "kubectl", "Linux"],
+      url: "#",
+      urlLabel: "",
+      color: "#a78bfa",
+      status: "Ongoing",
+      note: "Deliberately kept as a practice environment rather than a production system — I want to be sure I understand what happens before pointing it at something real.",
+    },
+    {
+      id: "bolo237",
+      title: "Bolo237",
+      subtitle: "Job board & services platform (Cameroon)",
+      description:
+        "A platform where people in Cameroon find jobs and services. Personal project, live and running. Code written with AI assistance; deployment, infrastructure and operations are mine.",
+      highlights: [
+        "REST API with Node.js/Express, Prisma ORM, serverless PostgreSQL on Neon",
+        "Layered protection: rate limiting per IP and user, Helmet, CORS, JWT",
+        "Sentry on frontend and backend — so I hear about errors before users report them",
+        "Continuous deployment via Vercel (frontend) and Render (backend)",
+        "Secrets and environment variables managed cleanly across several services",
+      ],
+      stack: ["Node.js", "React/Next.js", "Prisma", "PostgreSQL (Neon)", "Vercel", "Render", "JWT", "Sentry"],
       url: "https://bolo237.com",
       urlLabel: "bolo237.com",
       color: "#f0a050",
@@ -185,102 +207,24 @@ const projectsByLang: Record<Lang, Project[]> = {
       screenshot: "/screenshots/bolo237-home.png",
     },
     {
-      id: "mymifa",
-      title: "MyMifa",
-      subtitle: "Family Communication App (PWA)",
-      description:
-        "Progressive web app for family communication. Multiple cloud services independently orchestrated and deployed to production. Code developed with AI assistance (Claude Code); infrastructure and deployment handled independently.",
-      highlights: [
-        "Deployed and operated on Vercel with serverless PostgreSQL (Neon)",
-        "Media management with Cloudinary (upload and transformation)",
-        "Real-time communication via Pusher",
-        "Session caching with Upstash Redis",
-        "Error tracking with Sentry",
-        "Secrets and environment variable management across multiple cloud services",
-      ],
-      stack: [
-        "Next.js",
-        "Prisma",
-        "PostgreSQL (Neon)",
-        "Cloudinary",
-        "Pusher",
-        "Upstash Redis",
-        "Sentry",
-        "Vercel",
-      ],
-      url: "https://mymifa-app.vercel.app",
-      urlLabel: "mymifa-app.vercel.app",
-      color: "#818cf8",
-      status: "Live",
-      screenshot: "/screenshots/mymifa-home.png",
-    },
-    {
       id: "schmidts",
       title: "Schmidts Zaunbau Nord",
-      subtitle: "Client project — paid work",
+      subtitle: "Client project — relaunch and deployment automation",
       description:
-        "Responsive multipage website for a Hamburg-based fence construction company. Hand-coded from scratch (HTML/Tailwind/JS), with continuous deployment via Git.",
+        "A fence-construction site in Hamburg, sitting on undocumented legacy infrastructure and updated by hand over FTP. The visible work was the relaunch. The real work was finding out which directory was actually being served.",
       highlights: [
-        "Responsive multipage site (DE/EN): homepage, product catalog, imprint, privacy",
-        "Before/after slider, project gallery with auto-scroll, lightbox modals",
-        "GDPR-compliant Google Maps integration and cookie banner",
-        "SEO optimization with meta tags, Open Graph, semantic HTML",
-        "Continuous deployment via Git/Netlify",
+        "Four duplicated directories, no documentation — identified the genuinely served docroot by matching Last-Modified HTTP headers against file mtimes on the server, then captured the environment in a runbook",
+        "Replaced manual FTP deployment with a Bash pipeline using rsync over SSH: dry-run mode, configuration through environment variables, SSH key handling",
+        "curl smoke tests after every release: verifies the live German and English content and the API endpoint's HTTP status, failing loudly on regression",
+        "Swapped the external form service for a self-hosted PHP backend: input validation, SMTP header injection protection, honeypot against spam, send fallback, logging of failed attempts",
+        "Timestamped backups before every production change, so an immediate rollback stays possible",
       ],
-      stack: [
-        "HTML5",
-        "Tailwind CSS",
-        "JavaScript",
-        "Google Fonts",
-        "FormSubmit",
-        "Netlify",
-      ],
+      stack: ["Bash", "rsync over SSH", "PHP", "curl", "STRATO hosting", "Tailwind CSS", "JavaScript"],
       url: "https://schmidtszaunbaunord.com",
       urlLabel: "schmidtszaunbaunord.com",
       color: "#34d399",
       status: "Live",
       screenshot: "/screenshots/schmidts-home.png",
-    },
-    {
-      id: "237go",
-      title: "237Go / Carlite",
-      subtitle: "Intercity Bus Booking — Cameroon (in development)",
-      description:
-        "Startup project (pre-launch) — personal architecture project for intercity bus travel booking in Cameroon. Currently in development.",
-      highlights: [
-        "Planned platform: Mobile App (Flutter), Agency Dashboard (React), REST API (FastAPI)",
-        "Data strategy: Firebase (Firestore, Storage) and PostgreSQL",
-        "Payment integration for the Cameroonian market (CinetPay)",
-      ],
-      stack: [
-        "Flutter",
-        "React",
-        "Python/FastAPI",
-        "PostgreSQL",
-        "Firebase",
-        "CinetPay",
-      ],
-      url: "#",
-      urlLabel: "Pre-launch",
-      color: "#19b1ba",
-      status: "In Development",
-    },
-    {
-      id: "macarriere",
-      title: "Ma Carrière",
-      subtitle: "Career Management App",
-      description:
-        "Personal career management app: applications, agenda, documents, certifications — with AI assistance features. Deployed on Streamlit Cloud.",
-      highlights: [
-        "Authentication with session management: private dashboard and public portfolio",
-        "AI assistant for task prioritization and application structuring",
-        "Bilingual UI (French / German), deployed on Streamlit Cloud",
-      ],
-      stack: ["Python", "Streamlit", "AI Integration", "Authentication", "Streamlit Cloud"],
-      url: "https://samueldt.streamlit.app",
-      urlLabel: "samueldt.streamlit.app",
-      color: "#fbbf24",
-      status: "Live",
     },
   ],
 };
@@ -288,22 +232,22 @@ const projectsByLang: Record<Lang, Project[]> = {
 const sectionCopy = {
   de: {
     eyebrow: "Projekte",
-    headingA: "Was ich gebaut",
-    headingB: "& deployed habe.",
+    headingA: "Vier Projekte,",
+    headingB: "an denen ich wirklich arbeite.",
     intro:
-      "Selbst deployed und betrieben — jedes Projekt ist live und testbar. Code mit KI-Assistent entwickelt; Infrastruktur und Inbetriebnahme eigenständig.",
-    less: "Weniger Details",
-    more: "Mehr Details",
+      "Drei davon sind live und lassen sich anklicken, eines ist meine Übungsumgebung. Kein Mockup — deployed und betrieben von mir.",
+    less: "Weniger zeigen",
+    more: "Mehr dazu",
     moreCount: "mehr",
   },
   en: {
     eyebrow: "Projects",
-    headingA: "Things I've built",
-    headingB: "& deployed.",
+    headingA: "Four projects,",
+    headingB: "I actually work on.",
     intro:
-      "Self-deployed and operated — each project is live and testable. Code developed with AI assistance; infrastructure and operations handled independently.",
-    less: "Less details",
-    more: "More details",
+      "Three of them are live and clickable, one is my practice environment. No mockups — deployed and operated by me.",
+    less: "Show less",
+    more: "Read more",
     moreCount: "more",
   },
 };
@@ -311,9 +255,11 @@ const sectionCopy = {
 function ProjectCard({
   project,
   lang,
+  featured = false,
 }: {
   project: Project;
   lang: Lang;
+  featured?: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
   const t = sectionCopy[lang];
@@ -325,7 +271,9 @@ function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.4 }}
-      className="group rounded-2xl border border-white/8 bg-white/[0.02] transition hover:border-white/15"
+      className={`group rounded-2xl border border-white/8 bg-white/[0.02] transition hover:border-white/15 ${
+        featured ? "md:col-span-2" : ""
+      }`}
     >
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
@@ -354,10 +302,12 @@ function ProjectCard({
         </div>
 
         {project.screenshot && (
-          <div className="mt-4 overflow-hidden rounded-lg border border-white/8">
+          <div className={`mt-4 overflow-hidden rounded-lg border border-white/8 ${
+            featured ? "max-h-[340px]" : ""
+          }`}>
             <Image
               src={project.screenshot}
-              alt={`Vorschau von ${project.title}`}
+              alt={lang === "de" ? `Vorschau von ${project.title}` : `Preview of ${project.title}`}
               width={1280}
               height={800}
               className="w-full object-cover object-top"
@@ -367,6 +317,13 @@ function ProjectCard({
         )}
 
         <p className="mt-4 text-sm leading-relaxed text-[#a0b0c8] break-words">{project.description}</p>
+
+        {project.diagrams && (
+          <div className="mt-6 space-y-6">
+            <ArchitectureDiagram lang={lang} />
+            <PipelineDiagram lang={lang} />
+          </div>
+        )}
 
         <div className="mt-4 flex flex-wrap gap-2">
           {project.stack.slice(0, expanded ? undefined : 5).map((tech) => (
@@ -407,6 +364,12 @@ function ProjectCard({
             </motion.div>
           )}
         </AnimatePresence>
+
+        {project.note && (
+          <p className="mt-5 border-l-2 border-white/10 pl-4 text-sm italic leading-relaxed text-[#7e8ea6]">
+            {project.note}
+          </p>
+        )}
 
         <div className="mt-5 flex flex-wrap items-center gap-3">
           <button
@@ -463,8 +426,13 @@ export default function Projects({ lang }: ProjectsProps) {
         </motion.div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} lang={lang} />
+          {projects.map((project, i) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              lang={lang}
+              featured={i === 0}
+            />
           ))}
         </div>
       </div>

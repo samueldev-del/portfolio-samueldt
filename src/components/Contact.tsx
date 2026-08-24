@@ -47,7 +47,7 @@ const copy = {
     eyebrow: "Kontakt",
     title: "Lass uns zusammenarbeiten.",
     description:
-      "Offen für eine Junior-Position in Cloud/DevOps oder Fullstack-Entwicklung. Schreib mir gerne — ich freue mich auf dein Team und eure Herausforderungen.",
+      "Offen für Aufgaben in Cloud und DevOps. Schreib mir gerne — ich freue mich auf dein Team und eure Herausforderungen.",
     cta: "Hallo sagen",
     french: "Franzosisch",
     german: "Deutsch",
