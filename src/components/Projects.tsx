@@ -331,14 +331,18 @@ function ProjectCard({
         <p className="mt-4 text-sm leading-relaxed text-[#a0b0c8] break-words">{project.description}</p>
 
         {project.diagrams === "mymifa" && (
-          <div className="mt-6 space-y-8">
+          <div
+            className={`mt-6 space-y-8 ${expanded ? "" : "hidden sm:block"}`}
+          >
             <ArchitectureDiagram lang={lang} />
             <PipelineDiagram lang={lang} />
           </div>
         )}
 
         {project.diagrams === "ansible" && (
-          <div className="mt-6 space-y-8">
+          <div
+            className={`mt-6 space-y-8 ${expanded ? "" : "hidden sm:block"}`}
+          >
             <RoleRunDiagram lang={lang} />
             <PrecedenceDiagram lang={lang} />
           </div>

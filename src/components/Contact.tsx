@@ -235,16 +235,17 @@ export default function Contact({ lang }: ContactProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-[#7e8ea6]"
+          className="mt-12 flex flex-col items-center gap-2 text-sm text-[#7e8ea6] sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6"
         >
           <span>
             <strong className="text-white">{t.french}</strong> - {t.native}
           </span>
-          <span className="text-white/20">|</span>
-          <span>
+          {/* Separators only make sense once the three sit on one line. */}
+          <span className="hidden text-white/20 sm:inline">|</span>
+          <span className="text-center">
             <strong className="text-white">{t.german}</strong> - {t.levelDe}
           </span>
-          <span className="text-white/20">|</span>
+          <span className="hidden text-white/20 sm:inline">|</span>
           <span>
             <strong className="text-white">{t.english}</strong> - {t.fluent}
           </span>
