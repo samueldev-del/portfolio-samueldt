@@ -1,6 +1,7 @@
 "use client";
 
 import type { Lang } from "@/lib/i18n";
+import { Arrow, Figure, Node } from "./primitives";
 
 const copy = {
   de: {
@@ -65,110 +66,10 @@ const copy = {
   },
 };
 
-const BOX = {
-  neutral: { fill: "#2b2f38", stroke: "#4a5160" },
-  blue: { fill: "#123a63", stroke: "#2f6ba8" },
-  green: { fill: "#12453a", stroke: "#2f8a6d" },
-  brown: { fill: "#5a2a18", stroke: "#9c4c2a" },
-  purple: { fill: "#332f7a", stroke: "#5f59c7" },
-  maroon: { fill: "#5c1f3c", stroke: "#a8386b" },
-  merge: { fill: "#1e4a1c", stroke: "#3f8a3a" },
-};
-
-type NodeProps = {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-  tone: keyof typeof BOX;
-  label: string;
-  sub?: string;
-};
-
-function Node({ x, y, w, h, tone, label, sub }: NodeProps) {
-  const c = BOX[tone];
-  return (
-    <g>
-      <rect
-        x={x}
-        y={y}
-        width={w}
-        height={h}
-        rx={10}
-        fill={c.fill}
-        stroke={c.stroke}
-        strokeWidth={1.5}
-      />
-      <text
-        x={x + w / 2}
-        y={sub ? y + h / 2 - 4 : y + h / 2 + 4}
-        textAnchor="middle"
-        fill="#ffffff"
-        fontSize={13}
-        fontWeight={600}
-      >
-        {label}
-      </text>
-      {sub && (
-        <text
-          x={x + w / 2}
-          y={y + h / 2 + 14}
-          textAnchor="middle"
-          fill="#b9c4d6"
-          fontSize={10.5}
-        >
-          {sub}
-        </text>
-      )}
-    </g>
-  );
-}
-
-function Arrow({ d }: { d: string }) {
-  return (
-    <path
-      d={d}
-      fill="none"
-      stroke="#7e8ea6"
-      strokeWidth={1.4}
-      markerEnd="url(#mymifa-arrow)"
-    />
-  );
-}
-
-function Defs() {
-  return (
-    <defs>
-      <marker
-        id="mymifa-arrow"
-        viewBox="0 0 10 10"
-        refX="9"
-        refY="5"
-        markerWidth="6"
-        markerHeight="6"
-        orient="auto-start-reverse"
-      >
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#7e8ea6" />
-      </marker>
-    </defs>
-  );
-}
-
 export function ArchitectureDiagram({ lang }: { lang: Lang }) {
   const t = copy[lang];
   return (
-    <figure className="m-0">
-      <figcaption className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-[#7e8ea6]">
-        {t.archTitle}
-      </figcaption>
-      <div className="overflow-x-auto rounded-xl border border-white/8 bg-[#0b0e17] p-4">
-        <svg
-          viewBox="0 0 740 470"
-          role="img"
-          aria-label={t.archTitle}
-          className="h-auto w-full min-w-[620px]"
-        >
-          <Defs />
+    <Figure title={t.archTitle} viewBox="0 0 740 470" minWidth={620}>
 
           <Node x={20} y={20} w={200} h={62} tone="neutral" label={t.frontend} sub={t.frontendSub} />
           <Node x={262} y={20} w={200} h={62} tone="blue" label={t.api} sub={t.apiSub} />
@@ -206,10 +107,8 @@ export function ArchitectureDiagram({ lang }: { lang: Lang }) {
 
           <Arrow d="M 142 292 L 142 336" />
           <Arrow d="M 590 292 L 590 320 L 455 320 L 455 336" />
-          <Arrow d="M 292 377 L 334 377" />
-        </svg>
-      </div>
-    </figure>
+      <Arrow d="M 292 377 L 334 377" />
+    </Figure>
   );
 }
 
@@ -222,18 +121,7 @@ export function PipelineDiagram({ lang }: { lang: Lang }) {
   ];
 
   return (
-    <figure className="m-0">
-      <figcaption className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-[#7e8ea6]">
-        {t.ciTitle}
-      </figcaption>
-      <div className="overflow-x-auto rounded-xl border border-white/8 bg-[#0b0e17] p-4">
-        <svg
-          viewBox="0 0 740 250"
-          role="img"
-          aria-label={t.ciTitle}
-          className="h-auto w-full min-w-[620px]"
-        >
-          <Defs />
+    <Figure title={t.ciTitle} viewBox="0 0 740 250" minWidth={620}>
 
           <Node x={12} y={92} w={132} h={56} tone="neutral" label={t.pr} />
 
@@ -255,10 +143,8 @@ export function PipelineDiagram({ lang }: { lang: Lang }) {
             );
           })}
 
-          <Arrow d="M 636 120 L 660 120" />
-          <Node x={604} y={92} w={124} h={56} tone="merge" label={t.merge} />
-        </svg>
-      </div>
-    </figure>
+      <Arrow d="M 636 120 L 660 120" />
+      <Node x={604} y={92} w={124} h={56} tone="merge" label={t.merge} />
+    </Figure>
   );
 }

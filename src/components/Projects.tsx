@@ -9,6 +9,10 @@ import {
   ArchitectureDiagram,
   PipelineDiagram,
 } from "@/components/diagrams/MyMifaDiagrams";
+import {
+  PrecedenceDiagram,
+  RoleRunDiagram,
+} from "@/components/diagrams/AnsibleDiagrams";
 
 type Project = {
   id: string;
@@ -23,7 +27,7 @@ type Project = {
   status: string;
   screenshot?: string;
   note?: string;
-  diagrams?: boolean;
+  diagrams?: "mymifa" | "ansible";
 };
 
 type ProjectsProps = {
@@ -64,7 +68,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       urlLabel: "Repository ansehen",
       color: "#818cf8",
       status: "Live",
-      diagrams: true,
+      diagrams: "mymifa",
       note: "Was ich daraus mitnehme: einem System erst trauen, wenn ich es gemessen habe. Jede Annahme — der Cron, die Migrationen, das Deployment — hat sich irgendwann als falsch erwiesen.",
     },
     {
@@ -74,18 +78,22 @@ const projectsByLang: Record<Lang, Project[]> = {
       description:
         "Kein Deployment, sondern eine Werkbank: eine Handvoll Linux-VMs und ein lokaler Multi-Node-Cluster, an denen ich übe, Zustand deklarativ zu beschreiben statt ihn von Hand herzustellen. Läuft seit März 2026 parallel zu allem anderen.",
       highlights: [
-        "Wiederverwendbare Ansible-Rolle, die nginx idempotent auf einer Servergruppe ausrollt: Jinja2-Templates auf Basis der Facts, Handler nur bei tatsächlicher Änderung, Schleifen und Bedingungen über Systemvariablen",
-        "Variablen-Präzedenz bewusst beherrscht — das war der Teil, an dem ich am längsten gesessen habe",
+        "Wiederverwendbare Rolle im kanonischen Layout (defaults, vars, tasks, handlers, templates, meta), die nginx idempotent auf zwei Hosts der Gruppe web ausrollt",
+        "Erster Task ist ein assert auf os_family — die Rolle bricht auf einem nicht unterstützten System sauber ab, statt auf halbem Weg zu scheitern",
+        "Paketliste über eine Schleife auf webserver_packages, Landing Page als Jinja2-Template mit Hostname und IPv4 aus den Facts",
+        "Handler Restart nginx wird per notify nur bei tatsächlicher Änderung am Template ausgelöst, nicht bei jedem Lauf",
+        "Variablen-Präzedenz bewusst beherrscht: defaults liefert [nginx], group_vars überschreibt auf [nginx, curl, git] — das war der Teil, an dem ich am längsten gesessen habe",
         "Secrets verschlüsselt über ansible-vault, mit nicht-interaktiver Ausführung für automatisierten Betrieb",
         "Vor jeder Anwendung erst Check-Modus mit Diff. Der Code ist konform zu ansible-lint im Production-Profil",
         "Kubernetes über deklarative Manifeste: Deployments und ReplicaSets, Pod-Scheduling, Verknüpfung über Labels und Selectors",
         "Interne Erreichbarkeit über ClusterIP-Services mit DNS-Auflösung und Lastverteilung; Rolling Updates und Rollback auf eine frühere Revision",
       ],
       stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Kubernetes", "kind", "kubectl", "Linux"],
-      url: "#",
-      urlLabel: "",
+      url: "https://github.com/samueldev-del/ansible-lab",
+      urlLabel: "Repository ansehen",
       color: "#a78bfa",
       status: "Laufend",
+      diagrams: "ansible",
       note: "Bewusst als Übungsumgebung geführt und nicht als Produktivsystem — ich will erst sicher sein, dass ich verstehe, was passiert, bevor ich es auf etwas Echtes loslasse.",
     },
     {
@@ -162,7 +170,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       urlLabel: "View the repository",
       color: "#818cf8",
       status: "Live",
-      diagrams: true,
+      diagrams: "mymifa",
       note: "What I took away: don't trust a system until you've measured it. Every assumption — the cron, the migrations, the deployment — turned out to be wrong at some point.",
     },
     {
@@ -172,18 +180,22 @@ const projectsByLang: Record<Lang, Project[]> = {
       description:
         "Not a deployment — a workbench: a handful of Linux VMs and a local multi-node cluster where I practise describing state declaratively instead of producing it by hand. Running since March 2026 alongside everything else.",
       highlights: [
-        "Reusable Ansible role that rolls out and configures nginx idempotently across a server group: Jinja2 templates driven by facts, handlers that fire only on real change, loops and conditionals from system variables",
-        "Variable precedence properly understood — that's the part I spent longest on",
+        "Reusable role in the canonical layout (defaults, vars, tasks, handlers, templates, meta) that rolls nginx out idempotently across two hosts in the web group",
+        "The first task is an assert on os_family — the role aborts cleanly on an unsupported system instead of failing halfway through",
+        "Package list driven by a loop over webserver_packages, landing page as a Jinja2 template carrying the hostname and IPv4 from the facts",
+        "The Restart nginx handler fires through notify only when the template actually changes, not on every run",
+        "Variable precedence properly understood: defaults ships [nginx], group_vars overrides it to [nginx, curl, git] — that's the part I spent longest on",
         "Secrets encrypted with ansible-vault, with non-interactive execution for automated runs",
         "Check mode with diff before every apply. The code passes ansible-lint on the production profile",
         "Kubernetes through declarative manifests: Deployments and ReplicaSets, pod scheduling, wiring via labels and selectors",
         "Internal reachability through ClusterIP services with DNS resolution and load balancing; rolling updates and rollback to a previous revision",
       ],
       stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Kubernetes", "kind", "kubectl", "Linux"],
-      url: "#",
-      urlLabel: "",
+      url: "https://github.com/samueldev-del/ansible-lab",
+      urlLabel: "View the repository",
       color: "#a78bfa",
       status: "Ongoing",
+      diagrams: "ansible",
       note: "Deliberately kept as a practice environment rather than a production system — I want to be sure I understand what happens before pointing it at something real.",
     },
     {
@@ -318,10 +330,17 @@ function ProjectCard({
 
         <p className="mt-4 text-sm leading-relaxed text-[#a0b0c8] break-words">{project.description}</p>
 
-        {project.diagrams && (
+        {project.diagrams === "mymifa" && (
           <div className="mt-6 space-y-6">
             <ArchitectureDiagram lang={lang} />
             <PipelineDiagram lang={lang} />
+          </div>
+        )}
+
+        {project.diagrams === "ansible" && (
+          <div className="mt-6 space-y-6">
+            <RoleRunDiagram lang={lang} />
+            <PrecedenceDiagram lang={lang} />
           </div>
         )}
 
@@ -426,12 +445,12 @@ export default function Projects({ lang }: ProjectsProps) {
         </motion.div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {projects.map((project, i) => (
+          {projects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}
               lang={lang}
-              featured={i === 0}
+              featured={Boolean(project.diagrams)}
             />
           ))}
         </div>
