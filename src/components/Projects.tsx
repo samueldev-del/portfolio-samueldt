@@ -74,9 +74,9 @@ const projectsByLang: Record<Lang, Project[]> = {
     {
       id: "ansible-k8s",
       title: "Konfigurationsmanagement & Orchestrierung",
-      subtitle: "Lernprojekt — Ansible, Kubernetes mit kind, Linux",
+      subtitle: "Ansible, Kubernetes mit kind, Linux",
       description:
-        "Kein Deployment, sondern eine Werkbank: eine Handvoll Linux-VMs und ein lokaler Multi-Node-Cluster, an denen ich übe, Zustand deklarativ zu beschreiben statt ihn von Hand herzustellen. Läuft seit März 2026 parallel zu allem anderen.",
+        "Eine Handvoll Linux-VMs und ein lokaler Multi-Node-Cluster, auf denen ich Zustand deklarativ beschreibe statt ihn von Hand herzustellen. Läuft seit März 2026 parallel zu allem anderen.",
       highlights: [
         "Wiederverwendbare Rolle im kanonischen Layout (defaults, vars, tasks, handlers, templates, meta), die nginx idempotent auf zwei Hosts der Gruppe web ausrollt",
         "Erster Task ist ein assert auf os_family — die Rolle bricht auf einem nicht unterstützten System sauber ab, statt auf halbem Weg zu scheitern",
@@ -94,14 +94,14 @@ const projectsByLang: Record<Lang, Project[]> = {
       color: "#a78bfa",
       status: "Laufend",
       diagrams: "ansible",
-      note: "Bewusst als Übungsumgebung geführt und nicht als Produktivsystem — ich will erst sicher sein, dass ich verstehe, was passiert, bevor ich es auf etwas Echtes loslasse.",
+      note: "Ich will erst sicher sein, dass ich verstehe, was passiert, bevor ich das auf etwas Echtes loslasse.",
     },
     {
       id: "bolo237",
       title: "Bolo237",
       subtitle: "Jobbörse & Dienstleistungen (Kamerun)",
       description:
-        "Eine Plattform, auf der Menschen in Kamerun Jobs und Dienstleistungen finden. Persönliches Projekt, live und in Betrieb. Der Code entstand mit KI-Unterstützung; Deployment, Infrastruktur und Betrieb habe ich selbst gemacht.",
+        "Eine Plattform, auf der Menschen in Kamerun Jobs und Dienstleistungen finden. Persönliches Projekt, live und in Betrieb. Deployment, Infrastruktur und Betrieb habe ich selbst gemacht.",
       highlights: [
         "REST-API mit Node.js/Express, Prisma ORM, serverless PostgreSQL bei Neon",
         "Mehrschichtige Absicherung: Rate Limiting pro IP und User, Helmet, CORS, JWT",
@@ -176,9 +176,9 @@ const projectsByLang: Record<Lang, Project[]> = {
     {
       id: "ansible-k8s",
       title: "Configuration management & orchestration",
-      subtitle: "Learning project — Ansible, Kubernetes with kind, Linux",
+      subtitle: "Ansible, Kubernetes with kind, Linux",
       description:
-        "Not a deployment — a workbench: a handful of Linux VMs and a local multi-node cluster where I practise describing state declaratively instead of producing it by hand. Running since March 2026 alongside everything else.",
+        "A handful of Linux VMs and a local multi-node cluster where I describe state declaratively instead of producing it by hand. Running since March 2026 alongside everything else.",
       highlights: [
         "Reusable role in the canonical layout (defaults, vars, tasks, handlers, templates, meta) that rolls nginx out idempotently across two hosts in the web group",
         "The first task is an assert on os_family — the role aborts cleanly on an unsupported system instead of failing halfway through",
@@ -196,14 +196,14 @@ const projectsByLang: Record<Lang, Project[]> = {
       color: "#a78bfa",
       status: "Ongoing",
       diagrams: "ansible",
-      note: "Deliberately kept as a practice environment rather than a production system — I want to be sure I understand what happens before pointing it at something real.",
+      note: "I want to be sure I understand what happens before I point this at something real.",
     },
     {
       id: "bolo237",
       title: "Bolo237",
       subtitle: "Job board & services platform (Cameroon)",
       description:
-        "A platform where people in Cameroon find jobs and services. Personal project, live and running. Code written with AI assistance; deployment, infrastructure and operations are mine.",
+        "A platform where people in Cameroon find jobs and services. Personal project, live and running. Deployment, infrastructure and operations are mine.",
       highlights: [
         "REST API with Node.js/Express, Prisma ORM, serverless PostgreSQL on Neon",
         "Layered protection: rate limiting per IP and user, Helmet, CORS, JWT",
@@ -247,7 +247,7 @@ const sectionCopy = {
     headingA: "Vier Projekte,",
     headingB: "an denen ich wirklich arbeite.",
     intro:
-      "Drei davon sind live und lassen sich anklicken, eines ist meine Übungsumgebung. Kein Mockup — deployed und betrieben von mir.",
+      "Drei davon sind live und lassen sich anklicken, das vierte liegt als Repository offen. Kein Mockup — deployed und betrieben von mir.",
     less: "Weniger zeigen",
     more: "Mehr dazu",
     moreCount: "mehr",
@@ -257,7 +257,7 @@ const sectionCopy = {
     headingA: "Four projects,",
     headingB: "I actually work on.",
     intro:
-      "Three of them are live and clickable, one is my practice environment. No mockups — deployed and operated by me.",
+      "Three of them are live and clickable, the fourth is open as a repository. No mockups — deployed and operated by me.",
     less: "Show less",
     more: "Read more",
     moreCount: "more",

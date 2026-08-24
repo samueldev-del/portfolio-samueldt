@@ -22,10 +22,9 @@ export const metadata: Metadata = {
     "Cloud Engineer",
     "Terraform",
     "STACKIT",
-    "Azure",
     "Docker",
     "Kubernetes",
-    "Terraform",
+    "Ansible",
     "Next.js",
     "Samuel Djommou Thengho",
   ],
@@ -45,12 +44,20 @@ export const metadata: Metadata = {
     siteName: "Portfolio Samuel DT",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
+        type: "image/png",
         alt: "Vorschau des Portfolios von Samuel",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Samuel Djommou Thengho | Cloud & DevOps Engineer",
+    description:
+      "Cloud & DevOps Engineer in Hamburg — CI/CD, Infrastructure as Code, Observability.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,

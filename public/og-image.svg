@@ -35,10 +35,10 @@
     Samuel Djommou Thengho
   </text>
   <text x="130" y="292" fill="url(#accent)" font-family="Inter, system-ui, sans-serif" font-size="38" font-weight="600">
-    Cloud &amp; DevOps Engineer · Fullstack Developer
+    Cloud &amp; DevOps Engineer
   </text>
   <text x="130" y="360" fill="#b3c1d9" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="400">
-    Azure · STACKIT · AWS · Kubernetes · Terraform · Next.js
+    AWS · STACKIT · Terraform · Kubernetes · Ansible
   </text>
 
   <rect x="130" y="400" width="320" height="60" rx="12" fill="rgba(240,160,80,0.14)" stroke="rgba(240,160,80,0.4)"/>

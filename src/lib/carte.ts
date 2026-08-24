@@ -19,9 +19,9 @@ export const CARD = {
   location: "Hamburg, Germany",
 
   /** Human formatting — used for `aria-label`s and the vCard, never printed. */
-  phone: "+49 151 24862693",
+  phone: "+49 152 19574804",
   /** RFC 3966 / tel: form. */
-  phoneRaw: "+4915124862693",
+  phoneRaw: "+4915219574804",
 
   email: "contact@samueldt.com",
   site: "https://samueldt.com",
@@ -49,7 +49,7 @@ export const CARD = {
 const MINIMAL_VCARD = false;
 
 /** Bumped by hand whenever the card's contact details change. */
-const REVISION = "2026-08-12T00:00:00Z";
+const REVISION = "2026-08-24T00:00:00Z";
 
 /** Escapes a vCard text value per RFC 2426 §4. */
 function escapeValue(value: string): string {
