@@ -4,149 +4,296 @@ import { motion } from "framer-motion";
 import type { Lang } from "@/lib/i18n";
 import SectionHeading from "@/components/SectionHeading";
 
+/**
+ * One entry per category, each translated field carrying both languages. The
+ * colour and the ordering then exist once instead of twice, so the two lists
+ * cannot drift apart.
+ */
+type Localized<T> = Record<Lang, T>;
+
 type SkillCategory = {
-  name: string;
+  name: Localized<string>;
   color: string;
-  skills: string[];
-  note?: string;
+  note?: Localized<string>;
+  skills: Localized<string[]>;
 };
 
-type SkillCategoryByLang = Record<Lang, SkillCategory[]>;
-
-const categoriesByLang: SkillCategoryByLang = {
-  de: [
-    {
-      name: "CI/CD",
-      color: "#c2410c",
-      skills: ["GitHub Actions", "GitLab CI", "GHCR", "Rulesets & blockierende Prüfungen"],
+const categories: SkillCategory[] = [
+  {
+    "color": "#c2410c",
+    "name": {
+      "de": "CI/CD",
+      "en": "CI/CD"
     },
-    {
-      name: "Container",
-      color: "#0e7490",
-      skills: ["Docker", "Docker Compose", "ECS Fargate"],
+    "skills": {
+      "de": [
+        "GitHub Actions",
+        "GitLab CI",
+        "GHCR",
+        "Rulesets & blockierende Prüfungen"
+      ],
+      "en": [
+        "GitHub Actions",
+        "GitLab CI",
+        "GHCR",
+        "Rulesets & blocking checks"
+      ]
+    }
+  },
+  {
+    "color": "#0e7490",
+    "name": {
+      "de": "Container",
+      "en": "Containers"
     },
-    {
-      name: "Orchestrierung",
-      color: "#1d4ed8",
-      note: "Deklarative Manifeste, Ingress, Rolling Updates, Rollback",
-      skills: ["Kubernetes", "kind", "kubectl", "ingress-nginx", "ConfigMaps & Secrets", "Probes"],
+    "skills": {
+      "de": [
+        "Docker",
+        "Docker Compose",
+        "ECS Fargate"
+      ],
+      "en": [
+        "Docker",
+        "Docker Compose",
+        "ECS Fargate"
+      ]
+    }
+  },
+  {
+    "color": "#1d4ed8",
+    "name": {
+      "de": "Orchestrierung",
+      "en": "Orchestration"
     },
-    {
-      name: "Infrastructure as Code",
-      color: "#b45309",
-      note: "Remote State, Module, kontrollierte Plan- und Apply-Läufe",
-      skills: ["Terraform"],
+    "note": {
+      "de": "Deklarative Manifeste, Ingress, Rolling Updates, Rollback",
+      "en": "Declarative manifests, ingress, rolling updates, rollback"
     },
-    {
-      name: "Konfigurationsmanagement",
-      color: "#6d28d9",
-      note: "Wiederverwendbare Rollen, Handler, Variablen-Präzedenz",
-      skills: ["Ansible", "Jinja2", "ansible-vault", "ansible-lint"],
+    "skills": {
+      "de": [
+        "Kubernetes",
+        "kind",
+        "kubectl",
+        "ingress-nginx",
+        "ConfigMaps & Secrets",
+        "Probes"
+      ],
+      "en": [
+        "Kubernetes",
+        "kind",
+        "kubectl",
+        "ingress-nginx",
+        "ConfigMaps & Secrets",
+        "probes"
+      ]
+    }
+  },
+  {
+    "color": "#b45309",
+    "name": {
+      "de": "Infrastructure as Code",
+      "en": "Infrastructure as Code"
     },
-    {
-      name: "AWS",
-      color: "#a16207",
-      note: "Im eigenen Projekt aufgebaut und betrieben",
-      skills: ["IAM", "S3", "Lambda", "EventBridge", "SSM Parameter Store", "CloudWatch", "ECS", "VPC", "ALB"],
+    "note": {
+      "de": "Remote State, Module, kontrollierte Plan- und Apply-Läufe",
+      "en": "Remote state, modules, controlled plan and apply runs"
     },
-    {
-      name: "Observability",
-      color: "#be185d",
-      skills: ["CloudWatch (Metriken, Alarme, Logs)", "SNS", "Sentry"],
+    "skills": {
+      "de": [
+        "Terraform"
+      ],
+      "en": [
+        "Terraform"
+      ]
+    }
+  },
+  {
+    "color": "#6d28d9",
+    "name": {
+      "de": "Konfigurationsmanagement",
+      "en": "Configuration management"
     },
-    {
-      name: "Sicherheit",
-      color: "#047857",
-      skills: ["gitleaks", "Secret Scanning", "Least Privilege", "Verschlüsselung at rest & in transit"],
+    "note": {
+      "de": "Wiederverwendbare Rollen, Handler, Variablen-Präzedenz",
+      "en": "Reusable roles, handlers, variable precedence"
     },
-    {
-      name: "Sprachen",
-      color: "#4338ca",
-      skills: ["JavaScript / TypeScript", "SQL / T-SQL", "Bash"],
+    "skills": {
+      "de": [
+        "Ansible",
+        "Jinja2",
+        "ansible-vault",
+        "ansible-lint"
+      ],
+      "en": [
+        "Ansible",
+        "Jinja2",
+        "ansible-vault",
+        "ansible-lint"
+      ]
+    }
+  },
+  {
+    "color": "#a16207",
+    "name": {
+      "de": "AWS",
+      "en": "AWS"
     },
-    {
-      name: "Frameworks & Datenbanken",
-      color: "#0f766e",
-      skills: ["Node.js", "Express", "Next.js", "PostgreSQL", "Microsoft SQL Server"],
+    "note": {
+      "de": "Im eigenen Projekt aufgebaut und betrieben",
+      "en": "Built and operated on my own project"
     },
-    {
-      name: "Qualitätssicherung",
-      color: "#7e22ce",
-      skills: ["Unit- & Integrationstests", "Smoke-Tests nach dem Deployment"],
+    "skills": {
+      "de": [
+        "IAM",
+        "S3",
+        "Lambda",
+        "EventBridge",
+        "SSM Parameter Store",
+        "CloudWatch",
+        "ECS",
+        "VPC",
+        "ALB"
+      ],
+      "en": [
+        "IAM",
+        "S3",
+        "Lambda",
+        "EventBridge",
+        "SSM Parameter Store",
+        "CloudWatch",
+        "ECS",
+        "VPC",
+        "ALB"
+      ]
+    }
+  },
+  {
+    "color": "#be185d",
+    "name": {
+      "de": "Observability",
+      "en": "Observability"
     },
-    {
-      name: "Werkzeuge",
-      color: "#475569",
-      skills: ["Git", "GitHub CLI", "actionlint", "hadolint", "AWS CLI", "psql", "rsync over SSH"],
+    "skills": {
+      "de": [
+        "CloudWatch (Metriken, Alarme, Logs)",
+        "SNS",
+        "Sentry"
+      ],
+      "en": [
+        "CloudWatch (metrics, alarms, logs)",
+        "SNS",
+        "Sentry"
+      ]
+    }
+  },
+  {
+    "color": "#047857",
+    "name": {
+      "de": "Sicherheit",
+      "en": "Security"
     },
-  ],
-  en: [
-    {
-      name: "CI/CD",
-      color: "#c2410c",
-      skills: ["GitHub Actions", "GitLab CI", "GHCR", "Rulesets & blocking checks"],
+    "skills": {
+      "de": [
+        "gitleaks",
+        "Secret Scanning",
+        "Least Privilege",
+        "Verschlüsselung at rest & in transit"
+      ],
+      "en": [
+        "gitleaks",
+        "Secret scanning",
+        "Least privilege",
+        "Encryption at rest & in transit"
+      ]
+    }
+  },
+  {
+    "color": "#4338ca",
+    "name": {
+      "de": "Sprachen",
+      "en": "Languages"
     },
-    {
-      name: "Containers",
-      color: "#0e7490",
-      skills: ["Docker", "Docker Compose", "ECS Fargate"],
+    "skills": {
+      "de": [
+        "JavaScript / TypeScript",
+        "SQL / T-SQL",
+        "Bash"
+      ],
+      "en": [
+        "JavaScript / TypeScript",
+        "SQL / T-SQL",
+        "Bash"
+      ]
+    }
+  },
+  {
+    "color": "#0f766e",
+    "name": {
+      "de": "Frameworks & Datenbanken",
+      "en": "Frameworks & databases"
     },
-    {
-      name: "Orchestration",
-      color: "#1d4ed8",
-      note: "Declarative manifests, ingress, rolling updates, rollback",
-      skills: ["Kubernetes", "kind", "kubectl", "ingress-nginx", "ConfigMaps & Secrets", "probes"],
+    "skills": {
+      "de": [
+        "Node.js",
+        "Express",
+        "Next.js",
+        "PostgreSQL",
+        "Microsoft SQL Server"
+      ],
+      "en": [
+        "Node.js",
+        "Express",
+        "Next.js",
+        "PostgreSQL",
+        "Microsoft SQL Server"
+      ]
+    }
+  },
+  {
+    "color": "#7e22ce",
+    "name": {
+      "de": "Qualitätssicherung",
+      "en": "Quality assurance"
     },
-    {
-      name: "Infrastructure as Code",
-      color: "#b45309",
-      note: "Remote state, modules, controlled plan and apply runs",
-      skills: ["Terraform"],
+    "skills": {
+      "de": [
+        "Unit- & Integrationstests",
+        "Smoke-Tests nach dem Deployment"
+      ],
+      "en": [
+        "Unit & integration tests",
+        "Post-deployment smoke tests"
+      ]
+    }
+  },
+  {
+    "color": "#475569",
+    "name": {
+      "de": "Werkzeuge",
+      "en": "Tooling"
     },
-    {
-      name: "Configuration management",
-      color: "#6d28d9",
-      note: "Reusable roles, handlers, variable precedence",
-      skills: ["Ansible", "Jinja2", "ansible-vault", "ansible-lint"],
-    },
-    {
-      name: "AWS",
-      color: "#a16207",
-      note: "Built and operated on my own project",
-      skills: ["IAM", "S3", "Lambda", "EventBridge", "SSM Parameter Store", "CloudWatch", "ECS", "VPC", "ALB"],
-    },
-    {
-      name: "Observability",
-      color: "#be185d",
-      skills: ["CloudWatch (metrics, alarms, logs)", "SNS", "Sentry"],
-    },
-    {
-      name: "Security",
-      color: "#047857",
-      skills: ["gitleaks", "Secret scanning", "Least privilege", "Encryption at rest & in transit"],
-    },
-    {
-      name: "Languages",
-      color: "#4338ca",
-      skills: ["JavaScript / TypeScript", "SQL / T-SQL", "Bash"],
-    },
-    {
-      name: "Frameworks & databases",
-      color: "#0f766e",
-      skills: ["Node.js", "Express", "Next.js", "PostgreSQL", "Microsoft SQL Server"],
-    },
-    {
-      name: "Quality assurance",
-      color: "#7e22ce",
-      skills: ["Unit & integration tests", "Post-deployment smoke tests"],
-    },
-    {
-      name: "Tooling",
-      color: "#475569",
-      skills: ["Git", "GitHub CLI", "actionlint", "hadolint", "AWS CLI", "psql", "rsync over SSH"],
-    },
-  ],
-};
+    "skills": {
+      "de": [
+        "Git",
+        "GitHub CLI",
+        "actionlint",
+        "hadolint",
+        "AWS CLI",
+        "psql",
+        "rsync over SSH"
+      ],
+      "en": [
+        "Git",
+        "GitHub CLI",
+        "actionlint",
+        "hadolint",
+        "AWS CLI",
+        "psql",
+        "rsync over SSH"
+      ]
+    }
+  }
+];
 
 type SkillsProps = {
   lang: Lang;
@@ -197,9 +344,9 @@ export default function Skills({ lang }: SkillsProps) {
         />
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {categoriesByLang[lang].map((cat, i) => (
+          {categories.map((cat, i) => (
             <motion.div
-              key={cat.name}
+              key={cat.color}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -211,15 +358,15 @@ export default function Skills({ lang }: SkillsProps) {
                   className="h-2.5 w-2.5 rounded-full"
                   style={{ backgroundColor: cat.color }}
                 />
-                <h3 className="font-display text-lg text-ink">{cat.name}</h3>
+                <h3 className="font-display text-lg text-ink">{cat.name[lang]}</h3>
               </div>
               {cat.note && (
                 <p className="mt-1.5 text-xs leading-relaxed text-ink-3 italic">
-                  {cat.note}
+                  {cat.note[lang]}
                 </p>
               )}
               <div className="mt-4 flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
+                {cat.skills[lang].map((skill) => (
                   <span
                     key={skill}
                     className="rounded-lg border border-line bg-paper px-2.5 py-1 text-xs text-ink-2"

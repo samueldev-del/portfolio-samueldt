@@ -13,13 +13,13 @@ export default function SectionHeading({
   headingB,
   intro,
   centered = false,
-}: {
+}: Readonly<{
   eyebrow: string;
   headingA: string;
   headingB?: string;
   intro?: string;
   centered?: boolean;
-}) {
+}>) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

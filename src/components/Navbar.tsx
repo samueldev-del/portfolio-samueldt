@@ -125,7 +125,15 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? "Menu" : "Menu"}
+          aria-label={
+            lang === "de"
+              ? mobileOpen
+                ? "Menü schließen"
+                : "Menü öffnen"
+              : mobileOpen
+                ? "Close menu"
+                : "Open menu"
+          }
           aria-expanded={mobileOpen}
           className="rounded-lg border border-line bg-card p-2 text-ink-2 transition hover:text-ink md:hidden"
         >
