@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,11 +7,28 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+/**
+ * The display serif carries most of the warmth. Optical sizing is left to the
+ * browser, and the soft axis is dialled up so the letterforms read closer to
+ * letterpress than to a UI font.
+ */
+const fraunces = Fraunces({
+  variable: "--font-display",
+  subsets: ["latin"],
+  axes: ["SOFT", "WONK"],
+  display: "swap",
+});
+
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   weight: ["400", "500"],
   subsets: ["latin"],
 });
+
+/** Matches the paper ground, so the browser chrome does not fight the page. */
+export const viewport: Viewport = {
+  themeColor: "#faf6f0",
+};
 
 export const metadata: Metadata = {
   title: "Samuel Djommou Thengho | Cloud & DevOps Engineer",
@@ -80,9 +97,9 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#060810] text-[#f0f2f8]">
+      <body className="paper-grain min-h-full bg-paper text-ink-2">
         {children}
       </body>
     </html>

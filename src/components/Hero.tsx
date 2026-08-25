@@ -34,130 +34,136 @@ export default function Hero({ lang }: HeroProps) {
   const t = copy[lang];
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20 sm:px-8">
-      {/* Background effects */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-40 -top-32 h-[500px] w-[500px] rounded-full bg-[#f0a050]/20 blur-[140px]" />
-        <div className="absolute -right-32 top-[30%] h-[400px] w-[400px] rounded-full bg-[#19b1ba]/15 blur-[120px]" />
-        <div className="absolute bottom-0 left-[30%] h-[350px] w-[350px] rounded-full bg-[#f0a050]/10 blur-[130px]" />
+    <section className="relative overflow-hidden px-5 pt-28 pb-16 sm:px-8 sm:pt-32 sm:pb-24">
+      {/* Two soft washes of warm light, nothing that glows. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-40 -left-24 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(191,83,32,0.10),transparent_65%)]" />
+        <div className="absolute top-24 -right-32 h-[460px] w-[460px] rounded-full bg-[radial-gradient(circle,rgba(47,107,79,0.09),transparent_65%)]" />
       </div>
 
-      <div className="mx-auto max-w-4xl text-center min-w-0">
-        {/* Avatar */}
+      <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
+        {/* Left column — the words */}
+        <div className="min-w-0">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 rounded-full border border-sage/20 bg-sage-wash px-3.5 py-1.5 text-xs font-medium text-sage"
+          >
+            <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-sage" />
+            {t.openToWork}
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mt-6 font-display text-[2.6rem] leading-[1.04] tracking-[-0.02em] text-ink sm:text-6xl lg:text-[4.2rem]"
+          >
+            Samuel Djommou
+            <br />
+            <span className="marked">Thengho</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-5 text-lg text-ink sm:text-xl"
+          >
+            {t.role}
+            <span className="mx-2.5 text-line-2">·</span>
+            <span className="text-ink-2">{t.role2}</span>
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-5 max-w-xl text-[15px] leading-[1.75] text-ink-2"
+          >
+            {t.description}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-ink-3"
+          >
+            <span className="flex items-center gap-1.5">
+              <MapPin size={14} className="text-ember" />
+              Hamburg, Germany
+            </span>
+            <a
+              href="mailto:contact@samueldt.com"
+              className="flex items-center gap-1.5 transition hover:text-ink"
+            >
+              <Mail size={14} className="text-ember" />
+              contact@samueldt.com
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-9 flex flex-wrap items-center gap-3"
+          >
+            <a
+              href="#projects"
+              className="w-full rounded-full bg-ember px-7 py-3.5 text-center text-sm font-semibold text-white shadow-card transition hover:bg-ember-2 hover:shadow-lift sm:w-auto"
+            >
+              {t.ctaProjects}
+            </a>
+            <a
+              href="#contact"
+              className="w-full rounded-full border border-line-2 bg-card px-7 py-3.5 text-center text-sm font-medium text-ink transition hover:bg-paper-2 sm:w-auto"
+            >
+              {t.ctaContact}
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Right column — the photograph, pinned to the page like a print */}
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mx-auto mb-8"
+          initial={{ opacity: 0, y: 24, rotate: -4 }}
+          animate={{ opacity: 1, y: 0, rotate: -2.2 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="mx-auto w-full max-w-[19rem] md:max-w-[21rem]"
         >
-          <div className="relative mx-auto h-32 w-32 sm:h-36 sm:w-36">
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-[#f0a050] via-[#e8734a] to-[#19b1ba] opacity-70 blur-sm" />
+          <div className="rounded-[4px] border border-line bg-card p-3 pb-5 shadow-photo">
             <Image
               src="/samuel.JPG"
               alt="Samuel Djommou Thengho"
-              width={144}
-              height={144}
+              width={640}
+              height={800}
               priority
-              className="relative h-full w-full rounded-full object-cover border-2 border-white/10"
+              className="aspect-[4/5] w-full rounded-[2px] object-cover"
             />
+            <p className="mt-4 text-center font-display text-sm text-ink-3">
+              {t.role} — {t.role2}
+            </p>
           </div>
         </motion.div>
-
-        {/* Name & Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
-          <p className="mb-3 flex flex-wrap items-center justify-center gap-2 px-2 text-xs sm:text-sm text-[#19b1ba]">
-            <span className="inline-block h-2 w-2 rounded-full bg-[#19b1ba] animate-pulse" />
-            {t.openToWork}
-          </p>
-          <h1 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            Samuel Djommou
-            <br />
-            <span className="bg-gradient-to-r from-[#f0a050] via-[#f8c882] to-[#19b1ba] bg-clip-text text-transparent">
-              Thengho
-            </span>
-          </h1>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto mt-5 max-w-xl text-base font-medium text-[#a0b0c8] sm:text-xl"
-        >
-          {t.role} <span className="text-[#6b7a92]">|</span> {t.role2}
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#7e8ea6]"
-        >
-          {t.description}
-        </motion.p>
-
-        {/* Location & Email */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-5 text-sm text-[#7e8ea6]"
-        >
-          <span className="flex items-center gap-1.5">
-            <MapPin size={14} className="text-[#f0a050]" />
-            Hamburg, Germany
-          </span>
-          <a
-            href="mailto:contact@samueldt.com"
-            className="flex items-center gap-1.5 transition hover:text-white"
-          >
-            <Mail size={14} className="text-[#f0a050]" />
-            contact@samueldt.com
-          </a>
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-3"
-        >
-          <a
-            href="#projects"
-            className="w-full rounded-xl bg-gradient-to-r from-[#f0a050] to-[#e8734a] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-[#f0a050]/20 transition hover:shadow-[#f0a050]/30 hover:brightness-110 sm:w-auto"
-          >
-            {t.ctaProjects}
-          </a>
-          <a
-            href="#contact"
-            className="w-full rounded-xl border border-white/15 bg-white/5 px-7 py-3 text-sm font-medium text-[#d0daea] transition hover:bg-white/10 hover:text-white sm:w-auto"
-          >
-            {t.ctaContact}
-          </a>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="mt-16 flex justify-center"
-        >
-          <motion.a
-            href="#about"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="text-[#5a6a82] transition hover:text-[#a0b0c8]"
-          >
-            <ArrowDown size={20} />
-          </motion.a>
-        </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.1, duration: 0.6 }}
+        className="mt-16 flex justify-center"
+      >
+        <motion.a
+          href="#about"
+          aria-label={lang === "de" ? "Weiter" : "Continue"}
+          animate={{ y: [0, 7, 0] }}
+          transition={{ repeat: Infinity, duration: 2.2 }}
+          className="rounded-full border border-line bg-card p-2.5 text-ink-3 shadow-card transition hover:text-ember"
+        >
+          <ArrowDown size={18} />
+        </motion.a>
+      </motion.div>
     </section>
   );
 }

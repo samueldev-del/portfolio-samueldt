@@ -23,21 +23,21 @@ export default function CarteQrPage() {
   return (
     <main className="relative flex min-h-dvh flex-col items-center justify-center px-6 py-10">
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-clip">
-        <div className="absolute -left-32 -top-32 h-[440px] w-[440px] rounded-full bg-[#f0a050]/[0.17] blur-[110px]" />
+        <div className="absolute -top-40 -left-28 h-[460px] w-[460px] rounded-full bg-[radial-gradient(circle,rgba(191,83,32,0.13),transparent_65%)]" />
+        <div className="absolute -right-28 bottom-[-6rem] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(47,107,79,0.10),transparent_65%)]" />
       </div>
 
-      <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-[#7e8ea6]">
+      <p className="font-mono text-[10.5px] tracking-[0.22em] text-ink-3 uppercase">
         {CARD.role}
       </p>
 
-      <h1 className="mt-3 text-center text-[1.9rem] font-semibold leading-[1.05] tracking-[-0.03em] text-white">
-        Samuel Djommou{" "}
-        <span className="bg-gradient-to-r from-[#f0a050] via-[#f8c882] to-[#19b1ba] bg-clip-text pb-[0.08em] text-transparent">
-          Thengho
-        </span>
+      <h1 className="mt-3 text-center font-display text-[2rem] leading-[1.08] tracking-[-0.02em] text-ink">
+        Samuel Djommou <span className="text-ember">Thengho</span>
       </h1>
 
-      <div className="mt-8 rounded-[28px] bg-white p-4 shadow-[0_30px_70px_-24px_rgba(0,0,0,0.9)]">
+      {/* The panel stays a large white field: on a phone at partial screen
+          brightness, white area is what a camera actually has to work with. */}
+      <div className="mt-8 rounded-[28px] border border-line bg-white p-4 shadow-photo">
         <Image
           src="/carte-qr.svg"
           alt={`QR code linking to ${CARD.cardUrl}`}
@@ -49,14 +49,14 @@ export default function CarteQrPage() {
         />
       </div>
 
-      <p className="mt-7 font-mono text-[11px] uppercase tracking-[0.28em] text-[#a0b0c8]">
+      <p className="mt-7 font-mono text-[11px] tracking-[0.28em] text-ink-2 uppercase">
         Scan to connect
       </p>
-      <p className="mt-2 font-mono text-[11px] text-[#5a6a82]">samueldt.com/carte</p>
+      <p className="mt-2 font-mono text-[11px] text-ink-3">samueldt.com/carte</p>
 
       <a
         href="/carte"
-        className="mt-10 -m-2 flex items-center gap-1.5 p-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[#7e8ea6]"
+        className="-m-2 mt-10 flex items-center gap-1.5 rounded-full border border-line bg-card px-4 py-2.5 font-mono text-[11px] tracking-[0.14em] text-ink-2 uppercase shadow-card"
       >
         <ArrowLeft size={13} />
         Karte

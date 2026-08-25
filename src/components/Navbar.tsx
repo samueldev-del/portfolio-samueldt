@@ -49,45 +49,43 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#060810]/80 backdrop-blur-xl border-b border-white/8 shadow-lg shadow-black/20"
-          : "bg-transparent"
+          ? "border-b border-line bg-paper/85 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-8 sm:py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-8 sm:py-4">
         <a
           href="#"
-          className="flex min-w-0 items-center gap-2 text-base font-semibold tracking-tight text-white sm:text-lg"
+          className="flex min-w-0 items-center gap-2.5 text-ink"
         >
-          <Image
-            src="/logo.svg"
-            alt="SDT Logo"
-            width={32}
-            height={32}
-            className="brightness-115 drop-shadow-[0_0_10px_rgba(240,160,80,0.55)]"
-          />
-          <span className="truncate">samuel<span className="text-[#f0a050]">DT</span></span>
+          <Image src="/logo.svg" alt="" width={30} height={30} aria-hidden />
+          <span className="truncate font-display text-lg tracking-tight sm:text-xl">
+            samuel<span className="text-ember">DT</span>
+          </span>
         </a>
 
         {/* Desktop */}
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-0.5 md:flex">
           {links[lang].map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="rounded-lg px-3 py-2 text-sm text-[#b0bdd0] transition hover:text-white hover:bg-white/5"
+                className="nav-link rounded-lg px-3 py-2 text-sm text-ink-2 transition hover:text-ink"
               >
                 {link.label}
               </a>
             </li>
           ))}
-          <li className="ml-2 flex items-center rounded-lg border border-white/10 bg-white/5 p-1">
+          <li className="mx-3 flex items-center rounded-full border border-line bg-card p-0.5">
             <button
               type="button"
               onClick={() => onLangChange("de")}
-              className={`rounded-md px-2 py-1 text-xs transition ${
-                lang === "de" ? "bg-[#f0a050]/25 text-[#f8c882]" : "text-[#9cadc6] hover:text-white"
+              className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${
+                lang === "de"
+                  ? "bg-ember-wash text-ember-2"
+                  : "text-ink-3 hover:text-ink"
               }`}
             >
               DE
@@ -95,31 +93,31 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
             <button
               type="button"
               onClick={() => onLangChange("en")}
-              className={`rounded-md px-2 py-1 text-xs transition ${
-                lang === "en" ? "bg-[#19b1ba]/25 text-[#94edf3]" : "text-[#9cadc6] hover:text-white"
+              className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${
+                lang === "en"
+                  ? "bg-sage-wash text-sage"
+                  : "text-ink-3 hover:text-ink"
               }`}
             >
               EN
             </button>
           </li>
-          <li className="ml-3">
-            <div className="flex items-center gap-2">
-              <a
-                href={resumeHref}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-lg border border-[#f0a050]/50 bg-[#f0a050]/10 px-4 py-2 text-sm font-medium text-[#f8c882] transition hover:bg-[#f0a050]/20"
-              >
-                {resumeOpenLabel}
-              </a>
-              <a
-                href={resumeHref}
-                download
-                className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm font-medium text-[#d0daea] transition hover:bg-white/10 hover:text-white"
-              >
-                {resumeDownloadLabel}
-              </a>
-            </div>
+          <li className="flex items-center gap-2">
+            <a
+              href={resumeHref}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-ember px-4 py-2 text-sm font-medium text-white shadow-card transition hover:bg-ember-2"
+            >
+              {resumeOpenLabel}
+            </a>
+            <a
+              href={resumeHref}
+              download
+              className="rounded-full border border-line bg-card px-3.5 py-2 text-sm font-medium text-ink-2 transition hover:border-line-2 hover:text-ink"
+            >
+              {resumeDownloadLabel}
+            </a>
           </li>
         </ul>
 
@@ -127,9 +125,19 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="rounded-lg p-2 text-[#b0bdd0] transition hover:text-white md:hidden"
+          aria-label={
+            lang === "de"
+              ? mobileOpen
+                ? "Menü schließen"
+                : "Menü öffnen"
+              : mobileOpen
+                ? "Close menu"
+                : "Open menu"
+          }
+          aria-expanded={mobileOpen}
+          className="rounded-lg border border-line bg-card p-2 text-ink-2 transition hover:text-ink md:hidden"
         >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
@@ -140,29 +148,29 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-b border-white/8 bg-[#060810]/95 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-b border-line bg-paper/95 backdrop-blur-md md:hidden"
           >
-            <ul className="flex flex-col gap-1 px-5 pb-5">
+            <ul className="flex flex-col gap-0.5 px-5 pb-5">
               {links[lang].map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block rounded-lg px-3 py-2.5 text-sm text-[#b0bdd0] transition hover:text-white hover:bg-white/5"
+                    className="block rounded-lg px-3 py-2.5 text-sm text-ink-2 transition hover:bg-paper-2 hover:text-ink"
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
-              <li className="mt-2 flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 p-1.5">
+              <li className="mt-3 flex items-center gap-2 rounded-full border border-line bg-card p-1">
                 <button
                   type="button"
                   onClick={() => {
                     onLangChange("de");
                     setMobileOpen(false);
                   }}
-                  className={`flex-1 rounded-md px-3 py-2 text-xs transition ${
-                    lang === "de" ? "bg-[#f0a050]/25 text-[#f8c882]" : "text-[#9cadc6]"
+                  className={`flex-1 rounded-full px-3 py-2 text-xs font-medium transition ${
+                    lang === "de" ? "bg-ember-wash text-ember-2" : "text-ink-3"
                   }`}
                 >
                   Deutsch
@@ -173,33 +181,31 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                     onLangChange("en");
                     setMobileOpen(false);
                   }}
-                  className={`flex-1 rounded-md px-3 py-2 text-xs transition ${
-                    lang === "en" ? "bg-[#19b1ba]/25 text-[#94edf3]" : "text-[#9cadc6]"
+                  className={`flex-1 rounded-full px-3 py-2 text-xs font-medium transition ${
+                    lang === "en" ? "bg-sage-wash text-sage" : "text-ink-3"
                   }`}
                 >
                   English
                 </button>
               </li>
-              <li className="mt-2">
-                <div className="grid gap-2">
-                  <a
-                    href={resumeHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() => setMobileOpen(false)}
-                    className="block rounded-lg border border-[#f0a050]/50 bg-[#f0a050]/10 px-4 py-2.5 text-center text-sm font-medium text-[#f8c882]"
-                  >
-                    {resumeOpenLabel}
-                  </a>
-                  <a
-                    href={resumeHref}
-                    download
-                    onClick={() => setMobileOpen(false)}
-                    className="block rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-center text-sm font-medium text-[#d0daea]"
-                  >
-                    {resumeDownloadLabel}
-                  </a>
-                </div>
+              <li className="mt-2 grid gap-2">
+                <a
+                  href={resumeHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="block rounded-full bg-ember px-4 py-2.5 text-center text-sm font-medium text-white"
+                >
+                  {resumeOpenLabel}
+                </a>
+                <a
+                  href={resumeHref}
+                  download
+                  onClick={() => setMobileOpen(false)}
+                  className="block rounded-full border border-line bg-card px-4 py-2.5 text-center text-sm font-medium text-ink-2"
+                >
+                  {resumeDownloadLabel}
+                </a>
               </li>
             </ul>
           </motion.div>

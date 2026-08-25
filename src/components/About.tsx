@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Cloud, Server, Code, Shield } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
+import SectionHeading from "@/components/SectionHeading";
 
 type AboutProps = {
   lang: Lang;
@@ -86,52 +87,45 @@ export default function About({ lang }: AboutProps) {
   const t = copy[lang];
 
   return (
-    <section id="about" className="px-5 py-16 sm:px-8 sm:py-24">
+    <section id="about" className="relative px-5 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#f0a050]">
-            {t.eyebrow}
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-            {t.headingA}{" "}
-            <span className="text-[#7e8ea6]">{t.headingB}</span>
-          </h2>
-        </motion.div>
+        <SectionHeading
+          eyebrow={t.eyebrow}
+          headingA={t.headingA}
+          headingB={t.headingB}
+        />
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-8 max-w-3xl space-y-4 text-[15px] leading-relaxed text-[#a0b0c8]"
+          className="mt-10 max-w-2xl space-y-5 text-[16px] leading-[1.8] text-ink-2"
         >
-          <p>{t.p1}</p>
+          {/* The opening paragraph gets a drop cap — one small typographic
+              flourish that says a person laid this page out. */}
+          <p className="first-letter:float-left first-letter:mt-1 first-letter:mr-2.5 first-letter:font-display first-letter:text-[3.4rem] first-letter:leading-[0.8] first-letter:text-ember">
+            {t.p1}
+          </p>
           <p>{t.p2}</p>
           <p>{t.p3}</p>
         </motion.div>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {highlights[lang].map((item, i) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.4, delay: 0.1 * i }}
-              className="group rounded-2xl border border-white/8 bg-white/[0.02] p-5 transition hover:border-[#f0a050]/30 hover:bg-white/[0.04]"
+              transition={{ duration: 0.4, delay: 0.08 * i }}
+              className="group rounded-2xl border border-line bg-card p-6 shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f0a050]/10 text-[#f0a050] transition group-hover:bg-[#f0a050]/20">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-ember-wash text-ember transition group-hover:bg-ember group-hover:text-white">
                 <item.icon size={20} />
               </div>
-              <h3 className="mt-4 text-sm font-semibold text-white">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-xs leading-relaxed text-[#7e8ea6]">
+              <h3 className="mt-5 font-display text-lg text-ink">{item.title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-ink-3">
                 {item.description}
               </p>
             </motion.div>

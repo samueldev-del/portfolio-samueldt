@@ -5,13 +5,13 @@ import type { ReactNode } from "react";
 import type { Lang } from "@/lib/i18n";
 
 export const BOX = {
-  neutral: { fill: "#2b2f38", stroke: "#4a5160" },
-  blue: { fill: "#123a63", stroke: "#2f6ba8" },
-  green: { fill: "#12453a", stroke: "#2f8a6d" },
-  brown: { fill: "#5a2a18", stroke: "#9c4c2a" },
-  purple: { fill: "#332f7a", stroke: "#5f59c7" },
-  maroon: { fill: "#5c1f3c", stroke: "#a8386b" },
-  merge: { fill: "#1e4a1c", stroke: "#3f8a3a" },
+  neutral: { fill: "#efe7db", stroke: "#d5c7b3" },
+  blue: { fill: "#e3ecf8", stroke: "#8fb3da" },
+  green: { fill: "#e3f0e7", stroke: "#93c2a7" },
+  brown: { fill: "#f8e7d9", stroke: "#dfae8b" },
+  purple: { fill: "#eae7f8", stroke: "#aea6dd" },
+  maroon: { fill: "#f8e4ec", stroke: "#dda3bb" },
+  merge: { fill: "#e7f1de", stroke: "#a6c894" },
 } as const;
 
 export type Tone = keyof typeof BOX;
@@ -30,7 +30,7 @@ export function Defs() {
         markerHeight="6"
         orient="auto-start-reverse"
       >
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#7e8ea6" />
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#a08e79" />
       </marker>
     </defs>
   );
@@ -72,7 +72,7 @@ export function Node({
         x={x + w / 2}
         y={sub ? y + h / 2 - 4 : y + h / 2 + 4}
         textAnchor="middle"
-        fill="#ffffff"
+        fill="#211b16"
         fontSize={13}
         fontWeight={600}
       >
@@ -83,7 +83,7 @@ export function Node({
           x={x + w / 2}
           y={y + h / 2 + 14}
           textAnchor="middle"
-          fill="#b9c4d6"
+          fill="#5c5349"
           fontSize={10.5}
           fontFamily={mono ? "ui-monospace, SFMono-Regular, Menlo, monospace" : undefined}
         >
@@ -99,7 +99,7 @@ export function Arrow({ d, dashed = false }: { d: string; dashed?: boolean }) {
     <path
       d={d}
       fill="none"
-      stroke="#7e8ea6"
+      stroke="#a08e79"
       strokeWidth={1.4}
       strokeDasharray={dashed ? "5 4" : undefined}
       markerEnd={`url(#${ARROW_ID})`}
@@ -128,11 +128,11 @@ export function Figure({
 }) {
   return (
     <figure className="m-0 min-w-0">
-      <figcaption className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-[#7e8ea6]">
+      <figcaption className="mb-3 font-mono text-[11px] tracking-[0.14em] text-ink-3 uppercase">
         {title}
       </figcaption>
       <div className="relative min-w-0">
-        <div className="overflow-x-auto rounded-xl border border-white/8 bg-[#0b0e17] p-4">
+        <div className="overflow-x-auto rounded-xl border border-line bg-paper p-4">
           <svg
             viewBox={viewBox}
             role="img"
@@ -146,10 +146,10 @@ export function Figure({
         </div>
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-px right-px w-12 rounded-r-xl bg-gradient-to-l from-[#0b0e17] to-transparent sm:hidden"
+          className="pointer-events-none absolute inset-y-px right-px w-12 rounded-r-xl bg-gradient-to-l from-paper to-transparent sm:hidden"
         />
       </div>
-      <p className="mt-2 text-[11px] text-[#5a6a82] sm:hidden">
+      <p className="mt-2 text-[11px] text-ink-3 sm:hidden">
         {lang === "de"
           ? "Zum Erkunden seitwärts wischen"
           : "Swipe sideways to explore"}

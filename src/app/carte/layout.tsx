@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 
 import { CARD } from "@/lib/carte";
 
-/** Matches the page background, so there is no light flash or seam on load. */
+/** Matches the page background, so there is no flash or seam on load. */
 export const viewport: Viewport = {
-  themeColor: "#060810",
+  themeColor: "#faf6f0",
 };
 
 /**
@@ -41,8 +41,14 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * `isolate` creates a stacking context, so the card's own negative-z backdrop
+ * paints above this ground instead of disappearing behind the body background.
+ */
 export default function CarteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return children;
+  return (
+    <div className="isolate min-h-dvh bg-paper text-ink-2">{children}</div>
+  );
 }
