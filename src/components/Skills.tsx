@@ -27,8 +27,8 @@ const categoriesByLang: SkillCategoryByLang = {
     {
       name: "Orchestrierung",
       color: "#60a5fa",
-      note: "Deklarative Manifeste, Rolling Updates, Rollback",
-      skills: ["Kubernetes", "kind", "kubectl"],
+      note: "Deklarative Manifeste, Ingress, Rolling Updates, Rollback",
+      skills: ["Kubernetes", "kind", "kubectl", "ingress-nginx", "ConfigMaps & Secrets", "Probes"],
     },
     {
       name: "Infrastructure as Code",
@@ -93,8 +93,8 @@ const categoriesByLang: SkillCategoryByLang = {
     {
       name: "Orchestration",
       color: "#60a5fa",
-      note: "Declarative manifests, rolling updates, rollback",
-      skills: ["Kubernetes", "kind", "kubectl"],
+      note: "Declarative manifests, ingress, rolling updates, rollback",
+      skills: ["Kubernetes", "kind", "kubectl", "ingress-nginx", "ConfigMaps & Secrets", "probes"],
     },
     {
       name: "Infrastructure as Code",

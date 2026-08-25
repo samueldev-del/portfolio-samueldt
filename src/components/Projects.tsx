@@ -13,6 +13,10 @@ import {
   PrecedenceDiagram,
   RoleRunDiagram,
 } from "@/components/diagrams/AnsibleDiagrams";
+import {
+  ClusterDiagram,
+  DeclaredStateDiagram,
+} from "@/components/diagrams/K8sDiagrams";
 
 type Project = {
   id: string;
@@ -27,7 +31,7 @@ type Project = {
   status: string;
   screenshot?: string;
   note?: string;
-  diagrams?: "mymifa" | "ansible";
+  diagrams?: "mymifa" | "ansible" | "k8s";
 };
 
 type ProjectsProps = {
@@ -72,11 +76,11 @@ const projectsByLang: Record<Lang, Project[]> = {
       note: "Was ich daraus mitnehme: einem System erst trauen, wenn ich es gemessen habe. Jede Annahme — der Cron, die Migrationen, das Deployment — hat sich irgendwann als falsch erwiesen.",
     },
     {
-      id: "ansible-k8s",
-      title: "Konfigurationsmanagement & Orchestrierung",
-      subtitle: "Ansible, Kubernetes mit kind, Linux",
+      id: "ansible",
+      title: "Konfigurationsmanagement mit Ansible",
+      subtitle: "Ansible, Jinja2, ansible-vault, Linux",
       description:
-        "Eine Handvoll Linux-VMs und ein lokaler Multi-Node-Cluster, auf denen ich Zustand deklarativ beschreibe statt ihn von Hand herzustellen. Läuft seit März 2026 parallel zu allem anderen.",
+        "Eine Handvoll Linux-VMs, auf denen ich Zustand deklarativ beschreibe statt ihn von Hand herzustellen. Läuft seit März 2026 parallel zu allem anderen.",
       highlights: [
         "Wiederverwendbare Rolle im kanonischen Layout (defaults, vars, tasks, handlers, templates, meta), die nginx idempotent auf zwei Hosts der Gruppe web ausrollt",
         "Erster Task ist ein assert auf os_family — die Rolle bricht auf einem nicht unterstützten System sauber ab, statt auf halbem Weg zu scheitern",
@@ -85,16 +89,39 @@ const projectsByLang: Record<Lang, Project[]> = {
         "Variablen-Präzedenz bewusst beherrscht: defaults liefert [nginx], group_vars überschreibt auf [nginx, curl, git] — das war der Teil, an dem ich am längsten gesessen habe",
         "Secrets verschlüsselt über ansible-vault, mit nicht-interaktiver Ausführung für automatisierten Betrieb",
         "Vor jeder Anwendung erst Check-Modus mit Diff. Der Code ist konform zu ansible-lint im Production-Profil",
-        "Kubernetes über deklarative Manifeste: Deployments und ReplicaSets, Pod-Scheduling, Verknüpfung über Labels und Selectors",
-        "Interne Erreichbarkeit über ClusterIP-Services mit DNS-Auflösung und Lastverteilung; Rolling Updates und Rollback auf eine frühere Revision",
       ],
-      stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Kubernetes", "kind", "kubectl", "Linux"],
+      stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Linux", "SSH"],
       url: "https://github.com/samueldev-del/ansible-lab",
       urlLabel: "Repository ansehen",
       color: "#a78bfa",
       status: "Laufend",
       diagrams: "ansible",
       note: "Ich will erst sicher sein, dass ich verstehe, was passiert, bevor ich das auf etwas Echtes loslasse.",
+    },
+    {
+      id: "k8s-lab",
+      title: "Kubernetes-Lab",
+      subtitle: "Multi-Node-Cluster mit kind, Ingress, ConfigMaps",
+      description:
+        "Ein lokaler Cluster aus drei Nodes, auf dem ich die Kernobjekte von Kubernetes nicht nachlese, sondern anwende: Scheduling über mehrere Nodes, Erreichbarkeit von außen, Konfiguration getrennt vom Image. Alles als Manifest im Repository, nichts per kubectl edit.",
+      highlights: [
+        "Cluster aus einer Control Plane und zwei Workern über kind, damit Pod-Scheduling über mehrere Nodes tatsächlich beobachtbar ist statt nur behauptet",
+        "Deployment mit drei Replicas und topologySpreadConstraints (maxSkew 1 über kubernetes.io/hostname) — die Verteilung über die Nodes ist gewollt, nicht zufällig",
+        "Erreichbarkeit von außen auf zwei Wegen: ingress-nginx auf dem Node mit dem Label ingress-ready über hostPort 8080, zusätzlich ein NodePort auf 30080",
+        "Pfadbasiertes Routing im Ingress: / geht an web-svc, /api(/|$)(.*) mit rewrite-target an ein zweites Deployment — zwei Anwendungen hinter einem Host",
+        "Jeder Pod liefert seinen eigenen Namen über die Downward API aus, damit sich an wiederholten Requests nachweisen lässt, dass der Service wirklich verteilt",
+        "Konfiguration aus dem Image gelöst: index.html als Volume aus einer ConfigMap, APP_ENV als Umgebungsvariable, DB_PASSWORD aus einem Secret — die Secret-Datei ist per .gitignore ausgeschlossen, im Repository liegt nur ein Beispiel",
+        "Readiness- und Liveness-Probe getrennt gedacht: die eine entscheidet über Traffic, die andere über den Neustart",
+        "Resource Requests und Limits auf jedem Container, damit Scheduling und Begrenzung nicht dem Zufall überlassen sind",
+        "Rolling Update und Rollback auf eine frühere Revision durchgespielt — inklusive der Frage, was dabei mit den alten ReplicaSets passiert",
+      ],
+      stack: ["Kubernetes", "kind", "kubectl", "ingress-nginx", "ConfigMaps & Secrets", "YAML", "Docker"],
+      url: "https://github.com/samueldev-del/k8s-lab",
+      urlLabel: "Repository ansehen",
+      color: "#60a5fa",
+      status: "Laufend",
+      diagrams: "k8s",
+      note: "Ein Cluster auf dem Laptop kostet nichts und verzeiht alles. Genau deshalb kaputtmache ich ihn dort, und nicht anderswo.",
     },
     {
       id: "bolo237",
@@ -174,11 +201,11 @@ const projectsByLang: Record<Lang, Project[]> = {
       note: "What I took away: don't trust a system until you've measured it. Every assumption — the cron, the migrations, the deployment — turned out to be wrong at some point.",
     },
     {
-      id: "ansible-k8s",
-      title: "Configuration management & orchestration",
-      subtitle: "Ansible, Kubernetes with kind, Linux",
+      id: "ansible",
+      title: "Configuration management with Ansible",
+      subtitle: "Ansible, Jinja2, ansible-vault, Linux",
       description:
-        "A handful of Linux VMs and a local multi-node cluster where I describe state declaratively instead of producing it by hand. Running since March 2026 alongside everything else.",
+        "A handful of Linux VMs where I describe state declaratively instead of producing it by hand. Running since March 2026 alongside everything else.",
       highlights: [
         "Reusable role in the canonical layout (defaults, vars, tasks, handlers, templates, meta) that rolls nginx out idempotently across two hosts in the web group",
         "The first task is an assert on os_family — the role aborts cleanly on an unsupported system instead of failing halfway through",
@@ -187,16 +214,39 @@ const projectsByLang: Record<Lang, Project[]> = {
         "Variable precedence properly understood: defaults ships [nginx], group_vars overrides it to [nginx, curl, git] — that's the part I spent longest on",
         "Secrets encrypted with ansible-vault, with non-interactive execution for automated runs",
         "Check mode with diff before every apply. The code passes ansible-lint on the production profile",
-        "Kubernetes through declarative manifests: Deployments and ReplicaSets, pod scheduling, wiring via labels and selectors",
-        "Internal reachability through ClusterIP services with DNS resolution and load balancing; rolling updates and rollback to a previous revision",
       ],
-      stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Kubernetes", "kind", "kubectl", "Linux"],
+      stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Linux", "SSH"],
       url: "https://github.com/samueldev-del/ansible-lab",
       urlLabel: "View the repository",
       color: "#a78bfa",
       status: "Ongoing",
       diagrams: "ansible",
       note: "I want to be sure I understand what happens before I point this at something real.",
+    },
+    {
+      id: "k8s-lab",
+      title: "Kubernetes lab",
+      subtitle: "Multi-node cluster with kind, ingress, ConfigMaps",
+      description:
+        "A local three-node cluster where I use the core Kubernetes objects instead of reading about them: scheduling across nodes, reachability from outside, configuration kept out of the image. Everything is a manifest in the repository, nothing done through kubectl edit.",
+      highlights: [
+        "One control plane and two workers through kind, so scheduling across nodes is something I can actually observe rather than assert",
+        "Deployment of three replicas with topologySpreadConstraints (maxSkew 1 over kubernetes.io/hostname) — the spread across nodes is intended, not incidental",
+        "Two ways in from the host: ingress-nginx on the node labelled ingress-ready via hostPort 8080, plus a NodePort on 30080",
+        "Path-based routing in the Ingress: / goes to web-svc, /api(/|$)(.*) with a rewrite-target to a second deployment — two applications behind one host",
+        "Every pod serves its own name through the Downward API, so repeated requests prove the service really does distribute traffic",
+        "Configuration lifted out of the image: index.html mounted as a volume from a ConfigMap, APP_ENV as an environment variable, DB_PASSWORD from a Secret — the secret file is gitignored, only an example ships in the repository",
+        "Readiness and liveness kept conceptually apart: one decides about traffic, the other about a restart",
+        "Resource requests and limits on every container, so scheduling and capping aren't left to chance",
+        "Rolling update and rollback to a previous revision worked through — including what happens to the old ReplicaSets along the way",
+      ],
+      stack: ["Kubernetes", "kind", "kubectl", "ingress-nginx", "ConfigMaps & Secrets", "YAML", "Docker"],
+      url: "https://github.com/samueldev-del/k8s-lab",
+      urlLabel: "View the repository",
+      color: "#60a5fa",
+      status: "Ongoing",
+      diagrams: "k8s",
+      note: "A cluster on a laptop costs nothing and forgives everything. That is exactly why I break it there and not somewhere else.",
     },
     {
       id: "bolo237",
@@ -244,20 +294,20 @@ const projectsByLang: Record<Lang, Project[]> = {
 const sectionCopy = {
   de: {
     eyebrow: "Projekte",
-    headingA: "Vier Projekte,",
+    headingA: "Fünf Projekte,",
     headingB: "an denen ich wirklich arbeite.",
     intro:
-      "Drei davon sind live und lassen sich anklicken, das vierte liegt als Repository offen. Kein Mockup — deployed und betrieben von mir.",
+      "Drei davon sind live und lassen sich anklicken, zwei liegen als Repository offen. Kein Mockup — deployed und betrieben von mir.",
     less: "Weniger zeigen",
     more: "Mehr dazu",
     moreCount: "mehr",
   },
   en: {
     eyebrow: "Projects",
-    headingA: "Four projects,",
+    headingA: "Five projects,",
     headingB: "I actually work on.",
     intro:
-      "Three of them are live and clickable, the fourth is open as a repository. No mockups — deployed and operated by me.",
+      "Three of them are live and clickable, two are open as repositories. No mockups — deployed and operated by me.",
     less: "Show less",
     more: "Read more",
     moreCount: "more",
@@ -336,6 +386,13 @@ function ProjectCard({
           >
             <ArchitectureDiagram lang={lang} />
             <PipelineDiagram lang={lang} />
+          </div>
+        )}
+
+        {project.diagrams === "k8s" && (
+          <div className={`mt-6 space-y-8 ${expanded ? "" : "hidden sm:block"}`}>
+            <ClusterDiagram lang={lang} />
+            <DeclaredStateDiagram lang={lang} />
           </div>
         )}
 
