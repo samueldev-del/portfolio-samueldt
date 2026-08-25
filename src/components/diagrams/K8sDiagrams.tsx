@@ -95,12 +95,12 @@ const copy = {
 function Pod({ x, y, label, tone }: { x: number; y: number; label: string; tone: string }) {
   return (
     <g>
-      <rect x={x} y={y} width={92} height={22} rx={6} fill={tone} stroke="#4a5160" strokeWidth={1.2} />
+      <rect x={x} y={y} width={92} height={22} rx={6} fill={tone} stroke="#d5c7b3" strokeWidth={1.2} />
       <text
         x={x + 46}
         y={y + 15}
         textAnchor="middle"
-        fill="#dbe3ef"
+        fill="#3b332c"
         fontSize={9.5}
         fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
       >
@@ -123,11 +123,11 @@ function ClusterNode({
 }) {
   return (
     <g>
-      <rect x={x} y={y} width={232} height={112} rx={12} fill="#22262e" stroke="#3d434f" strokeWidth={1.5} />
+      <rect x={x} y={y} width={232} height={112} rx={12} fill="#f7f2ea" stroke="#e0d4c2" strokeWidth={1.5} />
       <text
         x={x + 16}
         y={y + 24}
-        fill="#ffffff"
+        fill="#211b16"
         fontSize={11.5}
         fontWeight={700}
         fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
@@ -147,8 +147,8 @@ export function ClusterDiagram({ lang }: { lang: Lang }) {
   return (
     <Figure title={t.clusterTitle} viewBox="0 0 760 552" minWidth={660} lang={lang}>
       {/* host */}
-      <rect x={16} y={16} width={728} height={70} rx={12} fill="#22262e" stroke="#3d434f" strokeWidth={1.5} />
-      <text x={34} y={38} fill="#ffffff" fontSize={12.5} fontWeight={700}>
+      <rect x={16} y={16} width={728} height={70} rx={12} fill="#f7f2ea" stroke="#e0d4c2" strokeWidth={1.5} />
+      <text x={34} y={38} fill="#211b16" fontSize={12.5} fontWeight={700}>
         {t.host}
       </text>
       {[t.hostA, t.hostB].map((line, i) => (
@@ -156,7 +156,7 @@ export function ClusterDiagram({ lang }: { lang: Lang }) {
           key={line}
           x={34 + i * 372}
           y={62}
-          fill="#b9c4d6"
+          fill="#5c5349"
           fontSize={10.5}
           fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
         >
@@ -192,8 +192,8 @@ export function ClusterDiagram({ lang }: { lang: Lang }) {
         y={396}
         name={t.cp}
         pods={[
-          ["ingress-nginx", "#123a63"],
-          ["web-…", "#2b2f38"],
+          ["ingress-nginx", "#e3ecf8"],
+          ["web-…", "#efe7db"],
         ]}
       />
       <ClusterNode
@@ -201,8 +201,8 @@ export function ClusterDiagram({ lang }: { lang: Lang }) {
         y={396}
         name={t.w1}
         pods={[
-          ["web-…", "#2b2f38"],
-          ["api-…", "#332f7a"],
+          ["web-…", "#efe7db"],
+          ["api-…", "#eae7f8"],
         ]}
       />
       <ClusterNode
@@ -210,12 +210,12 @@ export function ClusterDiagram({ lang }: { lang: Lang }) {
         y={396}
         name={t.w2}
         pods={[
-          ["web-…", "#2b2f38"],
-          ["api-…", "#332f7a"],
+          ["web-…", "#efe7db"],
+          ["api-…", "#eae7f8"],
         ]}
       />
 
-      <text x={380} y={534} textAnchor="middle" fill="#8e9bb0" fontSize={10}>
+      <text x={380} y={534} textAnchor="middle" fill="#7a7066" fontSize={10}>
         {t.spread}
       </text>
     </Figure>
@@ -243,7 +243,7 @@ export function DeclaredStateDiagram({ lang }: { lang: Lang }) {
       <Arrow d="M 426 131 L 380 131 L 380 286 L 322 286" dashed />
       <Arrow d="M 426 215 L 400 215 L 400 300 L 322 300" dashed />
       <Arrow d="M 426 299 L 360 299 L 360 314 L 322 314" dashed />
-      <text x={376} y={350} textAnchor="middle" fill="#8e9bb0" fontSize={10}>
+      <text x={376} y={350} textAnchor="middle" fill="#7a7066" fontSize={10}>
         {t.injects}
       </text>
 

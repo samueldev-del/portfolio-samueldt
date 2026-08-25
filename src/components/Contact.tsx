@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Globe, Link2, Code2 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
+import SectionHeading from "@/components/SectionHeading";
 
 const socials = [
   {
@@ -123,66 +124,67 @@ export default function Contact({ lang }: ContactProps) {
   }
 
   return (
-    <section id="contact" className="px-5 py-16 sm:px-8 sm:py-24">
+    <section id="contact" className="relative px-5 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-4xl">
+        <SectionHeading
+          eyebrow={t.eyebrow}
+          headingA={t.title}
+          intro={t.description}
+          centered
+        />
+
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="mt-8 text-center"
         >
-          <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#f0a050]">{t.eyebrow}</p>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">{t.title}</h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#7e8ea6] break-words">{t.description}</p>
-
-          <motion.a
+          <a
             href="mailto:contact@samueldt.com"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="mt-8 inline-flex rounded-xl bg-gradient-to-r from-[#f0a050] to-[#e8734a] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#f0a050]/20 transition hover:shadow-[#f0a050]/30"
+            className="inline-flex rounded-full bg-ember px-8 py-3.5 text-sm font-semibold text-white shadow-card transition hover:bg-ember-2 hover:shadow-lift"
           >
             {t.cta}
-          </motion.a>
+          </a>
         </motion.div>
 
         <motion.form
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, delay: 0.08 }}
-          className="mx-auto mt-12 max-w-2xl rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6"
+          className="mx-auto mt-12 max-w-2xl rounded-2xl border border-line bg-card p-6 shadow-card sm:p-7"
         >
-          <h3 className="text-sm font-semibold text-white">{t.formTitle}</h3>
+          <h3 className="font-display text-xl text-ink">{t.formTitle}</h3>
 
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <label className="grid gap-1.5 text-xs text-[#9badc7]">
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <label className="grid gap-1.5 text-xs font-medium text-ink-3">
               {t.name}
               <input
                 name="name"
                 required
-                className="rounded-lg border border-white/10 bg-[#0b1020] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0a050]/60"
+                className="rounded-lg border border-line bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-ember"
               />
             </label>
-            <label className="grid gap-1.5 text-xs text-[#9badc7]">
+            <label className="grid gap-1.5 text-xs font-medium text-ink-3">
               {t.email}
               <input
                 name="email"
                 type="email"
                 required
-                className="rounded-lg border border-white/10 bg-[#0b1020] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0a050]/60"
+                className="rounded-lg border border-line bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-ember"
               />
             </label>
           </div>
 
-          <label className="mt-3 grid gap-1.5 text-xs text-[#9badc7]">
+          <label className="mt-4 grid gap-1.5 text-xs font-medium text-ink-3">
             {t.message}
             <textarea
               name="message"
               required
               rows={5}
-              className="rounded-lg border border-white/10 bg-[#0b1020] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0a050]/60"
+              className="rounded-lg border border-line bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-ember"
             />
           </label>
 
@@ -195,26 +197,30 @@ export default function Contact({ lang }: ContactProps) {
             aria-hidden="true"
           />
 
-          <div className="mt-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="rounded-lg bg-gradient-to-r from-[#f0a050] to-[#e8734a] px-4 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition hover:bg-ink-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? t.sending : t.send}
             </button>
 
-            {status === "success" && <p className="text-xs text-[#8ce2a5] break-words">{t.success}</p>}
-            {status === "error" && <p className="text-xs text-[#ffb3b3] break-words">{t.error}</p>}
+            {status === "success" && (
+              <p className="text-xs break-words text-sage">{t.success}</p>
+            )}
+            {status === "error" && (
+              <p className="text-xs break-words text-ember-2">{t.error}</p>
+            )}
           </div>
         </motion.form>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="mt-16 grid gap-4 sm:grid-cols-2 md:grid-cols-3"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.12 }}
+          className="mt-14 grid gap-4 sm:grid-cols-2 md:grid-cols-3"
         >
           {socials.map((item) => (
             <a
@@ -222,38 +228,38 @@ export default function Contact({ lang }: ContactProps) {
               href={item.href}
               target={item.href.startsWith("http") ? "_blank" : undefined}
               rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.02] p-4 text-sm text-[#a0b0c8] transition hover:border-white/15 hover:text-white break-all"
+              className="flex items-center gap-3 rounded-xl border border-line bg-card p-4 text-sm break-all text-ink-2 shadow-card transition duration-300 hover:-translate-y-0.5 hover:text-ink hover:shadow-lift"
             >
-              <item.icon size={16} className="shrink-0 text-[#f0a050]" />
+              <item.icon size={16} className="shrink-0 text-ember" />
               {item.label}
             </a>
           ))}
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="mt-12 flex flex-col items-center gap-2 text-sm text-[#7e8ea6] sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6"
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="mt-12 flex flex-col items-center gap-2 text-sm text-ink-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6"
         >
           <span>
-            <strong className="text-white">{t.french}</strong> - {t.native}
+            <strong className="font-semibold text-ink">{t.french}</strong> - {t.native}
           </span>
           {/* Separators only make sense once the three sit on one line. */}
-          <span className="hidden text-white/20 sm:inline">|</span>
+          <span className="hidden text-line-2 sm:inline">|</span>
           <span className="text-center">
-            <strong className="text-white">{t.german}</strong> - {t.levelDe}
+            <strong className="font-semibold text-ink">{t.german}</strong> - {t.levelDe}
           </span>
-          <span className="hidden text-white/20 sm:inline">|</span>
+          <span className="hidden text-line-2 sm:inline">|</span>
           <span>
-            <strong className="text-white">{t.english}</strong> - {t.fluent}
+            <strong className="font-semibold text-ink">{t.english}</strong> - {t.fluent}
           </span>
         </motion.div>
       </div>
 
-      <div className="mx-auto mt-24 max-w-6xl border-t border-white/8 pt-8 text-center">
-        <p className="text-xs text-[#5a6a82]" suppressHydrationWarning>
+      <div className="mx-auto mt-20 max-w-6xl border-t border-line pt-8 text-center">
+        <p className="text-xs text-ink-3" suppressHydrationWarning>
           &copy; {new Date().getFullYear()} Samuel Djommou Thengho. {t.footer}
         </p>
       </div>

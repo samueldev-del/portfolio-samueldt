@@ -101,17 +101,17 @@ export function RoleRunDiagram({ lang }: { lang: Lang }) {
         width={214}
         height={104}
         rx={12}
-        fill="#22262e"
-        stroke="#3d434f"
+        fill="#f7f2ea"
+        stroke="#e0d4c2"
         strokeWidth={1.5}
       />
-      <text x={34} y={42} fill="#ffffff" fontSize={13} fontWeight={700}>
+      <text x={34} y={42} fill="#211b16" fontSize={13} fontWeight={700}>
         {t.inventory}
       </text>
       <text
         x={34}
         y={58}
-        fill="#8e9bb0"
+        fill="#7a7066"
         fontSize={10}
         fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
       >
@@ -125,15 +125,15 @@ export function RoleRunDiagram({ lang }: { lang: Lang }) {
             width={178}
             height={20}
             rx={6}
-            fill="#2b2f38"
-            stroke="#4a5160"
+            fill="#efe7db"
+            stroke="#d5c7b3"
             strokeWidth={1.2}
           />
           <text
             x={123}
             y={82 + i * 24}
             textAnchor="middle"
-            fill="#b9c4d6"
+            fill="#5c5349"
             fontSize={10}
             fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
           >
@@ -153,11 +153,11 @@ export function RoleRunDiagram({ lang }: { lang: Lang }) {
         width={520}
         height={364}
         rx={14}
-        fill="#22262e"
-        stroke="#3d434f"
+        fill="#f7f2ea"
+        stroke="#e0d4c2"
         strokeWidth={1.5}
       />
-      <text x={38} y={168} fill="#ffffff" fontSize={14} fontWeight={700}>
+      <text x={38} y={168} fill="#211b16" fontSize={14} fontWeight={700}>
         {t.role}
       </text>
 
@@ -183,7 +183,7 @@ export function RoleRunDiagram({ lang }: { lang: Lang }) {
       <Node x={568} y={286} w={176} h={56} tone="maroon" label={t.handler} sub={t.handlerSub} />
       <Arrow d="M 514 335 L 545 335 L 545 314 L 562 314" dashed />
       {t.notify.split("\n").map((line, i) => (
-        <text key={line} x={654} y={366 + i * 14} textAnchor="middle" fill="#8e9bb0" fontSize={10}>
+        <text key={line} x={654} y={366 + i * 14} textAnchor="middle" fill="#7a7066" fontSize={10}>
           {line}
         </text>
       ))}
@@ -204,11 +204,11 @@ export function PrecedenceDiagram({ lang }: { lang: Lang }) {
   return (
     <Figure title={t.varTitle} viewBox="0 0 760 400" minWidth={640} lang={lang}>
       {/* precedence axis */}
-      <line x1={40} y1={40} x2={40} y2={330} stroke="#4a5160" strokeWidth={1.4} />
-      <text x={40} y={30} textAnchor="middle" fill="#8e9bb0" fontSize={10}>
+      <line x1={40} y1={40} x2={40} y2={330} stroke="#d5c7b3" strokeWidth={1.4} />
+      <text x={40} y={30} textAnchor="middle" fill="#7a7066" fontSize={10}>
         {t.high}
       </text>
-      <text x={40} y={348} textAnchor="middle" fill="#8e9bb0" fontSize={10}>
+      <text x={40} y={348} textAnchor="middle" fill="#7a7066" fontSize={10}>
         {t.low}
       </text>
 
@@ -232,7 +232,7 @@ export function PrecedenceDiagram({ lang }: { lang: Lang }) {
         );
       })}
 
-      <text x={296} y={362} textAnchor="middle" fill="#8e9bb0" fontSize={10}>
+      <text x={296} y={362} textAnchor="middle" fill="#7a7066" fontSize={10}>
         {t.overrides} ↑
       </text>
 

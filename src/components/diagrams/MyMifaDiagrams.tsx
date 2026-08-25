@@ -85,14 +85,14 @@ export function ArchitectureDiagram({ lang }: { lang: Lang }) {
             width={700}
             height={310}
             rx={14}
-            fill="#22262e"
-            stroke="#3d434f"
+            fill="#f7f2ea"
+            stroke="#e0d4c2"
             strokeWidth={1.5}
           />
-          <text x={48} y={176} fill="#ffffff" fontSize={15} fontWeight={700}>
+          <text x={48} y={176} fill="#211b16" fontSize={15} fontWeight={700}>
             {t.aws}
           </text>
-          <text x={48} y={196} fill="#b9c4d6" fontSize={11}>
+          <text x={48} y={196} fill="#5c5349" fontSize={11}>
             {t.awsSub}
           </text>
 
@@ -136,7 +136,7 @@ export function PipelineDiagram({ lang }: { lang: Lang }) {
                 <path
                   d={`M 582 ${y + 26} L 636 ${y + 26} L 636 120`}
                   fill="none"
-                  stroke="#7e8ea6"
+                  stroke="#a08e79"
                   strokeWidth={1.4}
                 />
               </g>

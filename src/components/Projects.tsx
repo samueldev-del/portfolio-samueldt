@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
+import SectionHeading from "@/components/SectionHeading";
 import {
   ArchitectureDiagram,
   PipelineDiagram,
@@ -70,7 +71,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       ],
       url: "https://github.com/samueldev-del/mymifa",
       urlLabel: "Repository ansehen",
-      color: "#818cf8",
+      color: "#4338ca",
       status: "Live",
       diagrams: "mymifa",
       note: "Was ich daraus mitnehme: einem System erst trauen, wenn ich es gemessen habe. Jede Annahme — der Cron, die Migrationen, das Deployment — hat sich irgendwann als falsch erwiesen.",
@@ -93,7 +94,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Linux", "SSH"],
       url: "https://github.com/samueldev-del/ansible-lab",
       urlLabel: "Repository ansehen",
-      color: "#a78bfa",
+      color: "#6d28d9",
       status: "Laufend",
       diagrams: "ansible",
       note: "Ich will erst sicher sein, dass ich verstehe, was passiert, bevor ich das auf etwas Echtes loslasse.",
@@ -118,7 +119,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       stack: ["Kubernetes", "kind", "kubectl", "ingress-nginx", "ConfigMaps & Secrets", "YAML", "Docker"],
       url: "https://github.com/samueldev-del/k8s-lab",
       urlLabel: "Repository ansehen",
-      color: "#60a5fa",
+      color: "#1d4ed8",
       status: "Laufend",
       diagrams: "k8s",
       note: "Ein Cluster auf dem Laptop kostet nichts und verzeiht alles. Genau deshalb kaputtmache ich ihn dort, und nicht anderswo.",
@@ -139,7 +140,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       stack: ["Node.js", "React/Next.js", "Prisma", "PostgreSQL (Neon)", "Vercel", "Render", "JWT", "Sentry"],
       url: "https://bolo237.com",
       urlLabel: "bolo237.com",
-      color: "#f0a050",
+      color: "#b45309",
       status: "Live",
       screenshot: "/screenshots/bolo237-home.png",
     },
@@ -159,7 +160,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       stack: ["Bash", "rsync over SSH", "PHP", "curl", "STRATO-Hosting", "Tailwind CSS", "JavaScript"],
       url: "https://schmidtszaunbaunord.com",
       urlLabel: "schmidtszaunbaunord.com",
-      color: "#34d399",
+      color: "#047857",
       status: "Live",
       screenshot: "/screenshots/schmidts-home.png",
     },
@@ -195,7 +196,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       ],
       url: "https://github.com/samueldev-del/mymifa",
       urlLabel: "View the repository",
-      color: "#818cf8",
+      color: "#4338ca",
       status: "Live",
       diagrams: "mymifa",
       note: "What I took away: don't trust a system until you've measured it. Every assumption — the cron, the migrations, the deployment — turned out to be wrong at some point.",
@@ -218,7 +219,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       stack: ["Ansible", "ansible-vault", "ansible-lint", "Jinja2", "Linux", "SSH"],
       url: "https://github.com/samueldev-del/ansible-lab",
       urlLabel: "View the repository",
-      color: "#a78bfa",
+      color: "#6d28d9",
       status: "Ongoing",
       diagrams: "ansible",
       note: "I want to be sure I understand what happens before I point this at something real.",
@@ -243,7 +244,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       stack: ["Kubernetes", "kind", "kubectl", "ingress-nginx", "ConfigMaps & Secrets", "YAML", "Docker"],
       url: "https://github.com/samueldev-del/k8s-lab",
       urlLabel: "View the repository",
-      color: "#60a5fa",
+      color: "#1d4ed8",
       status: "Ongoing",
       diagrams: "k8s",
       note: "A cluster on a laptop costs nothing and forgives everything. That is exactly why I break it there and not somewhere else.",
@@ -264,7 +265,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       stack: ["Node.js", "React/Next.js", "Prisma", "PostgreSQL (Neon)", "Vercel", "Render", "JWT", "Sentry"],
       url: "https://bolo237.com",
       urlLabel: "bolo237.com",
-      color: "#f0a050",
+      color: "#b45309",
       status: "Live",
       screenshot: "/screenshots/bolo237-home.png",
     },
@@ -284,7 +285,7 @@ const projectsByLang: Record<Lang, Project[]> = {
       stack: ["Bash", "rsync over SSH", "PHP", "curl", "STRATO hosting", "Tailwind CSS", "JavaScript"],
       url: "https://schmidtszaunbaunord.com",
       urlLabel: "schmidtszaunbaunord.com",
-      color: "#34d399",
+      color: "#047857",
       status: "Live",
       screenshot: "/screenshots/schmidts-home.png",
     },
@@ -329,34 +330,42 @@ function ProjectCard({
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.4 }}
-      className={`group min-w-0 rounded-2xl border border-white/8 bg-white/[0.02] transition hover:border-white/15 ${
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.45 }}
+      className={`min-w-0 overflow-hidden rounded-2xl border border-line bg-card shadow-card transition duration-300 hover:shadow-lift ${
         featured ? "md:col-span-2" : ""
       }`}
     >
-      <div className="p-5 sm:p-6">
+      {/* A hairline in the project's own colour, so the cards are told apart
+          before a word is read. */}
+      <div aria-hidden className="h-1" style={{ backgroundColor: project.color }} />
+
+      <div className="p-6 sm:p-7">
         <div className="flex items-start justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-3">
+          <div className="flex min-w-0 items-center gap-3.5">
             <div
-              className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold text-white"
-              style={{ backgroundColor: `${project.color}20` }}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl font-display text-lg"
+              style={{ backgroundColor: `${project.color}14`, color: project.color }}
             >
-              <span style={{ color: project.color }}>{project.title.charAt(0)}</span>
+              {project.title.charAt(0)}
             </div>
             <div className="min-w-0">
-              <h3 className="text-lg font-semibold text-white break-words">{project.title}</h3>
-              <p className="text-xs text-[#7e8ea6] break-words">{project.subtitle}</p>
+              <h3 className="font-display text-xl leading-tight break-words text-ink">
+                {project.title}
+              </h3>
+              <p className="mt-0.5 text-[13px] break-words text-ink-3">
+                {project.subtitle}
+              </p>
             </div>
           </div>
           <span
-            className="shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium"
+            className="shrink-0 rounded-full px-3 py-1 text-[11px] font-medium"
             style={{
-              backgroundColor: `${project.color}15`,
+              backgroundColor: `${project.color}12`,
               color: project.color,
-              border: `1px solid ${project.color}30`,
+              border: `1px solid ${project.color}2e`,
             }}
           >
             {project.status}
@@ -364,9 +373,11 @@ function ProjectCard({
         </div>
 
         {project.screenshot && (
-          <div className={`mt-4 overflow-hidden rounded-lg border border-white/8 ${
-            featured ? "max-h-[340px]" : ""
-          }`}>
+          <div
+            className={`mt-5 overflow-hidden rounded-xl border border-line ${
+              featured ? "max-h-[340px]" : ""
+            }`}
+          >
             <Image
               src={project.screenshot}
               alt={lang === "de" ? `Vorschau von ${project.title}` : `Preview of ${project.title}`}
@@ -378,44 +389,42 @@ function ProjectCard({
           </div>
         )}
 
-        <p className="mt-4 text-sm leading-relaxed text-[#a0b0c8] break-words">{project.description}</p>
+        <p className="mt-5 text-[15px] leading-[1.75] break-words text-ink-2">
+          {project.description}
+        </p>
 
         {project.diagrams === "mymifa" && (
-          <div
-            className={`mt-6 space-y-8 ${expanded ? "" : "hidden sm:block"}`}
-          >
+          <div className={`mt-7 space-y-8 ${expanded ? "" : "hidden sm:block"}`}>
             <ArchitectureDiagram lang={lang} />
             <PipelineDiagram lang={lang} />
           </div>
         )}
 
         {project.diagrams === "k8s" && (
-          <div className={`mt-6 space-y-8 ${expanded ? "" : "hidden sm:block"}`}>
+          <div className={`mt-7 space-y-8 ${expanded ? "" : "hidden sm:block"}`}>
             <ClusterDiagram lang={lang} />
             <DeclaredStateDiagram lang={lang} />
           </div>
         )}
 
         {project.diagrams === "ansible" && (
-          <div
-            className={`mt-6 space-y-8 ${expanded ? "" : "hidden sm:block"}`}
-          >
+          <div className={`mt-7 space-y-8 ${expanded ? "" : "hidden sm:block"}`}>
             <RoleRunDiagram lang={lang} />
             <PrecedenceDiagram lang={lang} />
           </div>
         )}
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-5 flex flex-wrap gap-2">
           {project.stack.slice(0, expanded ? undefined : 5).map((tech) => (
             <span
               key={tech}
-              className="rounded-md border border-white/8 bg-white/[0.03] px-2 py-1 text-[11px] text-[#7e8ea6]"
+              className="rounded-md bg-paper-2 px-2 py-1 font-mono text-[11px] text-ink-3"
             >
               {tech}
             </span>
           ))}
           {!expanded && project.stack.length > 5 && (
-            <span className="rounded-md px-2 py-1 text-[11px] text-[#5a6a82]">
+            <span className="px-1 py-1 font-mono text-[11px] text-ink-3">
               +{project.stack.length - 5} {t.moreCount}
             </span>
           )}
@@ -430,12 +439,13 @@ function ProjectCard({
               transition={{ duration: 0.25 }}
               className="overflow-hidden"
             >
-              <ul className="mt-5 space-y-2 border-t border-white/8 pt-5">
+              <ul className="mt-6 space-y-2.5 border-t border-line pt-6">
                 {project.highlights.map((h) => (
-                  <li key={h} className="flex gap-2 text-sm text-[#a0b0c8]">
+                  <li key={h} className="flex gap-3 text-sm leading-relaxed text-ink-2">
                     <span
-                      className="mt-2 h-1 w-1 shrink-0 rounded-full"
-                      style={{ backgroundColor: project.color }}
+                      aria-hidden
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+                      style={{ backgroundColor: `${project.color}80` }}
                     />
                     {h}
                   </li>
@@ -446,16 +456,16 @@ function ProjectCard({
         </AnimatePresence>
 
         {project.note && (
-          <p className="mt-5 border-l-2 border-white/10 pl-4 text-sm italic leading-relaxed text-[#7e8ea6]">
+          <p className="mt-6 rounded-r-lg border-l-2 border-ember/50 bg-paper-2/70 py-3 pr-4 pl-4 font-display text-[15px] leading-relaxed text-ink-2 italic">
             {project.note}
           </p>
         )}
 
-        <div className="mt-5 flex flex-wrap items-center gap-3">
+        <div className="mt-6 flex flex-wrap items-center gap-3">
           <button
             type="button"
             onClick={() => setExpanded(!expanded)}
-            className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-xs text-[#a0b0c8] transition hover:border-white/20 hover:text-white"
+            className="flex items-center gap-1.5 rounded-full border border-line bg-paper px-4 py-2 text-xs font-medium text-ink-2 transition hover:border-line-2 hover:text-ink"
           >
             {expanded ? (
               <>
@@ -472,7 +482,7 @@ function ProjectCard({
               href={project.url}
               target="_blank"
               rel="noreferrer"
-              className="max-w-full break-all flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium transition hover:bg-white/5"
+              className="flex max-w-full items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold break-all transition hover:underline"
               style={{ color: project.color }}
             >
               <ExternalLink size={13} />
@@ -490,20 +500,17 @@ export default function Projects({ lang }: ProjectsProps) {
   const projects = projectsByLang[lang];
 
   return (
-    <section id="projects" className="px-5 py-16 sm:px-8 sm:py-24">
+    <section
+      id="projects"
+      className="relative border-y border-line bg-paper-2 px-5 py-20 sm:px-8 sm:py-28"
+    >
       <div className="mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#f0a050]">{t.eyebrow}</p>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-            {t.headingA} <span className="text-[#7e8ea6]">{t.headingB}</span>
-          </h2>
-          <p className="mt-3 max-w-xl text-sm text-[#7e8ea6]">{t.intro}</p>
-        </motion.div>
+        <SectionHeading
+          eyebrow={t.eyebrow}
+          headingA={t.headingA}
+          headingB={t.headingB}
+          intro={t.intro}
+        />
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {projects.map((project) => (

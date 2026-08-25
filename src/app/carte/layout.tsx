@@ -41,8 +41,16 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * The portfolio is a light, papery page; the card is deliberately the opposite —
+ * a dark slab meant to be looked at once, on a phone, in a hallway. `isolate`
+ * creates a stacking context so the card's own negative-z backdrop paints above
+ * this dark ground instead of disappearing behind the body's paper.
+ */
 export default function CarteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return children;
+  return (
+    <div className="isolate min-h-dvh bg-[#060810] text-[#f0f2f8]">{children}</div>
+  );
 }
