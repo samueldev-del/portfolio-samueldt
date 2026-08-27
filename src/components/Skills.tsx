@@ -66,24 +66,28 @@ const categories: SkillCategory[] = [
       "en": "Orchestration"
     },
     "note": {
-      "de": "Deklarative Manifeste, Ingress, Rolling Updates, Rollback",
-      "en": "Declarative manifests, ingress, rolling updates, rollback"
+      "de": "Deklarative Manifeste, Helm-Charts, Rolling Updates, Rollback",
+      "en": "Declarative manifests, Helm charts, rolling updates, rollback"
     },
     "skills": {
       "de": [
         "Kubernetes",
         "kind",
         "kubectl",
+        "Helm",
         "ingress-nginx",
         "ConfigMaps & Secrets",
+        "StatefulSets & PVCs",
         "Probes"
       ],
       "en": [
         "Kubernetes",
         "kind",
         "kubectl",
+        "Helm",
         "ingress-nginx",
         "ConfigMaps & Secrets",
+        "StatefulSets & PVCs",
         "probes"
       ]
     }
@@ -173,13 +177,23 @@ const categories: SkillCategory[] = [
       "de": "Observability",
       "en": "Observability"
     },
+    "note": {
+      "de": "Metriken abfragen und Alarme selbst definieren",
+      "en": "Querying metrics and writing the alerting rules myself"
+    },
     "skills": {
       "de": [
+        "Prometheus",
+        "PromQL",
+        "Alerting Rules",
         "CloudWatch (Metriken, Alarme, Logs)",
         "SNS",
         "Sentry"
       ],
       "en": [
+        "Prometheus",
+        "PromQL",
+        "Alerting rules",
         "CloudWatch (metrics, alarms, logs)",
         "SNS",
         "Sentry"
