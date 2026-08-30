@@ -57,13 +57,13 @@ const copy = {
       "_helpers.tpl",
     ],
     valuesDefault: "values.yaml",
-    valuesDefaultSub: "replicaCount 3 · web.localdev.me",
+    valuesDefaultSub: "replicaCount 4 · web.localdev.me",
     valuesDev: "values-dev.yaml",
     valuesDevSub: "replicaCount 1 · dev.localdev.me",
     overrides: "nur die Abweichungen",
     relWeb: "Release: web",
     relWebCmd: "helm install web ./chart",
-    relWebA: "3 Pods · web.localdev.me",
+    relWebA: "4 Pods · web.localdev.me",
     relWebB: "Revision 1",
     relDev: "Release: dev",
     relDevCmd: "helm install dev -f values-dev.yaml",
@@ -77,6 +77,25 @@ const copy = {
     cmd3Sub: "Revisionen, ganze Release zurück",
     checksum:
       "checksum/config im Pod-Template: ändert sich die ConfigMap, rollt das Deployment neu aus",
+
+    gitopsTitle: "Von einem Commit zum Graphen",
+    push: "git push",
+    pushSub: "chart/values.yaml",
+    argo: "ArgoCD Application",
+    argoSub: "automated · selfHeal · prune",
+    cluster: "Release web",
+    clusterSub: "4 Pods · web.localdev.me",
+    drift: "kubectl scale --replicas=1",
+    driftSub: "von Hand, am Repository vorbei",
+    selfHeal: "selfHeal — nach rund zwei Minuten zurückgesetzt",
+    scrape: "scrape",
+    prom: "Prometheus",
+    promSub: "drei eigene Alarmregeln",
+    grafana: "Grafana",
+    grafanaSub: "Dashboard aus Dateien",
+    gitopsNote1: "Deployen heißt committen — kein kubectl apply, kein helm upgrade",
+    gitopsNote2:
+      "Panel „Scrape targets down“: count(up == 0) or vector(0) — sonst steht dort No data statt einer Null",
   },
   en: {
     clusterTitle: "kind cluster — from the host down to the pod",
@@ -131,13 +150,13 @@ const copy = {
       "_helpers.tpl",
     ],
     valuesDefault: "values.yaml",
-    valuesDefaultSub: "replicaCount 3 · web.localdev.me",
+    valuesDefaultSub: "replicaCount 4 · web.localdev.me",
     valuesDev: "values-dev.yaml",
     valuesDevSub: "replicaCount 1 · dev.localdev.me",
     overrides: "only the differences",
     relWeb: "Release: web",
     relWebCmd: "helm install web ./chart",
-    relWebA: "3 pods · web.localdev.me",
+    relWebA: "4 pods · web.localdev.me",
     relWebB: "Revision 1",
     relDev: "Release: dev",
     relDevCmd: "helm install dev -f values-dev.yaml",
@@ -151,6 +170,25 @@ const copy = {
     cmd3Sub: "revisions, whole release back",
     checksum:
       "checksum/config on the pod template: change the ConfigMap and the deployment rolls",
+
+    gitopsTitle: "From a commit to a graph",
+    push: "git push",
+    pushSub: "chart/values.yaml",
+    argo: "ArgoCD Application",
+    argoSub: "automated · selfHeal · prune",
+    cluster: "Release web",
+    clusterSub: "4 pods · web.localdev.me",
+    drift: "kubectl scale --replicas=1",
+    driftSub: "by hand, around the repository",
+    selfHeal: "selfHeal — reverted after about two minutes",
+    scrape: "scrape",
+    prom: "Prometheus",
+    promSub: "three alerting rules of my own",
+    grafana: "Grafana",
+    grafanaSub: "dashboard from files",
+    gitopsNote1: "Deploying means committing — no kubectl apply, no helm upgrade",
+    gitopsNote2:
+      "The \"Scrape targets down\" panel: count(up == 0) or vector(0) — without it a healthy cluster reads No data",
   },
 };
 
@@ -416,6 +454,45 @@ export function HelmReleaseDiagram({ lang }: { lang: Lang }) {
 
       <text x={380} y={422} textAnchor="middle" fill="#7a7066" fontSize={10}>
         {t.checksum}
+      </text>
+    </Figure>
+  );
+}
+
+export function GitOpsDiagram({ lang }: { lang: Lang }) {
+  const t = copy[lang];
+
+  return (
+    <Figure title={t.gitopsTitle} viewBox="0 0 760 430" minWidth={680} lang={lang}>
+      {/* the intended path: repository → controller → cluster */}
+      <Node x={16} y={40} w={210} h={58} tone="neutral" label={t.push} sub={t.pushSub} mono />
+      <Node x={266} y={40} w={228} h={58} tone="purple" label={t.argo} sub={t.argoSub} mono />
+      <Node x={534} y={40} w={210} h={58} tone="green" label={t.cluster} sub={t.clusterSub} mono />
+      <Arrow d="M 226 69 L 262 69" />
+      <Arrow d="M 494 69 L 530 69" />
+
+      {/* what happens when someone edits the cluster instead of the repository */}
+      <Node x={534} y={138} w={210} h={56} tone="brown" label={t.drift} sub={t.driftSub} mono />
+      <Arrow d="M 639 98 L 639 134" />
+      <Arrow d="M 530 172 L 410 172 L 410 102" dashed />
+      <text x={400} y={196} textAnchor="end" fill="#7a7066" fontSize={10}>
+        {t.selfHeal}
+      </text>
+
+      {/* and the feedback loop that says whether any of it is healthy */}
+      <Arrow d="M 594 98 L 594 122 L 350 122 L 350 262" />
+      <text x={358} y={240} fill="#7a7066" fontSize={10} fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">
+        {t.scrape}
+      </text>
+      <Node x={266} y={266} w={228} h={58} tone="blue" label={t.prom} sub={t.promSub} mono />
+      <Node x={534} y={266} w={210} h={58} tone="maroon" label={t.grafana} sub={t.grafanaSub} mono />
+      <Arrow d="M 494 295 L 530 295" />
+
+      <text x={380} y={368} textAnchor="middle" fill="#7a7066" fontSize={10}>
+        {t.gitopsNote1}
+      </text>
+      <text x={380} y={392} textAnchor="middle" fill="#7a7066" fontSize={10}>
+        {t.gitopsNote2}
       </text>
     </Figure>
   );

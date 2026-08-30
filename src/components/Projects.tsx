@@ -17,6 +17,7 @@ import {
 import {
   ClusterDiagram,
   DeclaredStateDiagram,
+  GitOpsDiagram,
   HelmReleaseDiagram,
 } from "@/components/diagrams/K8sDiagrams";
 
@@ -205,80 +206,86 @@ const projects: Project[] = [
       "en": "Kubernetes lab"
     },
     "subtitle": {
-      "de": "Von rohen Manifesten über Helm bis Prometheus",
-      "en": "From raw manifests through Helm to Prometheus"
+      "de": "Von rohen Manifesten über Helm bis GitOps",
+      "en": "From raw manifests through Helm to GitOps"
     },
     "status": {
       "de": "Laufend",
       "en": "Ongoing"
     },
     "description": {
-      "de": "Ein lokaler Cluster aus drei Nodes, auf dem dieselbe Anwendung zweimal liegt: einmal als rohe Manifeste, einmal als Helm-Chart. Genau dieser Vergleich zeigt, wofür es Helm überhaupt gibt. Darüber läuft Prometheus mit eigenen Alarmregeln. Alles als Code im Repository, nichts per kubectl edit.",
-      "en": "A local three-node cluster carrying the same application twice: once as raw manifests, once as a Helm chart. That comparison is what makes the reason Helm exists visible. Prometheus runs on top with its own alerting rules. Everything is code in the repository, nothing done through kubectl edit."
+      "de": "Ein lokaler Cluster aus drei Nodes, auf dem dieselbe Anwendung zweimal liegt: einmal als rohe Manifeste, einmal als Helm-Chart. Genau dieser Vergleich zeigt, wofür es Helm überhaupt gibt. Darüber liegen Prometheus mit eigenen Alarmregeln, ein aus Dateien provisioniertes Grafana-Dashboard und ArgoCD, das den Cluster gegen das Repository abgleicht statt gegen den letzten Befehl, den jemand getippt hat.",
+      "en": "A local three-node cluster carrying the same application twice: once as raw manifests, once as a Helm chart. That comparison is what makes the reason Helm exists visible. On top of it: Prometheus with alerting rules of my own, a Grafana dashboard provisioned from files, and ArgoCD reconciling the cluster against the repository instead of against the last command someone typed."
     },
     "highlights": {
       "de": [
         "Cluster aus einer Control Plane und zwei Workern über kind, damit Pod-Scheduling über mehrere Nodes tatsächlich beobachtbar ist statt nur behauptet",
         "Deployment mit drei Replicas, topologySpreadConstraints (maxSkew 1 über kubernetes.io/hostname) sowie Requests und Limits auf jedem Container — Verteilung und Begrenzung sind gewollt, nicht zufällig",
-        "Erreichbarkeit von außen auf zwei Wegen: ingress-nginx auf dem Node mit dem Label ingress-ready über hostPort 8080, zusätzlich ein NodePort auf 30080",
-        "Pfadbasiertes Routing im Ingress: / geht an web-svc, /api(/|$)(.*) mit rewrite-target an ein zweites Deployment — zwei Anwendungen hinter einem Host",
+        "Erreichbarkeit von außen auf zwei Wegen: ingress-nginx über hostPort 8080 auf dem Node mit dem Label ingress-ready, zusätzlich ein NodePort auf 30080. Im Ingress geht / an web-svc und /api(/|$)(.*) mit rewrite-target an ein zweites Deployment",
         "Jeder Pod liefert seinen eigenen Namen über die Downward API aus, damit sich an wiederholten Requests nachweisen lässt, dass der Service wirklich verteilt",
         "Konfiguration aus dem Image gelöst: index.html als Volume aus einer ConfigMap, APP_ENV als Umgebungsvariable, DB_PASSWORD aus einem Secret — die Secret-Datei ist per .gitignore ausgeschlossen, im Repository liegt nur ein Beispiel",
         "Readiness- und Liveness-Probe getrennt gedacht: die eine entscheidet über Traffic, die andere über den Neustart",
         "PersistentVolumeClaim mit dynamischer Provisionierung: ein Pod schreibt im Sekundentakt in ein ReadWriteOnce-Volume, und der Inhalt ist nach dem Löschen des Pods noch da — Speicher hat einen anderen Lebenszyklus als das, was ihn benutzt",
         "StatefulSet mit volumeClaimTemplates und Headless Service: jede Replica bekommt eine stabile Identität und ihr eigenes Volume, statt sich eines zu teilen",
-        "Rolling Update und Rollback auf eine frühere Revision durchgespielt — inklusive der Frage, was dabei mit den alten ReplicaSets passiert",
-        "Dieselbe Anwendung anschließend als Helm-Chart verpackt (Chart.yaml, values.yaml, Templates, _helpers.tpl). Vorher stand das Label app in drei Dateien und der Image-Tag in zwei — genau die Duplikation, die eine zweite Umgebung unbezahlbar macht",
+        "Dieselbe Anwendung anschließend als Helm-Chart verpackt (Chart.yaml, values.yaml, Templates, _helpers.tpl). Vorher stand das Label app in drei Dateien und der Image-Tag in zwei — genau die Duplikation, die eine zweite Umgebung teuer macht",
         "Selector-Labels bewusst von den vollen Labels getrennt, weil der Selector eines Deployments unveränderlich ist: eine Version im Selector, und das nächste helm upgrade scheitert",
         "checksum/config-Annotation auf dem Pod-Template: ändert sich der Inhalt der ConfigMap, rollt das Deployment neu aus, statt stillschweigend die alte Seite weiterzuliefern",
-        "Zwei unabhängige Releases aus einem Chart — andere Replica-Zahl, anderer Inhalt, anderer Hostname, kein einziges dupliziertes File. helm template und --dry-run=server vor jedem Apply, helm history und helm rollback danach",
-        "Prometheus über das Community-Chart installiert und die Werte auf das Nötige eingedampft: Alertmanager, Pushgateway und Persistenz aus, damit das Lab leicht bleibt",
-        "Drei eigene Alarmregeln: Scrape-Target weg, Pod länger als zwei Minuten nicht Running, Container über 200 MiB",
-        "In PromQL gelernt, warum container!=\"\" dazugehört: cAdvisor liefert neben den Containern noch eine Pod-Gesamtserie — ohne den Filter zählt man jeden Verbrauch doppelt"
+        "Zwei unabhängige Releases aus einem Chart — andere Replica-Zahl, anderer Inhalt, anderer Hostname, kein einziges dupliziertes File. helm template und --dry-run=server vor dem Apply, helm history und helm rollback danach",
+        "Prometheus über das Community-Chart installiert, Werte auf das Nötige eingedampft (Alertmanager, Pushgateway und Persistenz aus) und drei eigene Alarmregeln definiert: Scrape-Target weg, Pod länger als zwei Minuten nicht Running, Container über 200 MiB",
+        "In PromQL gelernt, warum container!=\"\" dazugehört: cAdvisor liefert neben den Containern noch eine Pod-Gesamtserie — ohne den Filter zählt man jeden Verbrauch doppelt",
+        "Grafana daneben gestellt und nichts davon über die Oberfläche konfiguriert: Datasource, Dashboard-Provider und das Dashboard selbst liegen als Dateien vor, und eine Namespace-Template-Variable deckt jeden Namespace mit einer einzigen Definition ab",
+        "Im Panel „Scrape targets down“ steckt count(up == 0) or vector(0). Ohne den Fallback zeigt ein gesunder Cluster No data — das liest sich wie eine kaputte Abfrage, nicht wie ruhiger Betrieb",
+        "ArgoCD-Application, die auf chart/ in diesem Repository zeigt: automated Sync mit selfHeal und prune. Deployen heißt hier committen — kein kubectl apply, kein helm upgrade von Hand",
+        "Selbst getestet, was selfHeal bedeutet: eine Skalierung per kubectl war nach rund zwei Minuten zurückgesetzt, weil der Cluster gegen das Repository abgeglichen wird und nicht gegen mich",
+        "ArgoCD lässt sich nur mit --server-side installieren: das applicationsets-CRD sprengt das 256-KB-Limit für Annotationen, auf das client-side apply angewiesen ist"
       ],
       "en": [
         "One control plane and two workers through kind, so scheduling across nodes is something I can actually observe rather than assert",
         "Deployment of three replicas with topologySpreadConstraints (maxSkew 1 over kubernetes.io/hostname) plus requests and limits on every container — the spread and the capping are intended, not incidental",
-        "Two ways in from the host: ingress-nginx on the node labelled ingress-ready via hostPort 8080, plus a NodePort on 30080",
-        "Path-based routing in the Ingress: / goes to web-svc, /api(/|$)(.*) with a rewrite-target to a second deployment — two applications behind one host",
+        "Two ways in from the host: ingress-nginx via hostPort 8080 on the node labelled ingress-ready, plus a NodePort on 30080. In the Ingress, / goes to web-svc and /api(/|$)(.*) with a rewrite-target to a second deployment",
         "Every pod serves its own name through the Downward API, so repeated requests prove the service really does distribute traffic",
         "Configuration lifted out of the image: index.html mounted as a volume from a ConfigMap, APP_ENV as an environment variable, DB_PASSWORD from a Secret — the secret file is gitignored, only an example ships in the repository",
         "Readiness and liveness kept conceptually apart: one decides about traffic, the other about a restart",
         "PersistentVolumeClaim with dynamic provisioning: a pod appends to a ReadWriteOnce volume every few seconds, and the content is still there after the pod is deleted — storage has a different lifecycle from the thing using it",
         "StatefulSet with volumeClaimTemplates and a headless Service: every replica gets a stable identity and its own volume instead of sharing one",
-        "Rolling update and rollback to a previous revision worked through — including what happens to the old ReplicaSets along the way",
         "The same application then packaged as a Helm chart (Chart.yaml, values.yaml, templates, _helpers.tpl). Before that the app label lived in three files and the image tag in two — exactly the duplication that makes a second environment expensive",
         "Selector labels deliberately kept apart from the full labels, because a Deployment selector is immutable: put a version in there and the next helm upgrade fails",
         "A checksum/config annotation on the pod template: change the ConfigMap content and the deployment rolls, instead of quietly serving the old page",
-        "Two independent releases from one chart — different replica count, different content, different hostname, not one duplicated file. helm template and --dry-run=server before every apply, helm history and helm rollback after",
-        "Prometheus installed from the community chart with the values boiled down: Alertmanager, Pushgateway and persistence off, so the lab stays light",
-        "Three alerting rules of my own: a scrape target gone, a pod outside Running for more than two minutes, a container over 200 MiB",
-        "PromQL taught me why container!=\"\" belongs in the query: cAdvisor exposes a pod-level total alongside the containers, so without the filter every usage is counted twice"
+        "Two independent releases from one chart — different replica count, different content, different hostname, not one duplicated file. helm template and --dry-run=server before the apply, helm history and helm rollback after",
+        "Prometheus installed from the community chart with the values boiled down (Alertmanager, Pushgateway and persistence off) and three alerting rules of my own: a scrape target gone, a pod outside Running for more than two minutes, a container over 200 MiB",
+        "PromQL taught me why container!=\"\" belongs in the query: cAdvisor exposes a pod-level total alongside the containers, so without the filter every usage is counted twice",
+        "Grafana added next to it with nothing configured through the UI: datasource, dashboard provider and the dashboard itself all exist as files, and a namespace template variable covers every namespace with a single definition",
+        "The \"Scrape targets down\" panel carries count(up == 0) or vector(0). Without the fallback a healthy cluster renders No data, which reads as a broken query rather than a quiet system",
+        "An ArgoCD Application pointing at chart/ in this repository: automated sync with selfHeal and prune. Deploying here means committing — no kubectl apply, no manual helm upgrade",
+        "Tested what selfHeal means in practice: a scale applied with kubectl was reverted about two minutes later, because the cluster is reconciled against the repository and not against me",
+        "ArgoCD installs only with --server-side: the applicationsets CRD exceeds the 256 KB annotation limit that client-side apply relies on"
       ]
     },
     "stack": {
       "de": [
         "Kubernetes",
         "kind",
-        "kubectl",
         "Helm",
-        "ingress-nginx",
+        "ArgoCD",
+        "GitOps",
         "Prometheus",
+        "Grafana",
         "PromQL",
         "StatefulSets & PVCs",
-        "ConfigMaps & Secrets",
+        "ingress-nginx",
         "YAML"
       ],
       "en": [
         "Kubernetes",
         "kind",
-        "kubectl",
         "Helm",
-        "ingress-nginx",
+        "ArgoCD",
+        "GitOps",
         "Prometheus",
+        "Grafana",
         "PromQL",
         "StatefulSets & PVCs",
-        "ConfigMaps & Secrets",
+        "ingress-nginx",
         "YAML"
       ]
     },
@@ -536,6 +543,7 @@ function ProjectCard({
             <ClusterDiagram lang={lang} />
             <DeclaredStateDiagram lang={lang} />
             <HelmReleaseDiagram lang={lang} />
+            <GitOpsDiagram lang={lang} />
           </div>
         )}
 

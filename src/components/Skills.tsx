@@ -22,20 +22,26 @@ const categories: SkillCategory[] = [
   {
     "color": "#c2410c",
     "name": {
-      "de": "CI/CD",
-      "en": "CI/CD"
+      "de": "CI/CD & GitOps",
+      "en": "CI/CD & GitOps"
+    },
+    "note": {
+      "de": "Pipelines und deklaratives Deployment aus dem Repository",
+      "en": "Pipelines and declarative deployment from the repository"
     },
     "skills": {
       "de": [
         "GitHub Actions",
         "GitLab CI",
         "GHCR",
+        "ArgoCD",
         "Rulesets & blockierende Prüfungen"
       ],
       "en": [
         "GitHub Actions",
         "GitLab CI",
         "GHCR",
+        "ArgoCD",
         "Rulesets & blocking checks"
       ]
     }
@@ -184,6 +190,7 @@ const categories: SkillCategory[] = [
     "skills": {
       "de": [
         "Prometheus",
+        "Grafana",
         "PromQL",
         "Alerting Rules",
         "CloudWatch (Metriken, Alarme, Logs)",
@@ -192,6 +199,7 @@ const categories: SkillCategory[] = [
       ],
       "en": [
         "Prometheus",
+        "Grafana",
         "PromQL",
         "Alerting rules",
         "CloudWatch (metrics, alarms, logs)",
