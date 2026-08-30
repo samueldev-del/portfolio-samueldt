@@ -30,23 +30,46 @@ export const viewport: Viewport = {
   themeColor: "#faf6f0",
 };
 
+/**
+ * German is the document language, so the metadata here is German. The English
+ * equivalents live on /en, which renders the same page with the toggle already
+ * flipped — that is what gives search engines an English description to index
+ * instead of a translated guess. Both pages point at each other through
+ * `alternates.languages`.
+ */
 export const metadata: Metadata = {
   title: "Samuel Djommou Thengho | Cloud & DevOps Engineer",
   description:
-    "Portfolio von Samuel Djommou Thengho — Cloud & DevOps Engineer in Hamburg. Automatisierte Softwareauslieferung vom Commit bis zum Alarm: GitHub Actions, Terraform, AWS, Ansible, Kubernetes.",
+    "Cloud & DevOps Engineer in Hamburg — vom Commit bis zum Alarm: CI/CD mit GitHub Actions, Terraform auf AWS, Kubernetes mit Helm und ArgoCD, Monitoring mit Prometheus und Grafana.",
   keywords: [
     "DevOps Engineer",
     "Cloud Engineer",
-    "Terraform",
-    "STACKIT",
-    "Docker",
     "Kubernetes",
+    "Helm",
+    "ArgoCD",
+    "GitOps",
+    "Prometheus",
+    "Grafana",
+    "PromQL",
+    "Terraform",
+    "AWS",
     "Ansible",
-    "Next.js",
+    "Docker",
+    "CI/CD",
+    "GitHub Actions",
+    "STACKIT",
+    "Hamburg",
     "Samuel Djommou Thengho",
   ],
   authors: [{ name: "Samuel Djommou Thengho" }],
   metadataBase: new URL("https://samueldt.com"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "de-DE": "/",
+      "en-GB": "/en",
+    },
+  },
   icons: {
     icon: "/favicon.svg",
     apple: "/favicon.svg",
@@ -54,9 +77,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Samuel Djommou Thengho | Cloud & DevOps Engineer",
     description:
-      "Cloud & DevOps Engineer in Hamburg — CI/CD, Infrastructure as Code, Observability.",
+      "CI/CD, Infrastructure as Code und GitOps: GitHub Actions und Terraform auf AWS, Kubernetes mit Helm und ArgoCD, Observability mit Prometheus und Grafana.",
     type: "website",
     locale: "de_DE",
+    alternateLocale: ["en_GB"],
     url: "https://samueldt.com",
     siteName: "Portfolio Samuel DT",
     images: [
@@ -73,7 +97,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Samuel Djommou Thengho | Cloud & DevOps Engineer",
     description:
-      "Cloud & DevOps Engineer in Hamburg — CI/CD, Infrastructure as Code, Observability.",
+      "CI/CD, Infrastructure as Code und GitOps: GitHub Actions und Terraform auf AWS, Kubernetes mit Helm und ArgoCD, Observability mit Prometheus und Grafana.",
     images: ["/og-image.png"],
   },
   robots: {

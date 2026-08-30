@@ -22,8 +22,10 @@ const Contact = dynamic(() => import("@/components/Contact"), {
   loading: () => <div className="h-96" />,
 });
 
-export default function PortfolioClient() {
-  const [lang, setLang] = useState<Lang>("de");
+export default function PortfolioClient({
+  initialLang = "de",
+}: Readonly<{ initialLang?: Lang }>) {
+  const [lang, setLang] = useState<Lang>(initialLang);
 
   return (
     <>
