@@ -34,7 +34,7 @@ const timelineByLang: Record<Lang, TimelineItem[]> = {
       type: "work",
       title: "Datenbankadministrator SQL Server",
       company: "GDE Solution GmbH, Freelance-Tätigkeit, Eberdingen",
-      period: "Mai 2023 — Februar 2025",
+      period: "Mai 2023 — März 2026",
       bullets: [
         "Sicherung und Wiederherstellung: automatisierte Strategien für Full-, Differential- und Transaction-Log-Backups, regelmäßig getestete Wiederherstellungsverfahren zur Prüfung der Datenkonsistenz sowie der RTO- und RPO-Ziele, Hochverfügbarkeit über AlwaysOn Availability Groups, Failover Cluster Instances und Log Shipping.",
         "Sicherheit und Zugriff: Konten, Rollen und Berechtigungen nach dem Least-Privilege-Prinzip verwaltet, Verschlüsselung der Daten im Ruhezustand über TDE und bei der Übertragung, Compliance-Audits und Erkennung unberechtigter Zugriffe.",
@@ -90,7 +90,7 @@ const timelineByLang: Record<Lang, TimelineItem[]> = {
       type: "work",
       title: "SQL Server Database Administrator",
       company: "GDE Solution GmbH, freelance, Eberdingen",
-      period: "May 2023 — February 2025",
+      period: "May 2023 — March 2026",
       bullets: [
         "Backup and recovery: automated strategies for full, differential and transaction log backups, regularly tested restore procedures verifying data consistency and RTO/RPO targets, high availability through AlwaysOn Availability Groups, Failover Cluster Instances and log shipping.",
         "Security and access: accounts, roles and permissions managed on least-privilege principles, encryption at rest through TDE and in transit, compliance audits and detection of unauthorised access.",
