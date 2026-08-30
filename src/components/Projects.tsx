@@ -43,6 +43,16 @@ type Project = {
   stack: Localized<string[]>;
   urlLabel: Localized<string>;
   note?: Localized<string>;
+  /**
+   * Extra captures for a project with more than one thing worth showing — a
+   * dashboard and a resource tree, say. Deliberately separate from the single
+   * `screenshot` above, which is the one hero image a live site gets.
+   *
+   * An entry is added only once the file exists in public/screenshots: a path
+   * pointing at nothing renders a broken image in production, and a portfolio
+   * with a broken image argues against itself.
+   */
+  gallery?: Array<{ src: string; alt: Localized<string> }>;
 };
 
 type ProjectsProps = {
@@ -51,6 +61,13 @@ type ProjectsProps = {
 
 const projects: Project[] = [
   {
+    // Waiting on one capture. Once public/screenshots/mymifa-dashboard.png
+    // exists (1280x800), add:
+    //   gallery: [
+    //     { src: "/screenshots/mymifa-dashboard.png",
+    //       alt: { de: "MyMifa-Übersicht der laufenden Bewerbungen",
+    //              en: "MyMifa overview of the applications in flight" } },
+    //   ],
     "id": "mymifa",
     "color": "#4338ca",
     "url": "https://github.com/samueldev-del/mymifa",
@@ -197,6 +214,16 @@ const projects: Project[] = [
     }
   },
   {
+    // Waiting on two captures. Once public/screenshots/k8s-grafana.png and
+    // k8s-argocd.png exist (1280x800), add:
+    //   gallery: [
+    //     { src: "/screenshots/k8s-grafana.png",
+    //       alt: { de: "Grafana-Dashboard „Lab overview“ mit CPU, Speicher und laufenden Pods",
+    //              en: "Grafana dashboard \"Lab overview\" showing CPU, memory and running pods" } },
+    //     { src: "/screenshots/k8s-argocd.png",
+    //       alt: { de: "Ressourcenbaum der ArgoCD-Application web, alle Objekte synchron",
+    //              en: "Resource tree of the ArgoCD Application web, every object in sync" } },
+    //   ],
     "id": "k8s-lab",
     "color": "#1d4ed8",
     "url": "https://github.com/samueldev-del/k8s-lab",
@@ -460,6 +487,7 @@ function ProjectCard({
 }>) {
   const [expanded, setExpanded] = useState(false);
   const t = sectionCopy[lang];
+  const detailsId = `${project.id}-details`;
 
   return (
     <motion.article
@@ -531,6 +559,26 @@ function ProjectCard({
           {project.description[lang]}
         </p>
 
+        {project.gallery && (
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {project.gallery.map((shot) => (
+              <div
+                key={shot.src}
+                className="overflow-hidden rounded-xl border border-line"
+              >
+                <Image
+                  src={shot.src}
+                  alt={shot.alt[lang]}
+                  width={1280}
+                  height={800}
+                  className="w-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
         {project.diagrams === "mymifa" && (
           <div className={`mt-7 space-y-8 ${expanded ? "" : "hidden sm:block"}`}>
             <ArchitectureDiagram lang={lang} />
@@ -578,6 +626,7 @@ function ProjectCard({
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="overflow-hidden"
+              id={detailsId}
             >
               <ul className="mt-6 space-y-2.5 border-t border-line pt-6">
                 {project.highlights[lang].map((h) => (
@@ -605,6 +654,8 @@ function ProjectCard({
           <button
             type="button"
             onClick={() => setExpanded(!expanded)}
+            aria-expanded={expanded}
+            aria-controls={detailsId}
             className="flex items-center gap-1.5 rounded-full border border-line bg-paper px-4 py-2 text-xs font-medium text-ink-2 transition hover:border-line-2 hover:text-ink"
           >
             {expanded ? (

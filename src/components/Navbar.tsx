@@ -37,6 +37,14 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
       : "/CV_Samuel_Djommou_Thengho_EN.pdf";
   const resumeOpenLabel = lang === "de" ? "Lebenslauf" : "Resume";
   const resumeDownloadLabel = "Download";
+  // Two links to the same file: without this, a screen reader announces
+  // "Lebenslauf" and "Download" with no way to tell what differs.
+  const resumeOpenHint =
+    lang === "de" ? "Lebenslauf als PDF öffnen" : "Open the resume as a PDF";
+  const resumeDownloadHint =
+    lang === "de"
+      ? "Lebenslauf als PDF herunterladen"
+      : "Download the resume as a PDF";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -82,6 +90,8 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
             <button
               type="button"
               onClick={() => onLangChange("de")}
+              aria-pressed={lang === "de"}
+              lang="de"
               className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${
                 lang === "de"
                   ? "bg-ember-wash text-ember-2"
@@ -93,6 +103,8 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
             <button
               type="button"
               onClick={() => onLangChange("en")}
+              aria-pressed={lang === "en"}
+              lang="en"
               className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${
                 lang === "en"
                   ? "bg-sage-wash text-sage"
@@ -107,6 +119,7 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
               href={resumeHref}
               target="_blank"
               rel="noreferrer"
+              aria-label={resumeOpenHint}
               className="rounded-full bg-ember px-4 py-2 text-sm font-medium text-white shadow-card transition hover:bg-ember-2"
             >
               {resumeOpenLabel}
@@ -114,6 +127,7 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
             <a
               href={resumeHref}
               download
+              aria-label={resumeDownloadHint}
               className="rounded-full border border-line bg-card px-3.5 py-2 text-sm font-medium text-ink-2 transition hover:border-line-2 hover:text-ink"
             >
               {resumeDownloadLabel}
@@ -135,6 +149,7 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                 : "Open menu"
           }
           aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
           className="rounded-lg border border-line bg-card p-2 text-ink-2 transition hover:text-ink md:hidden"
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -145,6 +160,7 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -169,6 +185,8 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                     onLangChange("de");
                     setMobileOpen(false);
                   }}
+                  aria-pressed={lang === "de"}
+                  lang="de"
                   className={`flex-1 rounded-full px-3 py-2 text-xs font-medium transition ${
                     lang === "de" ? "bg-ember-wash text-ember-2" : "text-ink-3"
                   }`}
@@ -181,6 +199,8 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                     onLangChange("en");
                     setMobileOpen(false);
                   }}
+                  aria-pressed={lang === "en"}
+                  lang="en"
                   className={`flex-1 rounded-full px-3 py-2 text-xs font-medium transition ${
                     lang === "en" ? "bg-sage-wash text-sage" : "text-ink-3"
                   }`}
@@ -194,6 +214,7 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => setMobileOpen(false)}
+                  aria-label={resumeOpenHint}
                   className="block rounded-full bg-ember px-4 py-2.5 text-center text-sm font-medium text-white"
                 >
                   {resumeOpenLabel}
@@ -202,6 +223,7 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                   href={resumeHref}
                   download
                   onClick={() => setMobileOpen(false)}
+                  aria-label={resumeDownloadHint}
                   className="block rounded-full border border-line bg-card px-4 py-2.5 text-center text-sm font-medium text-ink-2"
                 >
                   {resumeDownloadLabel}
