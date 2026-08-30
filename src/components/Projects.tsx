@@ -59,15 +59,24 @@ type ProjectsProps = {
   lang: Lang;
 };
 
+/**
+ * Three captures are still missing, and the entries are left out until the
+ * files exist. When they land in public/screenshots at 1280x800, add to the
+ * project named on the left:
+ *
+ *   mymifa    gallery: [{ src: "/screenshots/mymifa-dashboard.png",
+ *                         alt: { de: "MyMifa-Übersicht der laufenden Bewerbungen",
+ *                                en: "MyMifa overview of the applications in flight" } }]
+ *
+ *   k8s-lab   gallery: [{ src: "/screenshots/k8s-grafana.png",
+ *                         alt: { de: "Grafana-Dashboard „Lab overview“ mit CPU, Speicher und laufenden Pods",
+ *                                en: "Grafana dashboard Lab overview showing CPU, memory and running pods" } },
+ *                       { src: "/screenshots/k8s-argocd.png",
+ *                         alt: { de: "Ressourcenbaum der ArgoCD-Application web, alle Objekte synchron",
+ *                                en: "Resource tree of the ArgoCD Application web, every object in sync" } }]
+ */
 const projects: Project[] = [
   {
-    // Waiting on one capture. Once public/screenshots/mymifa-dashboard.png
-    // exists (1280x800), add:
-    //   gallery: [
-    //     { src: "/screenshots/mymifa-dashboard.png",
-    //       alt: { de: "MyMifa-Übersicht der laufenden Bewerbungen",
-    //              en: "MyMifa overview of the applications in flight" } },
-    //   ],
     "id": "mymifa",
     "color": "#4338ca",
     "url": "https://github.com/samueldev-del/mymifa",
@@ -214,16 +223,6 @@ const projects: Project[] = [
     }
   },
   {
-    // Waiting on two captures. Once public/screenshots/k8s-grafana.png and
-    // k8s-argocd.png exist (1280x800), add:
-    //   gallery: [
-    //     { src: "/screenshots/k8s-grafana.png",
-    //       alt: { de: "Grafana-Dashboard „Lab overview“ mit CPU, Speicher und laufenden Pods",
-    //              en: "Grafana dashboard \"Lab overview\" showing CPU, memory and running pods" } },
-    //     { src: "/screenshots/k8s-argocd.png",
-    //       alt: { de: "Ressourcenbaum der ArgoCD-Application web, alle Objekte synchron",
-    //              en: "Resource tree of the ArgoCD Application web, every object in sync" } },
-    //   ],
     "id": "k8s-lab",
     "color": "#1d4ed8",
     "url": "https://github.com/samueldev-del/k8s-lab",
