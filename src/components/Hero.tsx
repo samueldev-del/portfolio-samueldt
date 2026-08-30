@@ -15,7 +15,7 @@ const copy = {
     role: "Cloud & DevOps Engineer",
     role2: "Hamburg",
     description:
-      "Ich automatisiere die Softwareauslieferung vom Commit bis zum Alarm. Ausgebildet in der Systemintegration, zwei Jahre Verantwortung für Verfügbarkeit und Wiederherstellbarkeit von SQL-Server-Datenbanken im Produktivbetrieb — das lehrt einen, zuerst in Fehlerbildern zu denken.",
+      "Ich automatisiere die Softwareauslieferung vom Commit bis zum Alarm. Ausgebildet in der Systemintegration, fast drei Jahre Verantwortung für Verfügbarkeit und Wiederherstellbarkeit von SQL-Server-Datenbanken im Produktivbetrieb — das lehrt einen, zuerst in Fehlerbildern zu denken.",
     ctaProjects: "Projekte ansehen",
     ctaContact: "Kontakt aufnehmen",
   },
@@ -24,7 +24,7 @@ const copy = {
     role: "Cloud & DevOps Engineer",
     role2: "Hamburg",
     description:
-      "I automate software delivery from the commit to the alarm. Trained in systems integration, then two years responsible for the availability and recoverability of production SQL Server databases — that teaches you to think in failure modes first.",
+      "I automate software delivery from the commit to the alarm. Trained in systems integration, then nearly three years responsible for the availability and recoverability of production SQL Server databases — that teaches you to think in failure modes first.",
     ctaProjects: "View Projects",
     ctaContact: "Get in Touch",
   },
