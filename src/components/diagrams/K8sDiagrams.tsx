@@ -103,7 +103,7 @@ const copy = {
     hostA: "curl http://web.localdev.me:8080/",
     hostB: "curl http://localhost:30080",
     ingressCtl: "ingress-nginx controller",
-    ingressCtlSub: "hostPort 8080 → :80 · node labelled ingress-ready=true",
+    ingressCtlSub: "hostPort 8080 → :80 · node ingress-ready=true",
     nodeport: "Service web-nodeport",
     nodeportSub: "type: NodePort · nodePort 30080",
     rule1: "/",
@@ -274,17 +274,17 @@ export function ClusterDiagram({ lang }: { lang: Lang }) {
       <Arrow d="M 110 172 L 110 200" />
       <Arrow d="M 250 172 L 250 200" />
       <Node x={30} y={204} w={160} h={52} tone="neutral" label={t.rule1} sub={t.rule1Sub} mono />
-      <Node x={206} y={204} w={190} h={52} tone="neutral" label={t.rule2} sub={t.rule2Sub} mono />
+      <Node x={206} y={204} w={214} h={52} tone="neutral" label={t.rule2} sub={t.rule2Sub} mono />
 
       {/* services */}
       <Arrow d="M 110 256 L 110 288" />
-      <Arrow d="M 301 256 L 301 288" />
-      <Node x={30} y={292} w={160} h={52} tone="green" label={t.webSvc} sub={t.webSvcSub} mono />
-      <Node x={216} y={292} w={170} h={52} tone="green" label={t.apiSvc} sub={t.apiSvcSub} mono />
+      <Arrow d="M 313 256 L 313 288" />
+      <Node x={30} y={292} w={190} h={52} tone="green" label={t.webSvc} sub={t.webSvcSub} mono />
+      <Node x={236} y={292} w={190} h={52} tone="green" label={t.apiSvc} sub={t.apiSvcSub} mono />
 
       {/* down into the nodes */}
       <Arrow d="M 110 344 L 110 392" />
-      <Arrow d="M 301 344 L 301 392" />
+      <Arrow d="M 331 344 L 331 392" />
       <Arrow d="M 560 172 L 560 392" dashed />
 
       <ClusterNode
