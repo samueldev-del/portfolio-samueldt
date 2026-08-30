@@ -487,6 +487,7 @@ function ProjectCard({
 }>) {
   const [expanded, setExpanded] = useState(false);
   const t = sectionCopy[lang];
+  const detailsId = `${project.id}-details`;
 
   return (
     <motion.article
@@ -625,6 +626,7 @@ function ProjectCard({
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="overflow-hidden"
+              id={detailsId}
             >
               <ul className="mt-6 space-y-2.5 border-t border-line pt-6">
                 {project.highlights[lang].map((h) => (
@@ -652,6 +654,8 @@ function ProjectCard({
           <button
             type="button"
             onClick={() => setExpanded(!expanded)}
+            aria-expanded={expanded}
+            aria-controls={detailsId}
             className="flex items-center gap-1.5 rounded-full border border-line bg-paper px-4 py-2 text-xs font-medium text-ink-2 transition hover:border-line-2 hover:text-ink"
           >
             {expanded ? (

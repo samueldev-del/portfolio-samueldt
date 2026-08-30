@@ -164,7 +164,8 @@ export default function Contact({ lang }: ContactProps) {
               <input
                 name="name"
                 required
-                className="rounded-lg border border-line bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-ember"
+                autoComplete="name"
+                className="rounded-lg border border-field bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-ember"
               />
             </label>
             <label className="grid gap-1.5 text-xs font-medium text-ink-3">
@@ -173,7 +174,8 @@ export default function Contact({ lang }: ContactProps) {
                 name="email"
                 type="email"
                 required
-                className="rounded-lg border border-line bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-ember"
+                autoComplete="email"
+                className="rounded-lg border border-field bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-ember"
               />
             </label>
           </div>
@@ -184,7 +186,7 @@ export default function Contact({ lang }: ContactProps) {
               name="message"
               required
               rows={5}
-              className="rounded-lg border border-line bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-ember"
+              className="rounded-lg border border-field bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-ember"
             />
           </label>
 
@@ -206,12 +208,13 @@ export default function Contact({ lang }: ContactProps) {
               {isSubmitting ? t.sending : t.send}
             </button>
 
-            {status === "success" && (
-              <p className="text-xs break-words text-sage">{t.success}</p>
-            )}
-            {status === "error" && (
-              <p className="text-xs break-words text-ember-2">{t.error}</p>
-            )}
+            {/* The outcome is announced rather than only shown: the live region
+                exists before the submit, so a screen reader reports the result
+                instead of leaving the user waiting on a silent page. */}
+            <p role="status" aria-live="polite" className="text-xs break-words">
+              {status === "success" && <span className="text-sage">{t.success}</span>}
+              {status === "error" && <span className="text-ember-2">{t.error}</span>}
+            </p>
           </div>
         </motion.form>
 

@@ -15,9 +15,13 @@
   --color-card: #fffdfa;
   --color-ink: #211b16;
   --color-ink-2: #4b4239;
-  --color-ink-3: #7a7066;
+  --color-ink-3: #6b6259;
   --color-line: #e3d8c9;
   --color-line-2: #d4c6b2;
+  /* Form controls need a boundary of their own: WCAG 1.4.11 asks for 3:1
+     against the surface behind them, which the decorative hairlines above
+     never reach. */
+  --color-field: #9f8a6c;
   --color-ember: #bf5320;
   --color-ember-2: #9d4218;
   --color-ember-wash: #f8e9dc;
@@ -80,7 +84,9 @@ section {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-ember);
+  /* At 11px this is small text, so it takes the darker terracotta: the lighter
+     one lands at 4.36:1 on paper, just under the 4.5:1 it needs. */
+  color: var(--color-ember-2);
 }
 
 /* A drawn-looking underline for the accent word in a heading: it sits low,

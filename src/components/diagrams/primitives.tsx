@@ -132,7 +132,15 @@ export function Figure({
         {title}
       </figcaption>
       <div className="relative min-w-0">
-        <div className="overflow-x-auto rounded-xl border border-line bg-paper p-4">
+        {/* The figure scrolls sideways on a narrow screen, so it has to be
+            reachable without a pointer: focusable, named, and announced as a
+            region rather than as an anonymous box. */}
+        <div
+          tabIndex={0}
+          role="group"
+          aria-label={title}
+          className="overflow-x-auto rounded-xl border border-line bg-paper p-4"
+        >
           <svg
             viewBox={viewBox}
             role="img"
