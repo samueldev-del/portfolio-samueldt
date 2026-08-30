@@ -133,12 +133,16 @@ export function Figure({
       </figcaption>
       <div className="relative min-w-0">
         {/* The figure scrolls sideways on a narrow screen, so it has to be
-            reachable without a pointer: focusable, named, and announced as a
-            region rather than as an anonymous box. */}
+            reachable without a pointer. axe-core's scrollable-region-focusable
+            rule is explicit about it: a scrollable container needs tabindex, or
+            a keyboard can never reach the half of the diagram that is off
+            screen. Linters that only look for an interactive role flag this as
+            a mistake — it is the opposite. No role or label of its own: the
+            enclosing <figure> already carries the caption as its name, and a
+            second name here would only be read out twice. */}
         <div
+          // NOSONAR — see above: focusable on purpose, per axe scrollable-region-focusable
           tabIndex={0}
-          role="group"
-          aria-label={title}
           className="overflow-x-auto rounded-xl border border-line bg-paper p-4"
         >
           <svg
